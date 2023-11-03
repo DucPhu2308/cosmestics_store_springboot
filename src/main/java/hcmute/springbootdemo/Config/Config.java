@@ -23,10 +23,9 @@ public class Config implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-        ResourceHandlerRegistration resourceRegistration = registry.addResourceHandler("/src/main/resources/static/**");
-        resourceRegistration.addResourceLocations("/src/main/resources/static/admin")
-        					.addResourceLocations("/src/main/resources/static/web");
+        ResourceHandlerRegistration resourceRegistration = registry.addResourceHandler("/templates/**");
+        resourceRegistration.addResourceLocations("/templates/admin")
+        					.addResourceLocations("/templates/web");
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/js/");
 
