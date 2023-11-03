@@ -12,6 +12,7 @@ public class WebSiteMeshFilter implements WebMvcConfigurer {
         FilterRegistrationBean filter = new FilterRegistrationBean();
         CustomSiteMeshFilter siteMeshFilter = new CustomSiteMeshFilter();
         filter.setFilter(siteMeshFilter);
+        filter.addUrlPatterns("/*");
         return filter;
     }
 }

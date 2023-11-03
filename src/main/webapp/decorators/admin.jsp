@@ -14,8 +14,8 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600"
 	rel="stylesheet" type="text/css">
-<link href="<c:url value="/templates/css/style.css"/>"
-	rel="stylesheet" type="text/css">
+<%-- <link href="<c:url value="/admin/css/style.css"/>" rel="stylesheet" type="text/css"> --%>
+<link href="/src/main/resources/static/admin/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
