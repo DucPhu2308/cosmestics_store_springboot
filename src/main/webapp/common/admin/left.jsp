@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light min-vh-100"
-	style="width: 280px;">
+<%@ include file="/common/taglib.jsp" %>
+<div id="sidebar" class="d-flex flex-column flex-shrink-0 py-3 bg-light min-vh-100 open">
 	<a href="/"
 		class="d-flex align-items-center mb-3 mb-md-0 mx-md-auto link-dark text-decoration-none">
 		<!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> -->
-		<img src="<c:url value="/images/logo.jpg"/>" class="rounded-circle" alt="" width="100px"
+		<img src="<c:url value="/templates/logo.jpg"/>" class="rounded-circle" alt="" width="100px"
 		height="auto"> <span class="fs-4">OriShop</span>
 	</a>
 	<hr>
-	<ul class="nav nav-pills flex-column mb-auto">
-		<li class="nav-item"><a href="#" class="nav-link active"
+	<ul class="nav nav-pills flex-column mb-auto text-nowrap">
+		<li class="nav-item"><a href="<c:url value="/admin" />" class="nav-link ${active=='home' ? 'active' : 'link-dark'}"
 			aria-current="page"> <i class="fa-solid fa-house"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg> -->
 				Home
 		</a></li>
@@ -21,7 +21,7 @@
 		<li><a href="#" class="nav-link link-dark"> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg> -->
 				<i class="fa-solid fa-money-bill"></i> Orders
 		</a></li>
-		<li><a href="#" class="nav-link link-dark"> <i
+		<li><a href="<c:url value="/admin/product" />" class="nav-link ${active=='product' ? 'active' : 'link-dark'}"> <i
 				class="fa-solid fa-shop"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
 				Products
 		</a></li>

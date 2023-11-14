@@ -24,6 +24,34 @@
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
 }
+/*td {*/
+/*  white-space: normal !important; */
+/*  word-wrap: break-word;  */
+/*}*/
+#table th {
+	text-align: center !important;
+}
+td i {
+	font-size: 20px;
+}
+td .btn {
+	padding: 5px;
+	margin: 2px;
+}
+#sidebar {
+	transition: 0.5s;
+	overflow-x: hidden;
+}
+#sidebar.close {
+	width: 0px;
+}
+#sidebar.open {
+	width: 260px;
+}
+#sidebar > ul > li:hover {
+	background-color: rgb(0, 128, 192);
+	border-radius: 5px;
+}
 .nav-pills i {
     font-size: 20px;
     margin-right: 20px;
@@ -32,6 +60,8 @@
 	background-color: rgb(245, 245, 245);
 	box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
 	padding: 5px 10px;
+	display: flex;
+	justify-content: space-between;
 }
 .title {
 	display: flex;

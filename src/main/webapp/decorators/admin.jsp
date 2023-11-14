@@ -15,13 +15,15 @@
 	href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600"
 	rel="stylesheet" type="text/css">
 <link href="<c:url value="/templates/admin/css/style.css"/>" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 <!-- <link href="/src/main/resources/static/admin/css/style.css" rel="stylesheet" type="text/css"> -->
 </head>
 <body>
 
 	<table>
 		<tr>
-			<td rowspan="2"><%@ include file="/common/admin/left.jsp"%></td>
+			<td style="vertical-align: top;" rowspan="2"><%@ include file="/common/admin/left.jsp"%></td>
 			<td style="vertical-align: top; width:100%; height:0px"><%@ include file="/common/admin/header.jsp"%></td>
 		</tr>
 		<tr>
@@ -32,5 +34,6 @@
 	<!-- JS -->
 	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 		<script src="https://kit.fontawesome.com/6424ba951a.js" crossorigin="anonymous"></script>
+		<script src="<c:url value="/templates/admin/js/index.js"/>"></script>
 </body>
 </html>
