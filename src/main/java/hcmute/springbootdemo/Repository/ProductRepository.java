@@ -1,6 +1,7 @@
 package hcmute.springbootdemo.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import hcmute.springbootdemo.Entity.Product;
@@ -12,5 +13,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 
     Product findProductById(int productId);
 
-    List<Product> findProductByPage(int page,int pagesize);
+    @Query("select count(*) from Product ")
+    int countProduct();
 }

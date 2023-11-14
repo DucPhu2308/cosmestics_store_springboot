@@ -9,5 +9,6 @@ public interface IProductService {
 
     Product findProductById(int id);
 
-    List<Product> findProductByPage(int page,int pagesize);
+
+    int countProduct();
 }

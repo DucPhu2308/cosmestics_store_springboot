@@ -25,7 +25,7 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public List<Product> findProductByPage(int page, int pagesize) {
-        return productRepository.findProductByPage(page,pagesize);
+    public int countProduct() {
+        return productRepository.countProduct();
     }
 }
