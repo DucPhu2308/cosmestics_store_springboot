@@ -12,22 +12,22 @@
 	<ul class="nav nav-pills flex-column mb-auto text-nowrap">
 		<li class="nav-item"><a href="<c:url value="/admin" />" class="nav-link ${active=='home' ? 'active' : 'link-dark'}"
 			aria-current="page"> <i class="fa-solid fa-house"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg> -->
-				Home
+				Trang chủ
 		</a></li>
-		<li><a href="#" class="nav-link link-dark"> <i
+		<li><a href="<c:url value="/admin/brand-category" />" class="nav-link ${active=='brand' ? 'active' : 'link-dark'}"> <i
 				class="fa-solid fa-gauge"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg> -->
-				Dashboard
+				Nhãn hiệu & loại hàng
 		</a></li>
 		<li><a href="#" class="nav-link link-dark"> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg> -->
-				<i class="fa-solid fa-money-bill"></i> Orders
+				<i class="fa-solid fa-money-bill"></i> Đơn hàng
 		</a></li>
 		<li><a href="<c:url value="/admin/product" />" class="nav-link ${active=='product' ? 'active' : 'link-dark'}"> <i
 				class="fa-solid fa-shop"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
-				Products
+				Sản phẩm
 		</a></li>
 		<li><a href="#" class="nav-link link-dark"> <i
 				class="fa-solid fa-address-book"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg> -->
-				Customers
+				Khách hàng
 		</a></li>
 	</ul>
 	<hr>

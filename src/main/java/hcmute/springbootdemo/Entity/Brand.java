@@ -25,6 +25,9 @@ public class Brand implements Serializable{
 	@OneToMany(mappedBy = "brand", fetch = FetchType.EAGER)
 	private List<Product> products;
 
+	public Brand() {
+	}
+
 	public Brand(int id, String name, List<Product> products) {
 		this.name = name;
 		this.products = products;

@@ -10,7 +10,7 @@
 	<div class="container">
 		<h2 class="display-6 my-3">Sản phẩm</h2>
 		<button data-bs-toggle="modal" data-bs-target="#insertModal"
-			data-bs-action="Thêm sản phẩm" type="button" class="btn btn-primary">
+			data-bs-action="Thêm sản phẩm" type="button" class="btn btn-primary createbtn">
 			<i class="fa-solid fa-plus"></i> <span>Thêm sản phẩm</span>
 		</button>
 		<div class="table-responsive">
@@ -77,7 +77,7 @@
 								<i class="fa-solid fa-circle-info"></i>
 							</a> 
 							<a data-bs-toggle="modal" data-bs-target="#insertModal"
-			data-bs-action="Sửa sản phẩm" class="btn btn-outline-warning">
+			data-bs-action="Sửa sản phẩm" class="btn btn-outline-warning editbtn">
 								<i class="fa-solid fa-pen-to-square"></i> 
 							</a>
 							<a class="btn btn-outline-success">
@@ -107,10 +107,15 @@
 					</div>
 					<div class="modal-body">
 						<form>
-							<div class="mb-3">
-								<label for="recipient-name" class="col-form-label">Tên
-									sản phẩm:</label> <input type="text" class="form-control"
-									id="name">
+							<div class="row">
+								<div class="col-md-6">
+									<label for="recipient-name" class="col-form-label">ID:</label> 
+									<input readonly type="text" class="form-control" id="id">
+								</div>
+								<div class="col-md-6 ms-auto">
+									<label for="recipient-name" class="col-form-label">Tên sản
+									phẩm:</label> <input type="text" class="form-control" id="name">
+								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-6">
@@ -145,7 +150,7 @@
 
 							<div class="mb-3">
 								<label for="message-text" class="col-form-label">Mô tả:</label>
-								<textarea class="form-control" id="message-text"></textarea>
+								<textarea class="form-control" id="description"></textarea>
 							</div>
 						</form>
 					</div>
@@ -180,6 +185,11 @@
 // 		window.onload = () => {
 // 	        $('#insertModal').modal('show');
 // 	    }
+		const id = document.getElementById('id')
+		const price = document.getElementById('price')
+		const stock = document.getElementById('stock')
+		const name = document.getElementById('name')
+		const description = document.getElementById('description')
 		 $(document).ready(function(){
 		        $('.editbtn').on('click', function(){
 		
@@ -189,6 +199,11 @@
 		              return $(this).text();
 		            }).get();
 					console.log(data)
+					id.value = data[0]
+					name.value = data[1]
+					price.value = data[2]
+					stock.value = data[7]
+					description.value = data[3]
 // 					var Imagedata = [];
 // 					Imagedata.push($tr.find('img').attr('src'))
 // 		            $('#SetImage').attr("src",Imagedata[0]);
@@ -197,6 +212,20 @@
 // 		            $('#quantity').val(data[1]);
 // 		            $('#size').val(data[2]);
 		            
+		        });
+		        $('.createbtn').on('click', function(){
+		    		
+		            $('#insertModal').modal('show');
+		            $tr =$(this).closest('tr');
+		            var data= $tr.children("td").map(function(){
+		              return $(this).text();
+		            }).get();
+					console.log(data)
+					id.value = ''
+					name.value = ''
+					price.value = ''
+					stock.value = ''
+					description.value = ''
 		        });
 		    });
 		new DataTable('#table', {
