@@ -1,0 +1,158 @@
+/*
+** Style Simple Ecommerce Theme for Bootstrap 4
+** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
+*/
+.bloc_left_price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+}
+.category_block li:hover {
+    background-color: #007bff;
+}
+.category_block li:hover a {
+    color: #ffffff;
+}
+.category_block li a {
+    color: #343a40;
+}
+.add_to_cart_block .price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+    margin-bottom: 0;
+}
+.add_to_cart_block .price_discounted {
+    color: #343a40;
+    text-align: center;
+    text-decoration: line-through;
+    font-size: 140%;
+}
+.product_rassurance {
+    padding: 10px;
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+.product_rassurance .list-inline {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+.product_rassurance .list-inline li:hover {
+    color: #343a40;
+}
+.reviews_product .fa-star {
+    color: gold;
+}
+.pagination {
+    margin-top: 20px;
+}
+footer {
+    background: #343a40;
+    padding: 40px;
+}
+footer a {
+    color: #f8f9fa!important
+}
+
+.detail_form_info{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.form_login.profile_user_container{
+    width:700px;
+    height:100%;
+    margin: 80px auto 100px auto;
+    padding: 30px 20px;
+    background: #f4f7f8;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
+}
+.form_login.profile_user_container h3{
+    text-align: center;
+}
+
+
+.detail_info{
+    width:200%;
+}
+.detail_author {
+    display:flex;
+    line-height: 3.5;
+}
+.detail_author input{
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.detail_author label{
+    color:#000;
+    font-family: 'Be VietNam Pro', sans-serif;
+    width:140px;
+    text-align: left;
+    margin-bottom: 1px ;
+    position: relative;
+    bottom:10px;
+}
+.checkoption{
+    width:100%;
+
+}
+.checkoption input{
+    width:10px;
+    height:10px;
+}
+.detail_info_image{
+    width:100%;
+    height:320px;
+    padding-left:10px;
+    border-left:1px solid #79b0e8;
+    
+}
+.detail_image_user{
+    display:flex;
+    flex-direction: column;
+    padding:0 10px;
+    margin-top:40%;
+    align-items: center;
+}
+.detail_info_image img{
+    width:100px;
+    height:100px;
+    border-radius: 50%;
+    object-fit: cover;
+    align-items: center;
+}
+.detail_info_image button{
+    width:100px;
+    height:40px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    background-color: #79b0e8;
+    color:#fff;
+    margin-top:10px;
+    cursor: pointer;
+}
+.detail_info_image button:hover{
+    background-color: #144491;
+}
+.detail_info_submit{
+    display:flex;
+    justify-content: center;
+    margin-top:20px;
+}
+
+.detail_info_submit input{
+    width:100px;
+    height:30px;
+    cursor: pointer;
+    border-radius: 10px;
+}
