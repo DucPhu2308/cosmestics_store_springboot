@@ -28,8 +28,8 @@ public class Product implements Serializable{
 	@Column(columnDefinition = "decimal(10,2)")
 	private int price;
 	
-	@Column(columnDefinition = "bit")
-	private int available;
+	@Column
+	private Boolean available;
 	
 	@Column(columnDefinition = "float")
 	private float discountPercent;
@@ -43,10 +43,10 @@ public class Product implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String createdAt;
 	
-	@Column(columnDefinition = "datetime")
+	@Column
 	private Date discountStart;
 	
-	@Column(columnDefinition = "datetime")
+	@Column
 	private Date discountEnd;
 	
 	@ManyToOne
@@ -57,32 +57,23 @@ public class Product implements Serializable{
 	@JoinColumn(name = "brandId")
 	private Brand brand;
 	
-	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<Image> images;
 	
 	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
 	private List<Review> reviews;
 	
-	@ManyToMany(mappedBy = "cart")
-	Set<Cart> cart_products;
+	@OneToMany(mappedBy = "product")
+	List<Cart_Product> cart_products;
 
-	public Product(int id, int stoke, int price, int available, float discountPercent, String description, String name,
-			String createdAt, Date discountStart, Date discountEnd, Category category, Brand brand, List<Image> images,
-			List<Review> reviews, Set<Cart> cart_products) {
-		this.id = id;
-		this.stoke = stoke;
-		this.price = price;
-		this.available = available;
-		this.discountPercent = discountPercent;
-		this.description = description;
-		this.name = name;
-		this.createdAt = createdAt;
-		this.discountStart = discountStart;
-		this.discountEnd = discountEnd;
-		this.category = category;
-		this.brand = brand;
-		this.images = images;
-		this.reviews = reviews;
+	
+	public Product() {
+	}
+	public List<Cart_Product> getCart_products() {
+		return cart_products;
+	}
+
+	public void setCart_products(List<Cart_Product> cart_products) {
 		this.cart_products = cart_products;
 	}
 
@@ -110,14 +101,12 @@ public class Product implements Serializable{
 		this.price = price;
 	}
 
-	public int getAvailable() {
+	public Boolean getAvailable() {
 		return available;
 	}
-
-	public void setAvailable(int available) {
+	public void setAvailable(Boolean available) {
 		this.available = available;
 	}
-
 	public float getDiscountPercent() {
 		return discountPercent;
 	}
@@ -197,14 +186,4 @@ public class Product implements Serializable{
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
-
-	public Set<Cart> getCart_products() {
-		return cart_products;
-	}
-
-	public void setCart_products(Set<Cart> cart_products) {
-		this.cart_products = cart_products;
-	}
-	
-	
 }

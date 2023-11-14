@@ -22,28 +22,29 @@ public class Cart implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String name;
 	
-	@Column(columnDefinition = "bit")
-	private int active;
+	@Column
+	private Boolean active;
 	
-	@OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
 	private List<Order> orders;
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
 	
-	@ManyToMany(mappedBy = "product")
-	Set<Product> product_carts;
+	@OneToMany(mappedBy = "cart")
+	List<Cart_Product> cart_products;
 
-	public Cart(int id, String name, int active, List<Order> orders, User user, Set<Product> product_carts) {
-		this.id = id;
-		this.name = name;
-		this.active = active;
-		this.orders = orders;
-		this.user = user;
-		this.product_carts = product_carts;
+	public Cart() {
 	}
 
+	public List<Cart_Product> getCart_products() {
+		return cart_products;
+	}
+
+	public void setCart_products(List<Cart_Product> cart_products) {
+		this.cart_products = cart_products;
+	}
 	public int getId() {
 		return id;
 	}
@@ -59,12 +60,11 @@ public class Cart implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getActive() {
+	public Boolean getActive() {
 		return active;
 	}
 
-	public void setActive(int active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
@@ -83,14 +83,4 @@ public class Cart implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public Set<Product> getProduct_carts() {
-		return product_carts;
-	}
-
-	public void setProduct_carts(Set<Product> product_carts) {
-		this.product_carts = product_carts;
-	}
-	
-
 }

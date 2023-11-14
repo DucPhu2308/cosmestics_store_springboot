@@ -13,12 +13,12 @@ import javax.persistence.*;
 public class Cart_Product implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@Id
+	Long id;
+	
 	@Column(columnDefinition = "int")
 	private int quantity;
-	
-    @EmbeddedId
-    Cart_Product id;
 
     @ManyToOne
     @JoinColumn(name = "cartId")
@@ -27,12 +27,26 @@ public class Cart_Product implements Serializable{
     @ManyToOne
     @JoinColumn(name = "productId")
     Product product;
+    
+    
 
-	public Cart_Product(int quantity, Cart_Product id, Cart cart, Product product) {
-		this.quantity = quantity;
+	public Cart_Product() {
+	}
+
+	public Cart_Product(Long id, int quantity, Cart cart, Product product) {
+
 		this.id = id;
+		this.quantity = quantity;
 		this.cart = cart;
 		this.product = product;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public int getQuantity() {
@@ -41,14 +55,6 @@ public class Cart_Product implements Serializable{
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-	}
-
-	public Cart_Product getId() {
-		return id;
-	}
-
-	public void setId(Cart_Product id) {
-		this.id = id;
 	}
 
 	public Cart getCart() {

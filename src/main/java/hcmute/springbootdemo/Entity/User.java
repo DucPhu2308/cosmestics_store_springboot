@@ -1,6 +1,7 @@
 package hcmute.springbootdemo.Entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 
-@Table(name = "User")
+@Table(name = "Users")
 
 @NamedQuery(name = "User.findAll", query = "SELECT p FROM User p")
 
@@ -34,11 +35,11 @@ public class User implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String email;
 	
-	@Column(columnDefinition = "datetime")
+	@Column(columnDefinition = "date")
 	private Date dob;
 	
-	@Column(columnDefinition = "bit")
-	private int gender;
+	@Column
+	private Boolean gender;
 	
 	@Column(columnDefinition = "varchar(255)")
 	private String avatarLink;
@@ -46,38 +47,45 @@ public class User implements Serializable{
 	@Column(columnDefinition = "varchar(40)")
 	private String passwordHashed;
 	
-	@Column(columnDefinition = "bit")
-	private int isAdmin;
+	@Column
+	private Boolean isAdmin;
 	
-	@Column(columnDefinition = "bit")
-	private int active;
+	@Column
+	private Boolean active;
 	
-	@Column(columnDefinition = "datetime")
-	private Date createdAt;
+	@Column
+	private LocalDateTime createdAt;
 	
-	@Column(columnDefinition = "datetime")
-	private Date lastLogin;
+	@Column
+	private LocalDateTime lastLogin;
 	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Review> reviews;
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<Cart> carts;
+	
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
 
-	public User(int id, String firstName, String lastName, String phone, String email, Date dob, int gender,
-			String avatarLink, String passwordHashed, int isAdmin, int active, Date createdAt, Date lastLogin,
-			List<Cart> carts) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phone = phone;
-		this.email = email;
-		this.dob = dob;
-		this.gender = gender;
-		this.avatarLink = avatarLink;
-		this.passwordHashed = passwordHashed;
-		this.isAdmin = isAdmin;
-		this.active = active;
+	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(LocalDateTime lastLogin) {
 		this.lastLogin = lastLogin;
-		this.carts = carts;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 	public int getId() {
@@ -128,11 +136,11 @@ public class User implements Serializable{
 		this.dob = dob;
 	}
 
-	public int getGender() {
+	public Boolean getGender() {
 		return gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(Boolean gender) {
 		this.gender = gender;
 	}
 
@@ -151,37 +159,21 @@ public class User implements Serializable{
 	public void setPasswordHashed(String passwordHashed) {
 		this.passwordHashed = passwordHashed;
 	}
-
-	public int getIsAdmin() {
+	
+	public Boolean getIsAdmin() {
 		return isAdmin;
 	}
 
-	public void setIsAdmin(int isAdmin) {
+	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 
-	public int getActive() {
+	public Boolean getActive() {
 		return active;
 	}
 
-	public void setActive(int active) {
+	public void setActive(Boolean active) {
 		this.active = active;
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getLastLogin() {
-		return lastLogin;
-	}
-
-	public void setLastLogin(Date lastLogin) {
-		this.lastLogin = lastLogin;
 	}
 
 	public List<Cart> getCarts() {

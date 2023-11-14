@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 
-@Table(name = "Order")
+@Table(name = "Orders")
 
 @NamedQuery(name = "Order.findAll", query = "SELECT c FROM Order c")
 
@@ -20,48 +20,33 @@ public class Order implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id ;
 	
-	@Column(columnDefinition = "bit")
-	private int paid;
+	@Column
+	private Boolean paid;
 
-	@Column(columnDefinition = "float")
+	@Column
 	private float subTotal;
 	
-	@Column(columnDefinition = "float")
+	@Column
 	private float totalDiscount;
 	
-	@Column(columnDefinition = "float")
+	@Column
 	private float shippingFee;
 	
-	@Column(columnDefinition = "float")
+	@Column
 	private float total;
 	
 	@Column(columnDefinition = "varchar(255)")
 	private String address;
 	
-	@Column(columnDefinition = "datetime")
+	@Column
 	private Date orderDate;
 
-	@Column(columnDefinition = "datetime")
+	@Column
 	private Date arriveDate;
 	
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "cartId")
 	private Cart cart ;
-
-	public Order(int id, int paid, float subTotal, float totalDiscount, float shippingFee, float total, String address,
-			Date orderDate, Date arriveDate, Cart cart) {
-		this.id = id;
-		this.paid = paid;
-		this.subTotal = subTotal;
-		this.totalDiscount = totalDiscount;
-		this.shippingFee = shippingFee;
-		this.total = total;
-		this.address = address;
-		this.orderDate = orderDate;
-		this.arriveDate = arriveDate;
-		this.cart = cart;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -70,11 +55,11 @@ public class Order implements Serializable{
 		this.id = id;
 	}
 
-	public int getPaid() {
+	public Boolean getPaid() {
 		return paid;
 	}
 
-	public void setPaid(int paid) {
+	public void setPaid(Boolean paid) {
 		this.paid = paid;
 	}
 

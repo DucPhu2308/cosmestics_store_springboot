@@ -1,6 +1,7 @@
 package hcmute.springbootdemo.Entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,49 +20,44 @@ public class Review implements Serializable{
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id ;
-	
-	@Column(columnDefinition = "bigint")
-	private int parentId;
 
-	@Column(columnDefinition = "smallint(2)")
+	@Column
 	private int rating;
 	
 	@Column(columnDefinition = "text")
 	private String content;
 	
-	@Column(columnDefinition = "bit")
-	private int published;
+	@Column
+	private Boolean published;
 	
-	@Column(columnDefinition = "datetime")
-	private Date createdAt;
+	@Column
+	private LocalDateTime createdAt;
 	
-	@Column(columnDefinition = "datetime")
-	private Date lastUpdate;
+	@Column
+	private LocalDateTime lastUpdate;
 	
 	@ManyToOne
 	@JoinColumn(name = "productId")
 	private Product product;
 	
-	@OneToMany(mappedBy = "review", fetch = FetchType.EAGER)
-	private List<User> users;
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User user;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "parentId", referencedColumnName = "id")
     private Review parent;
-
-	public Review(int id, int parentId, int rating, String content, int published, Date createdAt, Date lastUpdate,
-			Product product, List<User> users, Review parent) {
-		this.id = id;
-		this.parentId = parentId;
-		this.rating = rating;
-		this.content = content;
-		this.published = published;
-		this.createdAt = createdAt;
-		this.lastUpdate = lastUpdate;
-		this.product = product;
-		this.users = users;
-		this.parent = parent;
+	
+	public List<Review> getChildren() {
+		return children;
 	}
+
+	public void setChildren(List<Review> children) {
+		this.children = children;
+	}
+
+	@OneToMany(mappedBy = "parent")
+	private List<Review> children;
 
 	public int getId() {
 		return id;
@@ -69,14 +65,6 @@ public class Review implements Serializable{
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(int parentId) {
-		this.parentId = parentId;
 	}
 
 	public int getRating() {
@@ -95,27 +83,28 @@ public class Review implements Serializable{
 		this.content = content;
 	}
 
-	public int getPublished() {
+
+	public Boolean getPublished() {
 		return published;
 	}
 
-	public void setPublished(int published) {
+	public void setPublished(Boolean published) {
 		this.published = published;
 	}
 
-	public Date getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public Date getLastUpdate() {
+	public LocalDateTime getLastUpdate() {
 		return lastUpdate;
 	}
 
-	public void setLastUpdate(Date lastUpdate) {
+	public void setLastUpdate(LocalDateTime lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 
@@ -126,13 +115,13 @@ public class Review implements Serializable{
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
-	public List<User> getUsers() {
-		return users;
+	
+	public User getUser() {
+		return user;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Review getParent() {
