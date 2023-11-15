@@ -36,6 +36,10 @@ public class Category implements Serializable{
 		this.products = products;
 	}
 
+	public Category() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getId() {
 		return id;
 	}

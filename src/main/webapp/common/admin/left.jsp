@@ -18,8 +18,8 @@
 				class="fa-solid fa-gauge"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg> -->
 				Nhãn hiệu
 		</a></li>
-		<li><a href="#" class="nav-link link-dark"> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg> -->
-				<i class="fa-solid fa-money-bill"></i> Đơn hàng
+		<li><a href="<c:url value="/admin/category" />" class="nav-link ${active=='category' ? 'active' : 'link-dark'}"> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg> -->
+				<i class="fa-solid fa-money-bill"></i> Loại hàng
 		</a></li>
 		<li><a href="<c:url value="/admin/product" />" class="nav-link ${active=='product' ? 'active' : 'link-dark'}"> <i
 				class="fa-solid fa-shop"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
