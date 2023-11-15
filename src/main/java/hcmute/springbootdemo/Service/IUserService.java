@@ -1,4 +1,4 @@
-package hcmute.springbootdemo.Services;
+package hcmute.springbootdemo.Service;
 
 import hcmute.springbootdemo.Entity.User;
 

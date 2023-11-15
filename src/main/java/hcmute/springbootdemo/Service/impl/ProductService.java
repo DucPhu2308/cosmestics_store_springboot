@@ -1,7 +1,9 @@
-package hcmute.springbootdemo.Services;
+package hcmute.springbootdemo.Service.impl;
 
 import hcmute.springbootdemo.Entity.Product;
 import hcmute.springbootdemo.Repository.ProductRepository;
+import hcmute.springbootdemo.Service.IProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
