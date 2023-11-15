@@ -23,11 +23,15 @@
 
 	<table>
 		<tr>
-			<td style="vertical-align: top;" rowspan="2"><%@ include file="/common/admin/left.jsp"%></td>
-			<td style="vertical-align: top; width:100%; height:0px"><%@ include file="/common/admin/header.jsp"%></td>
+			<td id="sidebar-container" style="vertical-align: top;" rowspan="2"><%@ include file="/common/admin/left.jsp"%></td>
+			<td style="vertical-align: top; width:100%; height:0px" id="header"><%@ include file="/common/admin/header.jsp"%></td>
 		</tr>
 		<tr>
-			<td style="vertical-align: top;"><sitemesh:write property='body'></sitemesh:write> </td>
+			<td style="vertical-align: top; overflow-y: auto;" >
+				<div style="overflow-y: auto; max-height: 100%;" id="body-content">
+					<sitemesh:write property='body'></sitemesh:write> 
+				</div>
+			</td>
 		</tr>
 	</table>
 

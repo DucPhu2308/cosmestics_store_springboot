@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +22,8 @@ import hcmute.springbootdemo.Entity.Brand;
 import hcmute.springbootdemo.Service.IBrandService;
 
 @Controller
-@RequestMapping(value = "/admin/brand-category")
-public class BrandCategoryController {
+@RequestMapping(value = "/admin/brand")
+public class BrandController {
 	@Autowired
 	IBrandService brandService;
 	
@@ -31,15 +33,24 @@ public class BrandCategoryController {
 		model.addAttribute("active", "brand");
 		List<Brand> listBrands = brandService.findAll();
 		model.addAttribute("listBrands", listBrands);
-		return "admin/brand_category";
+		return "admin/brand";
 	}
-	@PostMapping(value = "saveBrand")
-	public String saveBrand(RedirectAttributes redirectAttributes, @RequestParam("name") String name)
+	@PostMapping(value = "save")
+	public String saveBrand(RedirectAttributes redirectAttributes,
+			@RequestParam(name="id", required=false) Integer id, @RequestParam("name") String name)
 	{
 		Brand brand = new Brand();
+		if (id != null)
+			brand.setId(id);
 		brand.setName(name);
 		brandService.save(brand);
 		redirectAttributes.addFlashAttribute("message", "Thao tác thành công!");
-		return "redirect:/admin/brand-category";
+		return "redirect:/admin/brand";
+	}
+	@GetMapping(value = "delete/{id}")
+	public String deleteBrand(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
+		brandService.deleteById(id);
+		redirectAttributes.addFlashAttribute("message", "Thao tác thành công!");
+		return "redirect:/admin/brand";
 	}
 }

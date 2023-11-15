@@ -29,7 +29,7 @@
 	</button>
 	<div class="table-responsive">
 		<table style="margin: 10px 5px;" id="table"
-			class="table-striped table align-middle bg-white">
+			class="table-striped table bg-white">
 			<thead class="table-dark">
 				<tr style="font-weight: bold">
 					<th>ID</th>
@@ -42,7 +42,18 @@
 					<tr>
 						<td>${i.id}</td>
 						<td>${i.name}</td>
-						<td>tác vụ</td>
+						<td>
+							<a class="btn btn-outline-info">
+								<i class="fa-solid fa-circle-info"></i>
+							</a> 
+							<a data-bs-toggle="modal" data-bs-target="#insertModal"
+			data-bs-action="Sửa nhãn hiệu" class="btn btn-outline-warning editbtn">
+								<i class="fa-solid fa-pen-to-square"></i> 
+							</a>
+							<a href="brand/delete/${i.id}" class="btn btn-outline-danger">
+								<i class="fa-solid fa-trash"></i>
+							</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -58,7 +69,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<form action="brand-category/saveBrand" method="post">
+				<form action="brand/save" method="post">
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-6">
@@ -84,6 +95,12 @@
 	</div>
 	<!-- 		End Insert modal -->
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
 <script>
 		const insertModal = document.getElementById('insertModal')
 		insertModal.addEventListener('show.bs.modal', event => {
@@ -100,10 +117,7 @@
 // 	        $('#insertModal').modal('show');
 // 	    }
 		const id = document.getElementById('id')
-		const price = document.getElementById('price')
-		const stock = document.getElementById('stock')
 		const name = document.getElementById('name')
-		const description = document.getElementById('description')
 		 $(document).ready(function(){
 		        $('.editbtn').on('click', function(){
 		
@@ -115,9 +129,6 @@
 					console.log(data)
 					id.value = data[0]
 					name.value = data[1]
-					price.value = data[2]
-					stock.value = data[7]
-					description.value = data[3]
 // 					var Imagedata = [];
 // 					Imagedata.push($tr.find('img').attr('src'))
 // 		            $('#SetImage').attr("src",Imagedata[0]);

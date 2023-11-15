@@ -14,9 +14,9 @@
 			aria-current="page"> <i class="fa-solid fa-house"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg> -->
 				Trang chủ
 		</a></li>
-		<li><a href="<c:url value="/admin/brand-category" />" class="nav-link ${active=='brand' ? 'active' : 'link-dark'}"> <i
+		<li><a href="<c:url value="/admin/brand" />" class="nav-link ${active=='brand' ? 'active' : 'link-dark'}"> <i
 				class="fa-solid fa-gauge"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg> -->
-				Nhãn hiệu & loại hàng
+				Nhãn hiệu
 		</a></li>
 		<li><a href="#" class="nav-link link-dark"> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg> -->
 				<i class="fa-solid fa-money-bill"></i> Đơn hàng
