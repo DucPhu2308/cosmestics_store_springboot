@@ -29,7 +29,7 @@ public class Config implements WebMvcConfigurer {
                             .addResourceLocations("/templates/login");
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/js/");
-
+        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
     }
 }
 

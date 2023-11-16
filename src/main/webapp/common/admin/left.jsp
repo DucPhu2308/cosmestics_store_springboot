@@ -5,7 +5,7 @@
 	<a href="/"
 		class="d-flex align-items-center mb-3 mb-md-0 mx-md-auto link-dark text-decoration-none">
 		<!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> -->
-		<img src="<c:url value="/templates/logo.jpg"/>" class="rounded-circle" alt="" width="100px"
+		<img src="<c:url value="/templates/images/logo.jpg"/>" class="rounded-circle" alt="" width="100px"
 		height="auto"> <span class="fs-4">OriShop</span>
 	</a>
 	<hr>
