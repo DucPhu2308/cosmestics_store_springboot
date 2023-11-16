@@ -26,10 +26,11 @@ public class Config implements WebMvcConfigurer {
         ResourceHandlerRegistration resourceRegistration = registry.addResourceHandler("/templates/**");
         resourceRegistration.addResourceLocations("/templates/admin")
         					.addResourceLocations("/templates/web")
-                            .addResourceLocations("/templates/login");
+                            .addResourceLocations("/templates/login")
+                            .addResourceLocations("/templates/images");
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/js/");
-        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
+
     }
 }
 
