@@ -1,0 +1,80 @@
+package hcmute.springbootdemo.Service.impl;
+
+import hcmute.springbootdemo.Entity.Product;
+import hcmute.springbootdemo.Repository.ProductRepository;
+import hcmute.springbootdemo.Service.IProductService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ProductServiceImpl implements IProductService{
+
+    @Autowired
+    ProductRepository productRepository;
+    
+
+    @Override
+	public <S extends Product> S save(S entity) {
+		return productRepository.save(entity);
+	}
+
+	@Override
+	public Optional<Product> findById(Integer id) {
+		return productRepository.findById(id);
+	}
+
+
+	@Override
+	public long count() {
+		return productRepository.count();
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		productRepository.deleteById(id);
+	}
+
+	@Override
+	public void delete(Product entity) {
+		productRepository.delete(entity);
+	}
+
+	@Override
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public Product findProductById(int id) {
+        return productRepository.findProductById(id);
+    }
+
+    @Override
+    public int countProduct() {
+        return productRepository.countProduct();
+    }
+
+	@Override
+	public List<Product> findProductByCategory(int categoryId) {
+		return productRepository.findProductByCategoryId(categoryId);
+	}
+
+	@Override
+	public List<Product> findProductByCategoryAndBrand(int categoryId, int brandId) {
+		return productRepository.findProductByCategoryIdAndBrandId(categoryId, brandId);
+	}
+
+	@Override
+	public List<Product> get10Newest() {
+		return productRepository.findTop10ByAvailableOrderByCreatedDateDesc(true);
+	}
+
+	@Override
+	public List<Product> get10Best() {
+		return productRepository.findTop10ByAvailableOrderBySoldCountDesc(true);
+	}
+}
