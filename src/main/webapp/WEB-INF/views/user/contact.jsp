@@ -3,8 +3,7 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     
-    
-    
+<body>
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading">E-COMMERCE CONTACT</h1>
@@ -16,7 +15,7 @@
         <div class="col">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Contact</li>
                 </ol>
             </nav>
@@ -30,22 +29,22 @@
                 <div class="card-header bg-primary text-white"><i class="fa fa-envelope"></i> Contact us.
                 </div>
                 <div class="card-body">
-                    <form:form >
+                    <form:form method="post" action="/contact/contact1" modelAttribute="contact">
                         <div class="form-group">
                             <label >Name</label>
-                           <form:input path="name" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter name" />    <%-- --%>
+                            <form:input path="user.lastName" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter name" />    <%-- --%>
                         </div>
                         <div class="form-group">
                             <label >Email address</label>
-                            <form:input type="email" class="form-control" path="email" aria-describedby="emailHelp" placeholder="Enter email" />
+                            <form:input type="email" class="form-control" path="user.email" aria-describedby="emailHelp" placeholder="Enter email" />
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                             <label >Message</label>
-                            <form:textarea class="form-control" path="message" rows="6" />
+                            <form:textarea class="form-control" path="content" rows="6" />
                         </div>
                         <div class="mx-auto">
-                        <button type="submit" class="btn btn-primary text-right">Submit</button></div>
+                            <input type="submit" class="btn btn-primary text-right" value="Xác nhận"></div>
                     </form:form>
                 </div>
             </div>
@@ -66,3 +65,5 @@
         </div>
     </div>
 </div>
+</body>
+    

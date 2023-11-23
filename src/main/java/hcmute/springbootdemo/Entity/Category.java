@@ -37,7 +37,7 @@ public class Category implements Serializable{
 	}
 
 	public Category() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public int getId() {

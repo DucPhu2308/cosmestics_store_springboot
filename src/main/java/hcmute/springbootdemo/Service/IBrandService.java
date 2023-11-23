@@ -2,7 +2,6 @@ package hcmute.springbootdemo.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 import hcmute.springbootdemo.Entity.Brand;
 
 public interface IBrandService {

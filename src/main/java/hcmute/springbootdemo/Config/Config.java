@@ -25,7 +25,7 @@ public class Config implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         ResourceHandlerRegistration resourceRegistration = registry.addResourceHandler("/templates/**");
         resourceRegistration.addResourceLocations("/templates/admin")
-        					.addResourceLocations("/templates/web")
+        					.addResourceLocations("/templates/user")
                             .addResourceLocations("/templates/login")
                             .addResourceLocations("/templates/images");
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");

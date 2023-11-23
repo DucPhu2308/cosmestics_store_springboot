@@ -27,8 +27,8 @@
 			<td style="vertical-align: top; width:100%; height:0px" id="header"><%@ include file="/common/admin/header.jsp"%></td>
 		</tr>
 		<tr>
-			<td style="vertical-align: top; overflow-y: auto;" >
-				<div style="overflow-y: auto; max-height: 100%;" id="body-content">
+			<td style="vertical-align: top;" >
+				<div style="overflow-y: auto; height: 90vh;" id="body-content">
 					<sitemesh:write property='body'></sitemesh:write> 
 				</div>
 			</td>

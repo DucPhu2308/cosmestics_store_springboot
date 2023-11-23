@@ -1,7 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <body>
 	<section class="jumbotron text-center">
@@ -26,49 +27,45 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><img src="https://dummyimage.com/50x50/55595c/fff" />
-								</td>
-								<td>Product Name Dada</td>
-								<td>In stock</td>
-								<td><input class="form-control" type="text" value="1" /></td>
-								<td class="text-right">124,90 €</td>
-								<td class="text-right"><button
-										class="btn btn-sm btn-danger">
-										<i class="fa fa-trash"></i>
-									</button></td>
-							</tr>
-							<tr>
-								<td><img src="https://dummyimage.com/50x50/55595c/fff" />
-								</td>
-								<td>Product Name Toto</td>
-								<td>In stock</td>
-								<td><input class="form-control" type="text" value="1" /></td>
-								<td class="text-right">33,90 €</td>
-								<td class="text-right"><button
-										class="btn btn-sm btn-danger">
-										<i class="fa fa-trash"></i>
-									</button></td>
-							</tr>
-							<tr>
-								<td><img src="https://dummyimage.com/50x50/55595c/fff" />
-								</td>
-								<td>Product Name Titi</td>
-								<td>In stock</td>
-								<td><input class="form-control" type="text" value="1" /></td>
-								<td class="text-right">70,00 €</td>
-								<td class="text-right"><button
-										class="btn btn-sm btn-danger">
-										<i class="fa fa-trash"></i>
-									</button></td>
-							</tr>
+							<c:if test="${listCartProduct == null}">
+								<tr>
+									<td colspan="6">Không có sản phẩm nào trong giỏ hàng</td>
+								</tr>
+							</c:if>
+							<c:if test="${listCartProduct != null}">
+								<c:forEach var="i" items="${listCartProduct}">
+									<tr>
+										<td><img src="https://dummyimage.com/50x50/55595c/fff" />
+										</td>
+										<td>${i.product.name}</td>
+										<td>${i.product.stock}</td>
+										<td><input class="form-control" type="text" value="${i.quantity}" /></td>
+										<td class="text-right">${i.totalPrice} €</td>
+										<td class="text-right">
+											<form:form method="post" action="/cart/delete/${i.product.id}">
+												<input type="submit" class="btn btn-sm btn-danger" value="Xóa">
+											</form:form>
+										</td>
+									</tr>
+
+								</c:forEach>
+							</c:if>
+
+
 							<tr>
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
 								<td>Sub-Total</td>
-								<td class="text-right">255,90 €</td>
+								<td class="text-right">
+									<c:if test="${totalPrice == null}">
+										0 €
+									</c:if>
+									<c:if test="${totalPrice != null}">
+										${totalPrice} €
+									</c:if>
+								</td>
 							</tr>
 							<tr>
 								<td></td>

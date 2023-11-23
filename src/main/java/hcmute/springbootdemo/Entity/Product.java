@@ -3,16 +3,16 @@ package hcmute.springbootdemo.Entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.*;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.lang.Nullable;
+
 @Entity
-
 @Table(name = "Product")
-
-@NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
-
+@EntityListeners(AuditingEntityListener.class)
 public class Product implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -23,31 +23,39 @@ public class Product implements Serializable{
 	private int id;
 	
 	@Column(columnDefinition = "int")
-	private int stoke;
+	private int stock;
 	
-	@Column(columnDefinition = "decimal(10,2)")
-	private int price;
+	@Column(columnDefinition = "int DEFAULT 0")
+	private int soldCount = 0;
 	
-	@Column
-	private Boolean available;
 	
+
 	@Column(columnDefinition = "float")
-	private float discountPercent;
+	private Float price;
+	
+	@Column(columnDefinition = "bool DEFAULT t")
+	private Boolean available = true;
+	
+	@Column(columnDefinition = "float DEFAULT 0")
+	private Float discountPercent;
 	
 	@Column(columnDefinition = "text")
 	private String description;
 	
 	@Column(columnDefinition = "varchar(255)")
 	private String name;
-
-	@Column(columnDefinition = "varchar(255)")
-	private String createdAt;
 	
 	@Column
+	@Nullable
 	private Date discountStart;
 	
 	@Column
+	@Nullable
 	private Date discountEnd;
+	
+	@Column
+	@CreatedDate
+	private Date createdDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "cateId")
@@ -65,9 +73,29 @@ public class Product implements Serializable{
 	
 	@OneToMany(mappedBy = "product")
 	List<Cart_Product> cart_products;
-
 	
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 	public Product() {
+	}
+	public int getSoldCount() {
+		return soldCount;
+	}
+	public void setSoldCount(int soldCount) {
+		this.soldCount = soldCount;
+	}
+	public void setPrice(Float price) {
+		this.price = price;
+	}
+	public void setDiscountPercent(Float discountPercent) {
+		this.discountPercent = discountPercent;
+	}
+	public Float getPrice() {
+		return price;
 	}
 	public List<Cart_Product> getCart_products() {
 		return cart_products;
@@ -84,23 +112,13 @@ public class Product implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public int getStoke() {
-		return stoke;
+	
+	public int getStock() {
+		return stock;
 	}
-
-	public void setStoke(int stoke) {
-		this.stoke = stoke;
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
 	public Boolean getAvailable() {
 		return available;
 	}
@@ -129,14 +147,6 @@ public class Product implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
 	}
 
 	public Date getDiscountStart() {
@@ -186,4 +196,5 @@ public class Product implements Serializable{
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
+
 }

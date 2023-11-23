@@ -15,7 +15,7 @@ public class Cart_Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	Long id;
+	int id;
 	
 	@Column(columnDefinition = "int")
 	private int quantity;
@@ -27,25 +27,35 @@ public class Cart_Product implements Serializable{
     @ManyToOne
     @JoinColumn(name = "productId")
     Product product;
-    
-    
+
+	@Column(columnDefinition = "float")
+	private float totalPrice;
 
 	public Cart_Product() {
 	}
 
-	public Cart_Product(Long id, int quantity, Cart cart, Product product) {
+	public Cart_Product(int id, int quantity, Cart cart, Product product, float totalPrice) {
 
 		this.id = id;
 		this.quantity = quantity;
 		this.cart = cart;
 		this.product = product;
+		this.totalPrice = totalPrice;
 	}
 
-	public Long getId() {
+	public float getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(float totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

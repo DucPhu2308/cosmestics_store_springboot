@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@ include file="/common/taglib.jsp"%>
+<!DOCTYPE html>
 <div class="container">
 	<h2 class="display-6 my-3">Nhãn hiệu</h2>
 	<c:if test="${message != null}">

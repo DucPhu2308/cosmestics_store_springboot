@@ -2,8 +2,8 @@ package hcmute.springbootdemo.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 import hcmute.springbootdemo.Entity.Category;
+import hcmute.springbootdemo.Entity.Product;
 
 public interface ICategoryService {
 
@@ -16,6 +16,7 @@ public interface ICategoryService {
 	Optional<Category> findById(Integer id);
 
 	List<Category> findAllById(Iterable<Integer> ids);
+
 
 	List<Category> findAll();
 

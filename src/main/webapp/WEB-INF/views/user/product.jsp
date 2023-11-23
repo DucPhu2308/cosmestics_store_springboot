@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%--<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>
-<%--<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>--%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <body>
 <section class="jumbotron text-center">
@@ -19,7 +19,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="category.html">Category</a></li>
+                    <li class="breadcrumb-item"><a href="/category">Category</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Product</li>
                 </ol>
             </nav>
@@ -44,20 +44,20 @@
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                    <p class="price">99.00 $</p>
-                    <p class="price_discounted">149.90 $</p>
-                    <form:form method="get" action="cart.html">
-                        <div class="form-group">
-                            <label for="colors">Color</label>
-                            <form:select class="custom-select" id="colors" path="custom-select">
-                                <%--									<option selected>Select</option>--%>
-                                <%--									<option value="1">Blue</option>--%>
-                                <%--									<option value="2">Red</option>--%>
-                                <%--									<option value="3">Green</option>--%>
+                    <c:if test="${discount == 0}">
+                        <p class="price">${product.price} $</p>
+                    </c:if>
+                    <c:if test="${discount != 0}">
+                        <p class="price">${product_discounted} $</p>
+                        <p class="price_discounted">${product.price} $</p>
+                        <label>Chương trình áp dụng giảm giá với sản phẩm này từ ngày ${discountStart} đến ngày ${discountEnd}</label>
+                    </c:if>
 
 
-                            </form:select>
-                        </div>
+                    <label>Số lượng còn lại: ${amount}</label>
+
+                    <form:form method="post" action="/product/${productId}/product_to_cart" modelAttribute="cart_product">
+
                         <div class="form-group">
                             <label>Quantity :</label>
                             <div class="input-group mb-3">
@@ -68,7 +68,7 @@
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <form:input type="text" class="form-control" id="quantity"
+                                <form:input type="text" class="form-control" id="quantity" name="quantity"
                                             path="quantity" min="1" max="100" value="1"/>
                                 <div class="input-group-append">
                                     <button type="button"
@@ -79,10 +79,11 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="cart.html"
-                           class="btn btn-success btn-lg btn-block text-uppercase"> <i
-                                class="fa fa-shopping-cart"></i> Add To Cart
-                        </a>
+                        <input type="submit" value="Thêm vào giỏ hàng" class="btn btn-success btn-lg btn-block text-uppercase">
+<%--                        <a href="cart.html"--%>
+<%--                           class="btn btn-success btn-lg btn-block text-uppercase"> <i--%>
+<%--                                class="fa fa-shopping-cart"></i> Add To Cart--%>
+<%--                        </a>--%>
                     </form:form>
                     <div class="product_rassurance">
                         <ul class="list-inline">
@@ -120,33 +121,8 @@
                     <i class="fa fa-align-justify"></i> Description
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Le Lorem Ipsum est simplement du faux
-                        texte employé dans la composition et la mise en page avant
-                        impression. Le Lorem Ipsum est le faux texte standard de
-                        l'imprimerie depuis les années 1500, quand un peintre anonyme
-                        assembla ensemble des morceaux de texte pour réaliser un livre
-                        spécimen de polices de texte. Il n'a pas fait que survivre cinq
-                        siècles, mais s'est aussi adapté à la bureautique informatique,
-                        sans que son contenu n'en soit modifié. Il a été popularisé dans
-                        les années 1960 grâce à la vente de feuilles Letraset contenant
-                        des passages du Lorem Ipsum, et, plus récemment, par son
-                        inclusion dans des applications de mise en page de texte, comme
-                        Aldus PageMaker.</p>
-                    <p class="card-text">Contrairement à une opinion répandue, le
-                        Lorem Ipsum n'est pas simplement du texte aléatoire. Il trouve
-                        ses racines dans une oeuvre de la littérature latine classique
-                        datant de 45 av. J.-C., le rendant vieux de 2000 ans. Un
-                        professeur du Hampden-Sydney College, en Virginie, s'est
-                        intéressé à un des mots latins les plus obscurs, consectetur,
-                        extrait d'un passage du Lorem Ipsum, et en étudiant tous les
-                        usages de ce mot dans la littérature classique, découvrit la
-                        source incontestable du Lorem Ipsum. Il provient en fait des
-                        sections 1.10.32 et 1.10.33 du "De Finibus Bonorum et Malorum"
-                        (Des Suprêmes Biens et des Suprêmes Maux) de Cicéron. Cet
-                        ouvrage, très populaire pendant la Renaissance, est un traité sur
-                        la théorie de l'éthique. Les premières lignes du Lorem Ipsum,
-                        "Lorem ipsum dolor sit amet...", proviennent de la section
-                        1.10.32.</p>
+                    <p>${product.description}</p>
+
                 </div>
             </div>
         </div>
@@ -157,20 +133,54 @@
                 <div class="card-header bg-primary text-white text-uppercase">
                     <i class="fa fa-comment"></i> Reviews
                 </div>
+                <div class="review">
+                    <form:form class="post-review" method="post" action="/product/${productId}/review1" modelAttribute="post_review">
+                        <div class="post-review-user">
+                            <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                 alt="avatar">
+                            <span class="ml-2">POSTER_NAME</span>
+                        </div>
+                        <h4 class="text-uppercase">Give your review:</h4>
+                        <div id="rating">
+                            <input path="rating" type="radio" id="star5" name="rating" value="5" />
+                            <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label class = "full" for="star3" title="Meh - 3 stars"></label>
+
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                        </div>
+                        <form:textarea path="content" class="form-control animated" cols="5" id="new-review" name="new-review"
+                                  placeholder="Enter your review here..." rows="5"></form:textarea>
+
+                        <input type="submit" value="Đăng bình luận" class="btn-post-review">
+
+                    </form:form>
+                </div>
+
+                <h3>Tất cả các bình luận</h3>
+
                 <div class="card-body">
-                    <div class="review">
-                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                        <meta itemprop="datePublished" content="01-01-2016">
-                        January 01, 2018 <span class="fa fa-star"></span> <span
-                            class="fa fa-star"></span> <span class="fa fa-star"></span> <span
-                            class="fa fa-star"></span> <span class="fa fa-star"></span> by
-                        Paul Smith
-                        <p class="blockquote">
-                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Integer posuere erat a ante.</p>
-                        </p>
-                        <hr>
-                    </div>
+                    <c:forEach var="i" items="${product_review}">
+                        <div class="review">
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                            <meta itemprop="datePublished" content="01-01-2016">
+                            ${i.published}<span class="fa fa-star"></span> <span
+                                class="fa fa-star"></span> <span class="fa fa-star"></span> <span
+                                class="fa fa-star"></span> <span class="fa fa-star"></span> ${i.user.firstName} ${i.user.lastName}
+                            <p class="blockquote">
+                            <p class="mb-0">${i.content}</p>
+                            <hr>
+                        </div>
+                    </c:forEach>
+
                     <div class="review">
                         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                         <meta itemprop="datePublished" content="01-01-2016">
@@ -182,7 +192,6 @@
                         <p class="blockquote">
                         <p class="mb-0">Lorem ipsum dolor sit amet, consectetur
                             adipiscing elit. Integer posuere erat a ante.</p>
-                        </p>
                         <hr>
                     </div>
                 </div>

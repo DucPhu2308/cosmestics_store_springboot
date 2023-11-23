@@ -11,10 +11,10 @@
 <body>
 <div class="form_login signin">
     <h4>Đăng nhập</h4>
-    <form method="post" action="/checklogin">
+    <form method="post" action="/login/checklogin">
         <div class="mb-3">
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                   placeholder="Email/Số điện thoại" name="username">
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Email/Số điện thoại" name="phoneNumber_email">
         </div>
         <div class="mb-3">
             <div class="mb-3-password">
@@ -33,7 +33,7 @@
             <button type="submit" class="btn btn-primary">Đăng nhập</button>
         </div>
         <div class="form-login-forgot-password">
-            <label for=""> <input type="checkbox">Ghi nhớ đăng nhập</label>
+            <label> <input type="checkbox">Ghi nhớ đăng nhập</label>
             <a href="">Quên mật khẩu</a>
         </div>
         <div class="mb-3 form-check">
@@ -47,7 +47,7 @@
             </div>
             <div class="signin_not_have_account">
                 <p>Bạn chưa có tài khoản. Hãy đăng ký
-                    <a href="">tại đây</a>
+                    <a href="/register/">tại đây</a>
                 </p>
             </div>
 

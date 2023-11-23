@@ -16,9 +16,12 @@ public class UserService implements IUserService{
     UserRepository userRepository;
 
     @Override
-    public boolean checklogin(String phoneNumber, String password) {
-        Optional<User> user = userRepository.findUserByPhone(phoneNumber);
+    public boolean checklogin(String phoneNumber_email, String password) {
+        Optional<User> user = userRepository.findUserByPhone(phoneNumber_email);
         if(user.isPresent() && user.get().getPasswordHashed().contains(password)){
+            return true;
+        }
+        else if(user.isPresent() && user.get().getEmail().contains(phoneNumber_email)){
             return true;
         }
         return false;
@@ -27,5 +30,10 @@ public class UserService implements IUserService{
     @Override
     public Optional<User> findUserByPhone(String phoneNumber) {
         return userRepository.findUserByPhone(phoneNumber);
+    }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
     }
 }

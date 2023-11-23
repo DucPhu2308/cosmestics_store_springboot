@@ -25,7 +25,7 @@
 				class="fa-solid fa-shop"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
 				Sản phẩm
 		</a></li>
-		<li><a href="#" class="nav-link link-dark"> <i
+		<li><a href="<c:url value="/admin/customer" />" class="nav-link ${active=='customer' ? 'active' : 'link-dark'}"> <i
 				class="fa-solid fa-address-book"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg> -->
 				Khách hàng
 		</a></li>
