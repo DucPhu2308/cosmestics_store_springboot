@@ -90,10 +90,11 @@ public class CartController {
     public String addCart(HttpSession session, @ModelAttribute("addCart") Cart cart){
         int user_id = (int) session.getAttribute("user_id");
         User user = userService.findById(user_id).get();
-        cart.setUser(user);
-        cart.setActive(true);
-        System.out.println(cart.getName()+" "+ cart.getActive()+" " +cart.getUser().getFirstName() );
-        cartService.save(cart);
+        Cart newCart = new Cart();
+        newCart.setUser(user);
+        newCart.setName(cart.getName());
+        newCart.setActive(true);
+        cartService.save(newCart);
         return "redirect:/cart";
     }
 

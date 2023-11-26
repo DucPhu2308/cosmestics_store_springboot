@@ -10,9 +10,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import hcmute.springbootdemo.Entity.Brand;
 import hcmute.springbootdemo.Entity.Category;
@@ -58,5 +61,13 @@ public class ProductController {
 		productService.deleteById(id);
 		redirectAttributes.addFlashAttribute("message", "Thao tác thành công!");
 		return "redirect:/admin/product";
+	}
+
+	@GetMapping("/images/{id}")
+	public String getImages(ModelMap model, @PathVariable("id") int id) {
+		model.addAttribute("active", "product");
+		Product product = productService.findById(id).get();
+		model.addAttribute("product", product);
+		return "admin/product_images";
 	}
 }

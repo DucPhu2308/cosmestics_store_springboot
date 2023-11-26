@@ -97,6 +97,9 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
                   <a class="btn btn-outline-success">
                     <i class="fa-solid fa-tag"></i>
                   </a>
+                  <a href="product/images/${i.id}" class="btn btn-outline-secondary">
+                    <i class="fa-regular fa-image"></i>
+                  </a>
                   <a class="btn btn-outline-danger"
 				  	data-bs-toggle="modal"
                     data-bs-target="#warningModal"

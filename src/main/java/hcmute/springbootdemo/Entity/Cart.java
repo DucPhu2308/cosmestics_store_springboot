@@ -21,8 +21,8 @@ public class Cart implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String name;
 	
-	@Column(columnDefinition = "BIT(1)")
-	private boolean active;
+	@Column(columnDefinition = "bool DEFAULT t")
+	private Boolean active;
 	
 	@OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
 	private List<Order> orders;
