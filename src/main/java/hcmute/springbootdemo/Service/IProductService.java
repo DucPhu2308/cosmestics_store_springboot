@@ -1,6 +1,8 @@
 package hcmute.springbootdemo.Service;
 
 import hcmute.springbootdemo.Entity.Product;
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +12,8 @@ public interface IProductService {
     Product findProductById(int id);
 
     int countProduct();
+
+	int countProductsByCategoryId(int categoryId);
 
 	List<Product> findProductByCategory(int categoryId);
 
@@ -28,4 +32,7 @@ public interface IProductService {
 	public List<Product> get10Newest();
 
 	public List<Product> get10Best();
+
+
+	Page<Product> findAll(int page, int size);
 }

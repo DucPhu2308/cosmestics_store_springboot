@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="temp" value="0"/>
 <body>
 <section class="jumbotron text-center">
     <div class="container">
@@ -17,7 +18,11 @@
                 <ul class="list-group category_block">
                     <li class="list-group-item"><a href="/category">Tất cả</a></li>
                     <c:forEach var="i" items="${list_category}">
-                        <li class="list-group-item"><a href="/category/${i.id}">${i.name}</a></li>
+
+                        <li class="list-group-item"><a href="/category/${i.id}">${i.name} (${listCountProduct.get(temp)} sản phẩm)</a></li>
+
+                        <c:set var="temp" value="${temp + 1}"/>
+
                     </c:forEach>
                 </ul>
             </div>
@@ -48,7 +53,7 @@
                         <div class="card">
                             <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
                             <div class="card-body">
-                                <h4 class="card-title"><a href="/product/${i.id}" title="View Product">${i.name}</a></h4>
+                                <h4 class="card-title"><a href="/product/${i.id}" title="View Product">${i.name} </a></h4>
                                 <p class="card-text">${i.description}</p>
                                 <div class="row">
                                     <div class="col">

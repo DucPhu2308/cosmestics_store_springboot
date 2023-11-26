@@ -4,6 +4,8 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<c:set var="cartID" value="0"/>
+
 <body>
 	<section class="jumbotron text-center">
 		<div class="container">
@@ -14,6 +16,36 @@
 	<div class="container mb-4">
 		<div class="row">
 			<div class="col-12">
+				<div class="table-select">
+					<form action="cart/getProduct" method="post">
+						<label >Chọn giỏ hàng:</label>
+						<select name="cart_user" >
+							<option selected>
+								<c:if test="${listCartUser == null}">
+									Chưa có giỏ hàng nào
+								</c:if>
+								<c:if test="${listCartUser != null}">
+									<c:forEach var="j" items="${listCartUser}">
+										<c:if test="${j.id == sessionScope.cart_id}">
+											${j.name}
+											<c:set var="cartID" value="${j.id}"/>
+										</c:if>
+									</c:forEach>
+								</c:if>
+							</option>
+
+							<c:forEach var="j" items="${listCartUser}">
+								<option value="${j.id} ">${j.name}</option>
+							</c:forEach>
+
+						</select>
+						<button type="submit" class="btn btn-primary">Hiện sản phẩm</button>
+					</form>
+
+				</div>
+				<form:form method="post" action="/cart/delete_cart/${cartID}">
+					<input type="submit" class="btn btn-sm btn-danger" value="Xóa giỏ hàng">
+				</form:form>
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<thead>
@@ -67,21 +99,14 @@
 									</c:if>
 								</td>
 							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>Shipping</td>
-								<td class="text-right">6,90 €</td>
-							</tr>
+
 							<tr>
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
 								<td><strong>Total</strong></td>
-								<td class="text-right"><strong>346,90 €</strong></td>
+								<td class="text-right"><strong>${totalPrice} €</strong></td>
 							</tr>
 						</tbody>
 					</table>
@@ -90,7 +115,7 @@
 			<div class="col mb-2">
 				<div class="row">
 					<div class="col-sm-12  col-md-6">
-						<button class="btn btn-block btn-light">Continue Shopping</button>
+						<button class="btn btn-block btn-light" type="submit" formaction="/category">Continue Shopping</button>
 					</div>
 					<div class="col-sm-12 col-md-6 text-right">
 						<button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>

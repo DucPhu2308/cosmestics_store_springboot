@@ -3,6 +3,7 @@ package hcmute.springbootdemo.Controller.User;
 
 import hcmute.springbootdemo.Entity.*;
 import hcmute.springbootdemo.Repository.*;
+import hcmute.springbootdemo.Service.impl.CartServiceImpl;
 import hcmute.springbootdemo.Service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,8 +34,11 @@ public class ProductUserController {
     @Autowired
     ReviewRepository reviewRepository;
 
+    @Autowired
+    CartServiceImpl cartService;
+
     @GetMapping(value="/{id}")
-    public String productUser(ModelMap modelMap, @PathVariable("id") int id){
+    public String productUser(ModelMap modelMap, @PathVariable("id") int id, HttpSession session){
 
         Product product = productRepository.findById(id).get();
 
@@ -45,9 +49,25 @@ public class ProductUserController {
             modelMap.addAttribute("available", "Hết hàng");
         }
 
+        String userID = (String) session.getAttribute("user_id");
 
-        modelMap.addAttribute("amount", product.getStock());
+        int user_id = 0;
+        if(userID == null){
+            modelMap.addAttribute("user_id", 0);
+        }
+        else{
+            user_id = (int) session.getAttribute("user_id");
+            modelMap.addAttribute("user_id", user_id);
+        }
 
+        List<Cart> listCart = cartService.findCartByUserId(user_id);
+
+        if(listCart !=null ){
+            modelMap.addAttribute("listCart", listCart);
+        }
+        else{
+            modelMap.addAttribute("listCart", "không có giỏ hàng");
+        }
 
         float price=0;
 
@@ -62,16 +82,20 @@ public class ProductUserController {
         modelMap.addAttribute("productId", id);
         modelMap.addAttribute("discount", product.getDiscountPercent());
 
+
+
         modelMap.addAttribute("discountStart", product.getDiscountStart());
         modelMap.addAttribute("discountEnd", product.getDiscountEnd());
 
         modelMap.addAttribute("product_discounted", price);
         modelMap.addAttribute("product_price", product.getPrice());
+
         modelMap.addAttribute("cart_product", new Cart_Product());
         modelMap.addAttribute("post_review",new Review());
 
         List<Review> product_review= reviewRepository.findReviewByProductId(id);
         modelMap.addAttribute("product_review", product_review);
+
 
 
         return "user/product";
@@ -96,9 +120,11 @@ public class ProductUserController {
 
         cart_productRepository.save(cartproduct);
 
+//        cách hiển thị thông báo thành công trên alert
 
+        session.setAttribute("CountProduct",cart_productRepository.count());
 
-        modelMap.addAttribute("success", "Thêm sản phẩm vào giỏ hàng thành công");
+        session.setAttribute("success", "Thêm sản phẩm vào giỏ hàng thành công");
 
         return "redirect:/product/{id}";
     }

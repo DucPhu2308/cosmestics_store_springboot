@@ -84,6 +84,7 @@ footer a {
 
 .detail_info{
     width:200%;
+    border-right:1px solid #79b0e8;
 }
 .detail_author {
     display:flex;
@@ -118,7 +119,6 @@ footer a {
     width:100%;
     height:320px;
     padding-left:10px;
-    border-left:1px solid #79b0e8;
     
 }
 .detail_image_user{
@@ -150,8 +150,8 @@ footer a {
 }
 .detail_info_submit{
     display:flex;
-    justify-content: center;
     margin-top:20px;
+    justify-content: space-evenly;
 }
 
 .detail_info_submit input{
@@ -159,6 +159,19 @@ footer a {
     height:30px;
     cursor: pointer;
     border-radius: 10px;
+}
+
+
+.detail_info_submit a{
+    width:100px;
+    height:30px;
+    cursor: pointer;
+    border-radius: 10px;
+    text-decoration: none;
+    color:#fff;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 

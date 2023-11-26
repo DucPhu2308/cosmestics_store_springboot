@@ -21,8 +21,8 @@ public class Cart implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String name;
 	
-	@Column
-	private Boolean active;
+	@Column(columnDefinition = "BIT(1)")
+	private boolean active;
 	
 	@OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
 	private List<Order> orders;
@@ -59,11 +59,11 @@ public class Cart implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Boolean getActive() {
+	public boolean getActive() {
 		return active;
 	}
 
-	public void setActive(Boolean active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 

@@ -80,7 +80,10 @@ public class UserServiceImpl implements IUserService{
 		return userRepository.save(entity);
 	}
 
-	@Override
+
+
+
+    @Override
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}

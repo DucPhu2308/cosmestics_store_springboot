@@ -26,12 +26,12 @@ public class HomeController {
     IProductService productService;
 
     @GetMapping(value="")
-    public String home (ModelMap model){
+    public String home (ModelMap model, HttpSession session){
         model.addAttribute("latestProduct", productService.get10Newest());    
         model.addAttribute("bestProduct", productService.get10Best());
+//        session.setAttribute("CountProduct",cart_productRepository.count());
         return "user/main";
     }
-
 
 
 
@@ -40,6 +40,7 @@ public class HomeController {
     public String checkout(HttpSession session){
         session.removeAttribute("username");
         session.removeAttribute("user_id");
+        session.removeAttribute("cart_id");
         return "redirect:/";
     }
 

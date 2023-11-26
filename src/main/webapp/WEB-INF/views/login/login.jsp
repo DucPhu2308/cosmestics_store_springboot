@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: trong
@@ -9,6 +10,7 @@
 
 
 <body>
+
 <div class="form_login signin">
     <h4>Đăng nhập</h4>
     <form method="post" action="/login/checklogin">

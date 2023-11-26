@@ -38,4 +38,8 @@ public interface IUserService {
 	List<User> findAll();
 
 	<S extends User> S save(S entity);
+
+
+
+
 }

@@ -1,5 +1,7 @@
 package hcmute.springbootdemo.Repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,6 +21,12 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 
     @Query("select count(*) from Product ")
     int countProduct();
+
+    @Query("select count(*) from Product where category.id = ?1")
+    int countProductsByCategoryId(int categoryId);
+
+    Page<Product> findAll(Pageable pageable);
+
 
     // top 10 new product by created date desc, available = true
     List<Product> findTop10ByAvailableOrderByCreatedDateDesc(boolean available);

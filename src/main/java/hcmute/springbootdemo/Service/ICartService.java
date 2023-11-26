@@ -21,4 +21,6 @@ public interface ICartService {
 
 	<S extends Cart> S save(S entity);
 
+	List<Cart> findCartByUserId(int userId);
+
 }

@@ -11,7 +11,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="/">
             <img src="<c:url value="/templates/images/logo.jpg"/>"  width="120" alt="logo" class="container_nav_image">
             ORI SHOP
         </a>
@@ -31,9 +31,6 @@
                     <a class="nav-link" href="/product">Product</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/cart">Cart</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/contact/${productId}">Contact</a>
                 </li>
             </ul>
@@ -49,7 +46,11 @@
                 </div>
                 <a class="btn btn-success btn-sm ml-3" href="/cart">
                     <i class="fa fa-shopping-cart"></i> Cart
-                    <span class="badge badge-light">3</span>
+<%--                    <c:if test="${sessionScope.CountProduct != null}">--%>
+<%--                    <span class="badge badge-light">--%>
+<%--                            ${sessionScope.CountProduct}--%>
+<%--                    </span>--%>
+<%--                    </c:if>--%>
                 </a>
             </form>
 
@@ -70,7 +71,7 @@
                             </div>
                         </div>
                         <div class="profile_user_col">
-                            <a href="">Hồ sơ của tui</a>
+                            <a href="/profile_user/${sessionScope.user_id}">Hồ sơ của tui</a>
                         </div>
                         <div class="profile_user_col">
                             <a href="">Đơn đặt hàng</a>

@@ -4,6 +4,11 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <body>
+<script>
+    <c:if test="${sessionScope.success}">
+        alert("Thêm vào giỏ hàng thành công");
+    </c:if>
+</script>
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading">E-COMMERCE PRODUCT</h1>
@@ -54,11 +59,19 @@
                     </c:if>
 
 
-                    <label>Số lượng còn lại: ${amount}</label>
-
                     <form:form method="post" action="/product/${productId}/product_to_cart" modelAttribute="cart_product">
 
                         <div class="form-group">
+                            <div class="form-group">
+                                <label for="colors">Chọn giỏ hàng</label>
+                                <form:select class="custom-select" id="colors" path="cart">
+                                    <option selected>Select</option>
+                                    <c:forEach var="i_cart" items="${listCart}">
+                                        <option value="${i_cart.id}">${i_cart.name}</option>
+                                    </c:forEach>
+                                </form:select>
+                            </div>
+                            <a href="/cart/add">Thêm giỏ hàng</a></br>
                             <label>Quantity :</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -200,4 +213,6 @@
     </div>
 </div>
 
+
 </body>
+
