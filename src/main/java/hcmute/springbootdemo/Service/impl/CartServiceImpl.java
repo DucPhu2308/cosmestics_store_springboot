@@ -26,6 +26,11 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
+	public void updateCart(Cart cart) {
+		cartRepository.save(cart);
+	}
+
+	@Override
 	public List<Cart> findAll() {
 		return cartRepository.findAll();
 	}
@@ -55,5 +60,4 @@ public class CartServiceImpl implements ICartService {
 		cartRepository.delete(entity);
 	}
 
-    
 }

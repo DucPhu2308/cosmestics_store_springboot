@@ -18,6 +18,13 @@ public interface ICart_Product {
 
 	List<Cart_Product> findAll();
 
+
 	<S extends Cart_Product> S save(S entity);
+
+	int countCart_ProductsByCartId(int cart_id);
+
+	int sumTotalProductByCartID(int cart_id);
+
+	List<Cart_Product> findCart_ProductsByCartId(int cart_id);
 
 }

@@ -27,13 +27,13 @@ public class LoginController {
 
 
     @PostMapping(value= "/checklogin")
-    public String checkLogin(@RequestParam("phoneNumber_email") String phoneNumber_email,
+    public String checkLogin(@RequestParam("phoneNumber") String phoneNumber,
                              @RequestParam("password") String password,
                              HttpSession session,
                              ModelMap modelMap){
 
-        if(userService.checklogin(phoneNumber_email,password)) {
-            Optional<User> user_login = userService.findUserByPhone(phoneNumber_email);
+        if(userService.checklogin(phoneNumber,password)) {
+            Optional<User> user_login = userService.findUserByPhone(phoneNumber);
             User user = user_login.get();
             session.setAttribute("user_id", user.getId());
             return "redirect:/" ;

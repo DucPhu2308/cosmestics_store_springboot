@@ -16,7 +16,7 @@
     <form method="post" action="/login/checklogin">
         <div class="mb-3">
             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                   placeholder="Email/Số điện thoại" name="phoneNumber_email">
+                   placeholder="Số điện thoại" name="phoneNumber">
         </div>
         <div class="mb-3">
             <div class="mb-3-password">

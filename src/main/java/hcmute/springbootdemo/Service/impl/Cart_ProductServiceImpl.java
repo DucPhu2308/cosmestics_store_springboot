@@ -21,6 +21,27 @@ public class Cart_ProductServiceImpl implements ICart_Product {
 	}
 
 	@Override
+	public int countCart_ProductsByCartId(int cart_id) {
+		return cart_ProductRepository.countCart_ProductsByCartId(cart_id);
+	}
+
+	@Override
+	public int sumTotalProductByCartID(int cart_id) {
+
+		if(cart_ProductRepository.findCart_ProductsByCartId(cart_id).isEmpty())
+			return 0;
+		else{
+			return cart_ProductRepository.sumTotal(cart_id);
+		}
+	}
+
+	@Override
+	public List<Cart_Product> findCart_ProductsByCartId(int cart_id) {
+		return cart_ProductRepository.findCart_ProductsByCartId(cart_id);
+	}
+
+
+	@Override
 	public List<Cart_Product> findAll() {
 		return cart_ProductRepository.findAll();
 	}
