@@ -34,6 +34,8 @@ public class Image implements Serializable{
 	@JoinColumn(name = "productId")
 	private Product product;
 
+	public Image() {
+	}
 	public Image(int id, String imageLink, Product product) {
 		this.id = id;
 		this.imageLink = imageLink;

@@ -21,6 +21,11 @@ public class ImageServiceImpl implements IImageService {
 	}
 
 	@Override
+	public List<Image> findAll() {
+		return imageRepository.findAll();
+	}
+
+	@Override
 	public Optional<Image> findById(Integer id) {
 		return imageRepository.findById(id);
 	}

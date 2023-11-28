@@ -22,4 +22,5 @@ public interface IImageService {
 
 	<S extends Image> S save(S entity);
 
+	public List<Image> findAll();
 }
