@@ -31,6 +31,11 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
+	public Cart findCartById(int id) {
+		return cartRepository.findCartById(id);
+	}
+
+	@Override
 	public List<Cart> findAll() {
 		return cartRepository.findAll();
 	}

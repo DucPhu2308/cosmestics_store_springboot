@@ -37,10 +37,32 @@
         <div class="col-12 col-lg-6">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                    <a href="" data-toggle="modal" data-target="#productModal"> <img
-                            class="img-fluid" src="https://dummyimage.com/800x800/55595c/fff"/>
-                        <p class="text-center">Zoom</p>
-                    </a>
+                    <div style="width: 90%; height: 500px;" id="carouselExample" class="carousel carousel-dark slide">
+                        <div class="carousel-inner">
+                            <c:forEach items="${product.images}" var="image" varStatus="status">
+                                <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                                        <%-- <div class="col-md-3"> --%>
+                                    <img src="<c:url value="/templates/images/${image.imageLink}"/>" style="height: 500px;" class="d-block w-100" alt="...">
+
+                                </div>
+                            </c:forEach>
+
+
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+<%--                    <a href="" data-toggle="modal" data-target="#productModal">--%>
+<%--                        <img src="<c:url value="/templates/images/${product.images}"/>"  width="120" alt="logo" class="container_nav_image">--%>
+<%--                        --%>
+<%--                        <p class="text-center">Zoom</p>--%>
+<%--                    </a>--%>
                 </div>
             </div>
         </div>

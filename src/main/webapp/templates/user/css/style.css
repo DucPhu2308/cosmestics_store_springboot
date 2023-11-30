@@ -174,8 +174,13 @@ footer a {
     align-items: center;
 }
 
-
-
+.jumbotron{
+    background-image: url("/templates/images/anh_my_pham.png");
+    background-size: cover;
+}
+.order_form{
+    padding:0 10%;
+}
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 /*reset css*/
 div,label{margin:0;padding:0;}
@@ -198,14 +203,10 @@ h1{font-size:1.5em;margin:10px;}
 #rating>input:checked~label:hover~label{color:#FFED85;}
 
 
-
-
-
 .btn-post-review{
     background-color: #2d6ba9;
     color: #fff;
     border: 1px solid #343a40;
-    border-radius: 0;
     padding: 10px 20px;
     font-size: 14px;
     font-weight: 400;

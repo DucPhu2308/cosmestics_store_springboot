@@ -30,7 +30,6 @@ public class ProfileUserController {
         String password = userService.findById(user_id).get().getPasswordHashed();
         user.setPasswordHashed(password);
         user.setId(user_id);
-
         userService.save(user);
         return "redirect:/profile_user/" + user_id;
     }

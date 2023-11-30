@@ -3,7 +3,6 @@ package hcmute.springbootdemo.Controller.User;
 import hcmute.springbootdemo.Entity.Cart;
 import hcmute.springbootdemo.Entity.Cart_Product;
 import hcmute.springbootdemo.Entity.User;
-import hcmute.springbootdemo.Repository.Cart_ProductRepository;
 import hcmute.springbootdemo.Service.impl.CartServiceImpl;
 import hcmute.springbootdemo.Service.impl.Cart_ProductServiceImpl;
 import hcmute.springbootdemo.Service.impl.ProductServiceImpl;
@@ -39,6 +38,7 @@ public class CartController {
 
         int user_id = (int) session.getAttribute("user_id");
         List<Cart> listCart = cartService.findCartByUserId(user_id);
+
         modelMap.addAttribute("listCartUser", listCart);
 
         List<Integer> countProductByCartID = new ArrayList<>();
@@ -55,7 +55,8 @@ public class CartController {
         modelMap.addAttribute("countProductByCartID", countProductByCartID);
         modelMap.addAttribute("totalPriceByCartID", totalPriceByCartID);
 
-        return "user/listCart";
+
+        return "user/cart/listCart";
     }
 
     @GetMapping(value="/{id}")
@@ -66,7 +67,7 @@ public class CartController {
         modelMap.addAttribute("totalPrice", totalPrice);
         session.setAttribute("cart_id", id);
 
-        return "user/cart";
+        return "user/cart/cart";
     }
 
     @GetMapping(value="/delete_cart/{id}")
@@ -81,48 +82,44 @@ public class CartController {
         return "redirect:/cart/"+session.getAttribute("cart_id");
     }
 
-    @GetMapping(value="/addCart")
-    public String addCart(ModelMap modelMap, HttpSession session){
-        modelMap.addAttribute("addCart", new Cart());
-        int user_id = (int) session.getAttribute("user_id");
-        String firstName= userService.findById(user_id).get().getFirstName();
-        String lastName= userService.findById(user_id).get().getLastName();
-
-        modelMap.addAttribute("firstName", firstName);
-        modelMap.addAttribute("lastName", lastName);
-
-        return "user/addCart";
-    }
+//    @GetMapping(value="/addCart")
+//    public String addCart(ModelMap modelMap, HttpSession session){
+//        modelMap.addAttribute("addCart", new Cart());
+//        int user_id = (int) session.getAttribute("user_id");
+//        String firstName= userService.findById(user_id).get().getFirstName();
+//        String lastName= userService.findById(user_id).get().getLastName();
+//
+//        modelMap.addAttribute("firstName", firstName);
+//        modelMap.addAttribute("lastName", lastName);
+//
+//        return "user/cart/addCart";
+//    }
 
     @PostMapping(value="/addCart")
-    public String addCart(HttpSession session, @ModelAttribute("addCart") Cart cart){
+    public String addCart(HttpSession session,
+                          @RequestParam("nameNewCart") String nameNewCart){
         int user_id = (int) session.getAttribute("user_id");
         User user = userService.findById(user_id).get();
         Cart newCart = new Cart();
         newCart.setUser(user);
-        newCart.setName(cart.getName());
+        newCart.setName(nameNewCart);
         newCart.setActive(true);
         cartService.save(newCart);
         return "redirect:/cart";
     }
 
-    @GetMapping(value="update/{id}")
-    public String updateCart(ModelMap modelMap, @PathVariable("id") int id){
-        Cart cart = cartService.findById(id).get();
-        modelMap.addAttribute("cart", cart);
-        return "user/updateCart";
-    }
 
-    @PostMapping(value="update/{id}")
-    public String updateCart(HttpSession session, @PathVariable("id") int id, @ModelAttribute("cart") Cart cart){
+
+    @PostMapping(value="updateCart/{id}")
+    public String updateCart(HttpSession session, @PathVariable("id") int id,
+                             @RequestParam("nameCart") String name){
         Cart cart1 = cartService.findById(id).get();
-        cart1.setName(cart.getName());
+        cart1.setId(id);
+        cart1.setName(name);
         cart1.setActive(true);
         User user = userService.findById((int) session.getAttribute("user_id")).get();
         cart1.setUser(user);
         cartService.save(cart1);
         return "redirect:/cart";
     }
-
-
 }

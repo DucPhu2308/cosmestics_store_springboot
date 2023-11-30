@@ -25,4 +25,6 @@ public interface ICartService {
 	List<Cart> findCartByUserId(int userId);
 
 	void updateCart(Cart cart);
+
+	Cart findCartById(int id);
 }

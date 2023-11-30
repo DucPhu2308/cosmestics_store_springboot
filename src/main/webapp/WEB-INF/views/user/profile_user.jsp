@@ -14,7 +14,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
-    <link rel="stylesheet" href="<c:url value="/templates/user/css/login.css"/>" />
+    <link rel="stylesheet" href="<c:url value="/templates/login/css/login.css"/>" />
     <link rel="stylesheet" href="<c:url value="/templates/login/css/header.css"/>" />
     <link rel="stylesheet" href="<c:url value="/templates/user/css/style.css"/>" />
 </head>

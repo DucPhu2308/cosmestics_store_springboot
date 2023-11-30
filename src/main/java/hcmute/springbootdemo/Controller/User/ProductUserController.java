@@ -114,9 +114,9 @@ public class ProductUserController {
         cartproduct.setProduct(product);
 
         // tổng tiền của sản phẩm đó sau khi thêm vào giỏ hàng
-        float total = cartproduct.getQuantity() * product.getPrice();
+        float total = cartproduct.getQuantity() * product.getPrice() - (cartproduct.getQuantity() * product.getPrice() * product.getDiscountPercent());
         cartproduct.setTotalPrice(total);
-        System.out.println("total: " + total);
+
 
         cart_productRepository.save(cartproduct);
 

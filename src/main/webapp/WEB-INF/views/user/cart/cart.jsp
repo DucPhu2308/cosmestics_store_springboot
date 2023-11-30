@@ -21,10 +21,11 @@
 						<thead>
 							<tr>
 								<th scope="col"></th>
-								<th scope="col">Product</th>
-								<th scope="col">Available</th>
-								<th scope="col" class="text-center">Quantity</th>
-								<th scope="col" class="text-right">Price</th>
+								<th scope="col">Sản phẩm</th>
+								<th scope="col">Có sẵn</th>
+								<th scope="col" class="text-center">Số lượng</th>
+								<th scope="col" class="text-right">Đơn giá</th>
+								<th scope="col" class="text-right">Tổng tiền</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -42,7 +43,24 @@
 										<td>${i.product.name}</td>
 										<td>${i.product.stock}</td>
 										<td><input class="form-control" type="text" value="${i.quantity}" /></td>
-										<td class="text-right">${i.totalPrice} €</td>
+										<td class="text-right">
+											<c:if test="${i.product.discountPercent == 0}">
+												<p class="price">${i.product.price}€</p>
+											</c:if>
+											<c:if test="${i.product.discountPercent != 0}">
+												<span class="price" style="text-decoration: line-through">${i.product.price}€</span>
+												<span class="price_discounted" >${i.product.price - i.product.discountPercent*i.product.price}€</span>
+											</c:if>
+
+
+										</td>
+
+<%--										thêm dấu gạch ngang vào giá cũ--%>
+
+
+
+
+										<td class="text-right">${i.totalPrice}€</td>
 										<td class="text-right">
 											<form:form method="post" action="/cart/delete_cartProduct/${i.product.id}">
 												<input type="submit" class="btn btn-sm btn-danger" value="Xóa">
@@ -59,6 +77,7 @@
 								<td></td>
 								<td></td>
 								<td></td>
+								<td></td>
 								<td>Sub-Total</td>
 								<td class="text-right">
 									<c:if test="${totalPrice == null}">
@@ -71,6 +90,7 @@
 							</tr>
 
 							<tr>
+								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
