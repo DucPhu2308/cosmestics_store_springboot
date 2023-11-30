@@ -7,7 +7,7 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
     <title>Insert title here</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container" style="overflow: auto;">
       <h2 class="display-6 my-3">Sản phẩm</h2>
       <c:if test="${message != null}">
         <div class="alert alert-primary alert-dismissible" role="alert">
@@ -40,15 +40,15 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
       >
         <i class="fa-solid fa-plus"></i> <span>Thêm sản phẩm</span>
       </button>
-      <div class="table-responsive">
+      <div class="table-container">
         <table
-          style="margin: 10px 5px"
           id="table"
           class="table-striped table align-middle bg-white"
         >
           <thead class="table-dark">
             <tr style="font-weight: bold">
-              <th>ID</th>
+              <th style="width: 40px">ID</th>
+              <th style="width: 160px">Ảnh</th>
               <th>Tên</th>
               <th>Giá</th>
               <th style="width: 240px">Mô tả</th>
@@ -57,6 +57,9 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
               <th>SL bán</th>
               <th>SL tồn</th>
               <th>Trạng thái</th>
+              <th>% giảm</th>
+              <th>Ngày BD</th>
+              <th>Ngày KT</th>
               <th>Ngày thêm</th>
               <th style="width: 160px">Tác vụ</th>
             </tr>
@@ -65,6 +68,7 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
             <c:forEach var="i" items="${list}">
               <tr>
                 <td>${i.id }</td>
+                <td><img src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" class="d-block w-100" alt="Ảnh không khả dụng"></td>
                 <td>${i.name }</td>
                 <td>${i.price }</td>
                 <td>${i.description }</td>
@@ -80,8 +84,12 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
                     <span class="badge text-bg-danger">Ngừng bán</span>
                   </c:if>
                 </td>
+                <td>${i.discountPercent}</td>
+                <td><fmt:formatDate value="${i.discountStart}" pattern="yyyy-MM-dd"/></td>
+                <td><fmt:formatDate value="${i.discountEnd}" pattern="yyyy-MM-dd"/></td>
 				<!-- format created date -->
 				<td><fmt:formatDate value="${i.createdDate}" pattern="dd/MM/yyyy"/></td>
+                
                 <td>
                   <a class="btn btn-outline-info">
                     <i class="fa-solid fa-circle-info"></i>
@@ -93,9 +101,6 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
                     class="btn btn-outline-warning editbtn"
                   >
                     <i class="fa-solid fa-pen-to-square"></i>
-                  </a>
-                  <a class="btn btn-outline-success">
-                    <i class="fa-solid fa-tag"></i>
                   </a>
                   <a href="product/images/${i.id}" class="btn btn-outline-secondary">
                     <i class="fa-regular fa-image"></i>
@@ -143,7 +148,7 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
                 <div class="mb-3">
                   <div class="form-check form-switch">
                     <label class="form-check-label">Trạng thái</label>
-                    <form:checkbox path="available" class="form-check-input" />
+                    <form:checkbox path="available" class="form-check-input" id="available"/>
                   </div>
                 </div>
                 <div class="row">
@@ -227,7 +232,42 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
                     </form:select>
                   </div>
                 </div>
-
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="recipient-name" class="col-form-label"
+                      >Phần trăm giảm:</label
+                    >
+                    <form:input
+                      path="discountPercent"
+                      type="number"
+                      step="0.01"
+                      class="form-control"
+                      id="discountPercent"
+                    />
+                  </div>
+                  <div class="col-md-4 ms-auto">
+                    <label for="recipient-name" class="col-form-label"
+                      >Ngày BD:</label
+                    >
+                    <form:input
+                      path="discountStart"
+                      type="date"
+                      class="form-control"
+                      id="discountStart"
+                    />
+                  </div>
+                  <div class="col-md-4 ms-auto">
+                    <label for="recipient-name" class="col-form-label"
+                      >Ngày KT:</label
+                    >
+                    <form:input
+                      path="discountEnd"
+                      type="date"
+                      class="form-control"
+                      id="discountEnd"
+                    />
+                  </div>
+                </div>
                 <div class="mb-3">
                   <label for="message-text" class="col-form-label"
                     >Mô tả:</label
@@ -315,6 +355,10 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
       const description = document.getElementById("description");
       const brand = document.getElementById("brand");
       const category = document.getElementById("category");
+      const available = document.getElementById("available");
+      const discountPercent = document.getElementById("discountPercent");
+      const discountStart = document.getElementById("discountStart");
+      const discountEnd = document.getElementById("discountEnd");
       $(document).ready(function () {
         $(".editbtn").on("click", function () {
           function findSelectedValue(select, text) {
@@ -334,12 +378,17 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
             })
             .get();
           id.value = data[0];
-          name.value = data[1];
-          price.value = data[2];
-          stock.value = data[7];
-          description.value = data[3];
-          brand.value = findSelectedValue(brand, data[4]);
-          category.value = findSelectedValue(category, data[5]);
+          name.value = data[2];
+          price.value = data[3];
+          stock.value = data[8];
+          description.value = data[4];
+          brand.value = findSelectedValue(brand, data[5]);
+          category.value = findSelectedValue(category, data[6]);
+          available.checked = !(data[9].includes("Ngừng bán"));
+          discountPercent.value = data[10];
+          discountStart.value = data[11];
+          discountEnd.value = data[12];
+
         });
         $(".createbtn").on("click", function () {
           $("#insertModal").modal("show");
@@ -362,6 +411,7 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
         pagingType: "full_numbers",
         pageLength: 5,
         responsive: true,
+        "autoWidth": false,
       });
     </script>
   </body>

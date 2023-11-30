@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
 @Entity
@@ -47,10 +48,12 @@ public class Product implements Serializable{
 	
 	@Column
 	@Nullable
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date discountStart;
 	
 	@Column
 	@Nullable
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date discountEnd;
 	
 	@Column
@@ -91,11 +94,15 @@ public class Product implements Serializable{
 	public void setPrice(Float price) {
 		this.price = price;
 	}
+	
+	public Float getPrice() {
+		return price;
+	}
 	public void setDiscountPercent(Float discountPercent) {
 		this.discountPercent = discountPercent;
 	}
-	public Float getPrice() {
-		return price;
+	public Float getDiscountPercent() {
+		return discountPercent;
 	}
 	public List<Cart_Product> getCart_products() {
 		return cart_products;
@@ -125,14 +132,6 @@ public class Product implements Serializable{
 	public void setAvailable(Boolean available) {
 		this.available = available;
 	}
-	public float getDiscountPercent() {
-		return discountPercent;
-	}
-
-	public void setDiscountPercent(float discountPercent) {
-		this.discountPercent = discountPercent;
-	}
-
 	public String getDescription() {
 		return description;
 	}

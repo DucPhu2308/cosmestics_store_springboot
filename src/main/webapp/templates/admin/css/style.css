@@ -38,6 +38,16 @@ td .btn {
 	padding: 5px;
 	margin: 2px;
 }
+.table-container {
+	overflow-x: auto;
+	width: 98%;
+}
+#table {
+	table-layout: fixed;
+}
+#table th {
+	width:80px;
+}
 #sidebar {
 	transition: 0.5s;
 	overflow-x: hidden;
@@ -46,7 +56,7 @@ td .btn {
 	width: 0px;
 }
 #sidebar.open {
-	width: 260px;
+	width: 220px;
 }
 #sidebar > ul > li:hover {
 	background-color: rgb(0, 128, 192);
