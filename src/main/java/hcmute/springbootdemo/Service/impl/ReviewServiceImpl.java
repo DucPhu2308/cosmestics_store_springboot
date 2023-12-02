@@ -1,5 +1,6 @@
 package hcmute.springbootdemo.Service.impl;
 
+import hcmute.springbootdemo.Entity.Product;
 import hcmute.springbootdemo.Entity.Review;
 import hcmute.springbootdemo.Repository.ReviewRepository;
 import hcmute.springbootdemo.Service.IReviewService;
@@ -20,6 +21,35 @@ public class ReviewServiceImpl implements IReviewService {
 	public <S extends Review> S save(S entity) {
 		return reviewRepository.save(entity);
 	}
+
+	@Override
+	public int getMaxId() {
+		return reviewRepository.getMaxId();
+	}
+
+	@Override
+	public int avgRating(int productId) {
+		List<Review> review = reviewRepository.findReviewByProductId(productId);
+		int sum = 0;
+		for (Review r : review) {
+			sum += r.getRating();
+		}
+		if (review.size() == 0) {
+			return 0;
+		}
+		else{
+			double avg = sum / review.size();
+			avg=Math.ceil(avg);
+			return (int) avg;
+		}
+
+	}
+
+	@Override
+	public int countReviewByProductId(int id) {
+		return reviewRepository.countReviewByProductId(id);
+	}
+
 
 	@Override
 	public List<Review> findAll() {
@@ -55,6 +85,7 @@ public class ReviewServiceImpl implements IReviewService {
 	public void delete(Review entity) {
 		reviewRepository.delete(entity);
 	}
+
 
     
 }

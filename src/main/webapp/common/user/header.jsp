@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/category">Categories</a>
@@ -67,19 +67,29 @@
             <div class="header_action_user">
                 <div class="header_action_logo_user">
                     <div class="user_logo">
-                        <img src="/templates/images/logo.jpg" width="30" alt="logo">
+                        <c:if test="${sessionScope.image_user == null}">
+                            <img src="<c:url value="/templates/images/account.png"/>" width="30" alt="logo">
+                        </c:if>
+                        <c:if test="${sessionScope.image_user != null}">
+                            <img src="<c:url value="/templates/images/${sessionScope.image_user}"/>" width="30" alt="logo">
+                        </c:if>
                     </div>
                     <div class="profile_user">
                         <div class="profile_user_info">
                             <div class="profile_user_info_col3">
-                                <img src="/templates/images/logo.jpg" width="30" alt="logo">
+                                <c:if test="${sessionScope.image_user == null}">
+                                    <img src="<c:url value="/templates/images/account.png"/>" width="30" alt="logo">
+                                </c:if>
+                                <c:if test="${sessionScope.image_user != null}">
+                                    <img src="<c:url value="/templates/images/${sessionScope.image_user}"/>" width="30" alt="logo">
+                                </c:if>
                             </div>
                             <div class="profile_user_info_col6">
                                 <span>Nicolas Tesla </span>
                             </div>
                         </div>
                         <div class="profile_user_col">
-                            <a href="/profile_user/${sessionScope.user_id}">Hồ sơ của tui</a>
+                            <a href="/profile_user/">Hồ sơ của tui</a>
                         </div>
                         <div class="profile_user_col">
                             <a href="">Đơn đặt hàng</a>

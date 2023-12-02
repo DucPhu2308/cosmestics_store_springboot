@@ -24,4 +24,10 @@ public interface IReviewService {
 
 	<S extends Review> S save(S entity);
 
+	int getMaxId();
+
+	int avgRating(int productId);
+
+	int countReviewByProductId(int id);
+
 }

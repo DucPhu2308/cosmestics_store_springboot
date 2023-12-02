@@ -4,11 +4,13 @@ package hcmute.springbootdemo.Controller.User;
 import hcmute.springbootdemo.Entity.Cart;
 import hcmute.springbootdemo.Entity.Cart_Product;
 import hcmute.springbootdemo.Entity.Order;
+import hcmute.springbootdemo.Entity.Product;
 import hcmute.springbootdemo.Repository.CartRepository;
 import hcmute.springbootdemo.Repository.Cart_ProductRepository;
 import hcmute.springbootdemo.Service.impl.CartServiceImpl;
 import hcmute.springbootdemo.Service.impl.Cart_ProductServiceImpl;
 import hcmute.springbootdemo.Service.impl.OrderServiceImpl;
+import hcmute.springbootdemo.Service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,9 @@ public class OrderController {
 
     @Autowired
     OrderServiceImpl orderService;
+
+    @Autowired
+    ProductServiceImpl productService;
 
     @GetMapping(value="{id}")
     public String order(ModelMap modelMap, @PathVariable("id") int id){
@@ -55,6 +60,12 @@ public class OrderController {
             total += cart_product.getProduct().getPrice() * cart_product.getQuantity();
             totalDiscount += cart_product.getQuantity() * (cart_product.getProduct().getPrice() - (cart_product.getProduct().getPrice()-(cart_product.getProduct().getPrice()*cart_product.getProduct().getDiscountPercent())));
 
+            //Cập nhật lai số lượng sản phẩm và số lượng đã bán
+            Product product = productService.findById(cart_product.getProduct().getId()).get();
+            product.setStock(product.getStock() - cart_product.getQuantity());
+            product.setSoldCount(product.getSoldCount() + cart_product.getQuantity());
+            productService.save(product);
+
         }
         order.setSubTotal(total);
 
@@ -64,6 +75,7 @@ public class OrderController {
 
         Cart cart = cartService.findCartById(id);
         cart.setActive(false);
+
 
         cartService.save(cart);
         orderService.save(order);

@@ -23,6 +23,8 @@ public interface IUserService {
     Optional<User> findUserByPhone(String phoneNumber);
     Optional<User> findUserByEmail(String email);
 
+	User findUserById(int id);
+
 	void delete(User entity);
 
 	void deleteById(Integer id);
@@ -38,7 +40,6 @@ public interface IUserService {
 	List<User> findAll();
 
 	<S extends User> S save(S entity);
-
 
 
 
