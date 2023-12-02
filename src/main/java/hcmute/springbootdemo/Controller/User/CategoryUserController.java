@@ -1,20 +1,27 @@
 package hcmute.springbootdemo.Controller.User;
 
 import hcmute.springbootdemo.Entity.Category;
+import hcmute.springbootdemo.Entity.Product;
 import hcmute.springbootdemo.Repository.Cart_ProductRepository;
 import hcmute.springbootdemo.Repository.CategoryRepository;
 import hcmute.springbootdemo.Service.IBrandService;
 import hcmute.springbootdemo.Service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path="/category")
@@ -47,10 +54,9 @@ public class CategoryUserController {
 
         modelMap.addAttribute("list_brand", brandService.findAll());
 
+        session.setAttribute("CountProduct",cart_productRepository.count());
 
         modelMap.addAttribute("list_product_category", productService.findAll());
-
-        session.setAttribute("CountProduct",cart_productRepository.count());
 
         return "user/category";
     }

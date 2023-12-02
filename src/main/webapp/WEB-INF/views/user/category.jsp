@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="temp" value="0"/>
 <body>
@@ -11,6 +12,7 @@
     </div>
 </section>
 <div class="container">
+
     <div class="row">
         <div class="col-12 col-sm-3">
             <div class="card bg-light mb-3">
@@ -47,14 +49,19 @@
 <%--            </div>--%>
         </div>
         <div class="col">
-            <div class="row">
+            <div class="row" id="content">
                 <c:forEach var="i" items="${list_product_category}">
-                    <div class="col-12 col-md-6 col-lg-4">
+                    <div class="product col-12 col-md-6 col-lg-4">
                         <div class="card">
-                            <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                            <c:if test="${i.images.size() > 0}">
+                                <img class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
+                            </c:if>
+                            <c:if test="${i.images.size() == 0}">
+                                <img class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
+                            </c:if>
                             <div class="card-body">
                                 <h4 class="card-title"><a href="/product/${i.id}" title="View Product">${i.name} </a></h4>
-                                <p class="card-text">${i.description}</p>
+                                <pre class="card-text">${i.description}</pre>
                                 <div class="row">
                                     <div class="col">
                                         <p class="btn btn-danger btn-block">${i.price} $</p>
@@ -71,19 +78,24 @@
 
                 <div class="col-12">
                     <nav aria-label="...">
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
+                        <div class="data-container" id="data-container" style="display: flex;">
+                            <button class="btn_page left page-item page-link" onclick="previous()">Previous</button>
+                            <ul class="pagination" id="pagination">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                            <button class="btn_page right page-item page-link"  >Next</button>
+                        </div>
+
                     </nav>
                 </div>
             </div>
@@ -91,6 +103,71 @@
 
     </div>
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<script>
+   var listProduct = document.querySelectorAll(".product");
+   var btn_previous = document.querySelector(".btn_page.left");
+   var btn_next = document.querySelector(".btn_page.right");
 
+   let thisPost=1;
+   let limitPost=6;
+
+    function previous() {
+        if (thisPost > 1) {
+            thisPost--;
+            loadPost();
+        }
+    }
+    function next() {
+        if (thisPost < Math.ceil(listProduct.length / limitPost)) {
+            thisPost++;
+            loadPost();
+        }
+    }
+
+    btn_next.addEventListener("click",()=>{
+      if(thisPost<Math.ceil(listProduct.length/limitPost)){
+         thisPost++;
+         loadPost();
+      }
+    });
+   function loadPost(){
+     let begin = (thisPost-1)*limitPost;
+     let end = thisPost*limitPost-1;
+     listProduct.forEach((item,index)=>{
+       if(index>=begin && index<=end){
+         item.style.display="block";
+       }else{
+         item.style.display="none";
+       }
+     })
+       listPost();
+   }
+   loadPost();
+
+   function listPost() {
+       let count = Math.ceil(listProduct.length / limitPost);
+       document.querySelector(".pagination").innerHTML = "";
+
+       for (i = 1; i <= count; i++) {
+           let newPost = document.createElement("li");
+           newPost.classList.add("page-item")
+           newPost.classList.add("page-link")
+           newPost.innerText = i;
+           if (i === thisPost) {
+               newPost.classList.add("active1");
+           }
+           newPost.setAttribute("onclick", "changePost(" + i + ")");
+           document.querySelector(".pagination").appendChild(newPost);
+       }
+
+   }
+   function changePost(post) {
+       thisPost = post;
+       loadPost();
+   }
+
+</script>
 </body>

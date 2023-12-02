@@ -89,8 +89,12 @@ public class ProductServiceImpl implements IProductService{
 	}
 
 	@Override
-	public Page<Product> findAll(int page, int size) {
-		Pageable pageable = PageRequest.of(page, size);
+	public Page<Product> findAll(Pageable pageable) {
 		return productRepository.findAll(pageable);
+	}
+
+	@Override
+	public List<Product> findProductsByBrandId(int brandId) {
+		return productRepository.findProductsByBrandId(brandId);
 	}
 }

@@ -4,23 +4,28 @@ package hcmute.springbootdemo.Controller.User;
 import hcmute.springbootdemo.Entity.*;
 import hcmute.springbootdemo.Repository.*;
 import hcmute.springbootdemo.Service.impl.CartServiceImpl;
+import hcmute.springbootdemo.Service.impl.ProductServiceImpl;
 import hcmute.springbootdemo.Service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 @RequestMapping(path="/product")
 public class ProductUserController {
-    @Autowired
-    ProductRepository productRepository;
+
 
     @Autowired
     Cart_ProductRepository cart_productRepository;
+
+    @Autowired
+    ProductServiceImpl productService;
 
     @Autowired
     CartRepository cartRepository;
@@ -40,7 +45,15 @@ public class ProductUserController {
     @GetMapping(value="/{id}")
     public String productUser(ModelMap modelMap, @PathVariable("id") int id, HttpSession session){
 
-        Product product = productRepository.findById(id).get();
+        Product product = productService.findById(id).get();
+
+        Date date_end_discount = product.getDiscountEnd();
+        Date now = new Date();
+
+//        if(date_end_discount.after(now)){
+//            product.setDiscountPercent(0.0f);
+//            productService.save(product);
+//        }
 
         if(product.getAvailable()){
             modelMap.addAttribute("available", "Còn hàng");
@@ -78,11 +91,19 @@ public class ProductUserController {
             price= product.getPrice();
         }
 
+        session.setAttribute("CountProduct",cart_productRepository.count());
+
+        int brandID = product.getBrand().getId();
+        List<Product> listProductBrand =productService.findProductsByBrandId(brandID);
+//        System.out.println("ma san pham" + id);
+//        System.out.println("ma hang" + brandID);
+//        System.out.println(listProductBrand);
+        modelMap.addAttribute("listProductBrand", listProductBrand);
+
+
         modelMap.addAttribute("product", product);
         modelMap.addAttribute("productId", id);
         modelMap.addAttribute("discount", product.getDiscountPercent());
-
-
 
         modelMap.addAttribute("discountStart", product.getDiscountStart());
         modelMap.addAttribute("discountEnd", product.getDiscountEnd());
@@ -101,15 +122,16 @@ public class ProductUserController {
         return "user/product";
     }
 
-    //Phần này chưa hoàn thành được cần thời gian để suy nghĩ
+
     @PostMapping(value="/{id}/product_to_cart")
     public String insertProductToCart(HttpSession session,
                                       @ModelAttribute("cart_product") Cart_Product cartproduct,
                                       @PathVariable("id") int id,
-                                      ModelMap modelMap){
+                                      ModelMap modelMap,
+                                      RedirectAttributes redirectAttributes){
 
 
-        Product product = productRepository.findById(id).get();
+        Product product = productService.findById(id).get();
 
         cartproduct.setProduct(product);
 
@@ -124,7 +146,7 @@ public class ProductUserController {
 
         session.setAttribute("CountProduct",cart_productRepository.count());
 
-        session.setAttribute("success", "Thêm sản phẩm vào giỏ hàng thành công");
+        redirectAttributes.addFlashAttribute("message", "Thêm vào giỏ hàng thành công");
 
         return "redirect:/product/{id}";
     }
@@ -133,7 +155,7 @@ public class ProductUserController {
     public String contact(@ModelAttribute("post_review") Review review,
                           ModelMap modelMap, @PathVariable(value = "id") int id ,
                           HttpSession session){
-        Product product= productRepository.findById(id).get();
+        Product product= productService.findById(id).get();
         User user = userRepository.findUserById((int) session.getAttribute("user_id"));
 
         review.setProduct(product);
