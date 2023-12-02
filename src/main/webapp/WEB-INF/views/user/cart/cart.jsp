@@ -24,7 +24,7 @@
 								<th scope="col">Sản phẩm</th>
 								<th scope="col">Có sẵn</th>
 								<th scope="col" class="text-center">Số lượng</th>
-								<th scope="col" class="text-right">Đơn giá</th>
+								<th scope="col" class="text-center">Đơn giá</th>
 								<th scope="col" class="text-right">Tổng tiền</th>
 								<th></th>
 							</tr>
@@ -38,12 +38,18 @@
 							<c:if test="${listCartProduct != null}">
 								<c:forEach var="i" items="${listCartProduct}">
 									<tr>
-										<td><img src="https://dummyimage.com/50x50/55595c/fff" />
+										<td>
+											<c:if test="${i.product.images.size() > 0}">
+												<img style="width:50px; height:50px" class="card-img-top" src="<c:url value="/templates/images/${i.product.images[0].imageLink}"/>" alt="Card image cap">
+											</c:if>
+											<c:if test="${i.product.images.size() == 0}">
+												<img style="width:50px; height:50px" class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
+											</c:if>
 										</td>
 										<td>${i.product.name}</td>
 										<td>${i.product.stock}</td>
-										<td><input class="form-control" type="text" value="${i.quantity}" /></td>
-										<td class="text-right">
+										<td><input class="form-control" type="text" value="${i.quantity}" disabled/></td>
+										<td class="text-center">
 											<c:if test="${i.product.discountPercent == 0}">
 												<p class="price">${i.product.price}€</p>
 											</c:if>

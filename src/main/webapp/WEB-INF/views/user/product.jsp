@@ -3,12 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+
 <body>
-<script>
-    <c:if test="${sessionScope.success}">
-        alert("Thêm vào giỏ hàng thành công");
-    </c:if>
-</script>
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading">E-COMMERCE PRODUCT</h1>
@@ -32,12 +28,30 @@
     </div>
 </div>
 <div class="container">
+    <c:if test="${message != null}">
+
+        <div class="alert alert-primary alert-dismissible" role="alert">
+
+            <i>${message}</i>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    </c:if>
+    <c:if test="${error != null}">
+
+        <div class="alert alert-danger alert-dismissible" role="alert">
+
+            <i>${error}</i>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    </c:if>
     <div class="row">
         <!-- Image -->
         <div class="col-12 col-lg-6">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                    <div style="width: 90%; height: 500px;" id="carouselExample" class="carousel carousel-dark slide">
+                    <div style="width: 100%; height: 500px;" id="carouselExample" class="carousel carousel-dark slide">
                         <div class="carousel-inner">
                             <c:forEach items="${product.images}" var="image" varStatus="status">
                                 <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
@@ -87,30 +101,31 @@
                             <div class="form-group">
                                 <label for="colors">Chọn giỏ hàng</label>
                                 <form:select class="custom-select" id="colors" path="cart">
-                                    <option selected>Select</option>
                                     <c:forEach var="i_cart" items="${listCart}">
-                                        <option value="${i_cart.id}">${i_cart.name}</option>
+                                        <c:if test="${i_cart.active == true}">
+                                            <option value="${i_cart.id}">${i_cart.name}</option>
+                                        </c:if>
                                     </c:forEach>
                                 </form:select>
                             </div>
-                            <a href="/cart/add">Thêm giỏ hàng</a></br>
+                            <a href="/cart">Thêm giỏ hàng</a></br>
                             <label>Quantity :</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <button type="button"
+                                    <form:button type="button"
                                             class="quantity-left-minus btn btn-danger btn-number"
                                             data-type="minus" data-field="">
                                         <i class="fa fa-minus"></i>
-                                    </button>
+                                    </form:button>
                                 </div>
                                 <form:input type="text" class="form-control" id="quantity" name="quantity"
                                             path="quantity" min="1" max="100" value="1"/>
                                 <div class="input-group-append">
-                                    <button type="button"
+                                    <form:button type="button"
                                             class="quantity-right-plus btn btn-success btn-number"
                                             data-type="plus" data-field="">
                                         <i class="fa fa-plus"></i>
-                                    </button>
+                                    </form:button>
                                 </div>
                             </div>
                         </div>
@@ -156,8 +171,52 @@
                     <i class="fa fa-align-justify"></i> Description
                 </div>
                 <div class="card-body">
-                    <p>${product.description}</p>
+                    <pre style="font-family: 'Be VietNam Pro', 'sans-serif'; font-size: 20px; font-weight: 500;">${product.description}</pre>
 
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white text-uppercase">
+                            <i class="fa fa-star"></i> Sản phẩm cùng hãng
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <c:forEach var="i" items="${listProductBrand}" varStatus="status">
+                                    <c:if test="${status.index <4}">
+                                        <c:if test="${i.id != productId}">
+                                            <div class="col-sm">
+                                                <div class="card">
+                                                    <c:if test="${i.images.size() > 0}">
+                                                        <img class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
+                                                    </c:if>
+                                                    <c:if test="${i.images.size() == 0}">
+                                                        <img class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
+                                                    </c:if>
+                                                    <div class="card-body">
+                                                        <h4 class="card-title"><a href="/product/${i.id}" title="View Product">${i.name}</a></h4>
+                                                        <p class="card-text">${i.description}</p>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <p class="btn btn-danger btn-block">${i.price}VNĐ</p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:if>
+                                    </c:if>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -235,6 +294,27 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+    //Plus & Minus for Quantity product
+    $(document).ready(function(){
+        var quantity = 1;
 
+        $('.quantity-right-plus').click(function(e){
+            e.preventDefault();
+            var quantity = parseInt($('#quantity').val());
+            $('#quantity').val(quantity + 1);
+        });
+
+        $('.quantity-left-minus').click(function(e){
+            e.preventDefault();
+            var quantity = parseInt($('#quantity').val());
+            if(quantity > 1){
+                $('#quantity').val(quantity - 1);
+            }
+        });
+
+    });
+</script>
 </body>
 

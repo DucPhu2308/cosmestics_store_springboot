@@ -46,11 +46,19 @@
                 </div>
                 <a class="btn btn-success btn-sm ml-3" href="/cart">
                     <i class="fa fa-shopping-cart"></i> Cart
-<%--                    <c:if test="${sessionScope.CountProduct != null}">--%>
-<%--                    <span class="badge badge-light">--%>
-<%--                            ${sessionScope.CountProduct}--%>
-<%--                    </span>--%>
-<%--                    </c:if>--%>
+                    <c:if test="${sessionScope.user_id!=null}">
+                        <c:if test="${sessionScope.CountProduct != null}">
+                        <span class="badge badge-light">
+                                ${sessionScope.CountProduct}
+                        </span>
+                        </c:if>
+                        <c:if test="${sessionScope.CountProduct == null}">
+                        <span class="badge badge-light">
+                            0
+                        </span>
+                        </c:if>
+                    </c:if>
+
                 </a>
             </form>
 

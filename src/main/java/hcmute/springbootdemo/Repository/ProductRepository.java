@@ -1,5 +1,7 @@
 package hcmute.springbootdemo.Repository;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,9 +31,13 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
     Page<Product> findAll(Pageable pageable);
 
 
+
     // top 10 new product by created date desc, available = true
     List<Product> findTop10ByAvailableOrderByCreatedDateDesc(boolean available);
 
     // top 10 product by sold quantity
     List<Product> findTop10ByAvailableOrderBySoldCountDesc(boolean available);
+
+    List<Product> findProductsByBrandId(int brandId);
+
 }

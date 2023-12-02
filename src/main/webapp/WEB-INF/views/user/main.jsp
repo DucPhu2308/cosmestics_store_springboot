@@ -76,9 +76,14 @@
                             <c:if test="${status.index < 4}">
                                 <div class="col-sm">
                                     <div class="card">
-                                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                                        <c:if test="${i.images.size() > 0}">
+                                            <img class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
+                                        </c:if>
+                                        <c:if test="${i.images.size() == 0}">
+                                            <img class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
+                                        </c:if>
                                         <div class="card-body">
-                                            <h4 class="card-title"><a href="product.html" title="View Product">${i.name}</a></h4>
+                                            <h4 class="card-title"><a href="/product/${i.id}" title="View Product">${i.name}</a></h4>
                                             <p class="card-text">${i.description}</p>
                                             <div class="row">
                                                 <div class="col">
@@ -114,16 +119,21 @@
                             <c:if test="${status.index < 4}">
                                 <div class="col-sm">
                                     <div class="card">
-                                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                                        <c:if test="${i.images.size() > 0}">
+                                            <img class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
+                                        </c:if>
+                                        <c:if test="${i.images.size() == 0}">
+                                            <img class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
+                                        </c:if>
                                         <div class="card-body">
-                                            <h4 class="card-title"><a href="product.html" title="View Product">${i.name}</a></h4>
+                                            <h4 class="card-title"><a href="/product/${i.id}" title="View Product">${i.name}</a></h4>
                                             <p class="card-text">${i.description}</p>
                                             <div class="row">
                                                 <div class="col">
                                                     <p class="btn btn-danger btn-block">${i.price}VNĐ</p>
                                                 </div>
                                                 <div class="col">
-                                                    <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
+                                                    <a href="/product/${i.id}" class="btn btn-success btn-block">Add to cart</a>
                                                 </div>
                                             </div>
                                         </div>

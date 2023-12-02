@@ -181,6 +181,26 @@ footer a {
 .order_form{
     padding:0 10%;
 }
+
+.btn_page{
+    color: blue;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.active1{
+    background-color: #007bff;
+    color: #fff;
+
+}
+.card-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 /*reset css*/
 div,label{margin:0;padding:0;}

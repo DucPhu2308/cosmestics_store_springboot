@@ -2,6 +2,7 @@ package hcmute.springbootdemo.Service;
 
 import hcmute.springbootdemo.Entity.Product;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,5 +35,7 @@ public interface IProductService {
 	public List<Product> get10Best();
 
 
-	Page<Product> findAll(int page, int size);
+	Page<Product> findAll(Pageable pageable);
+
+	List<Product> findProductsByBrandId(int brandId);
 }
