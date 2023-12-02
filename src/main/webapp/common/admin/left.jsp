@@ -29,6 +29,16 @@
 				class="fa-solid fa-address-book"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg> -->
 				Khách hàng
 		</a></li>
+		<li class="dropdown">
+			<button class="w-100 btn dropdown-toggle nav-link ${active=='statistics' ? 'active' : 'link-dark'}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				Thống kê
+			</button>
+			<ul class="dropdown-menu w-100">
+				<li><a class="dropdown-item" href="admin/statistics/monthly">Theo tháng</a></li>
+				<li><a class="dropdown-item" href="#">Theo quý</a></li>
+				<li><a class="dropdown-item" href="#">Theo năm</a></li>
+			</ul>
+		</li>
 	</ul>
 	<hr>
 	<div class="dropdown">

@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping(value="/profile_user/")
+@RequestMapping(value="/profile_user")
 public class ProfileUserController {
 
     @Autowired
     UserServiceImpl userService;
 
-    @GetMapping(value="{id}")
-    public String profile_user(ModelMap modelMap, @PathVariable("id") int id){
+    @GetMapping(value="")
+    public String profile_user(ModelMap modelMap, HttpSession session){
+        int id = (int) session.getAttribute("user_id");
         User user = userService.findById(id).get();
         modelMap.addAttribute("user", user);
         return "user/profile_user";
@@ -31,6 +32,6 @@ public class ProfileUserController {
         user.setPasswordHashed(password);
         user.setId(user_id);
         userService.save(user);
-        return "redirect:/profile_user/" + user_id;
+        return "redirect:/profile_user";
     }
 }

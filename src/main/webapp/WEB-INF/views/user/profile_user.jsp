@@ -42,7 +42,7 @@
 
     <div class="form_login profile_user_container">
         <h3>Hồ sơ của tôi</h3>
-        <form:form method="post" action="update_user" modelAttribute="user">
+        <form:form method="post" action="profile_user/update_user" modelAttribute="user">
             <div class="detail_form_info">
                 <div class="detail_info">
                     <div class="detail_author">

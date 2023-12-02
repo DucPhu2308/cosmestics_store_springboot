@@ -55,7 +55,7 @@
                             <c:forEach items="${product.images}" var="image" varStatus="status">
                                 <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
                                         <%-- <div class="col-md-3"> --%>
-                                    <img src="<c:url value="/templates/images/${image.imageLink}"/>" style="height: 500px;" class="d-block w-100" alt="...">
+                                    <img src="<c:url value="/templates/images/${image.imageLink}"/>" style="height: auto;" class="d-block w-100" alt="...">
 
                                 </div>
                             </c:forEach>

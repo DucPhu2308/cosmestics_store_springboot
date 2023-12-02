@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -41,9 +42,9 @@ public class OrderController {
     @PostMapping(value="/add_orderCart/{id}")
     public String addOrder(@PathVariable("id") int id, @ModelAttribute("order") Order order){
         order.setCart(cartService.findCartById(id));
-        order.setPaid(false);
+        order.setPaid(true);
         order.setArriveDate(null);
-        order.setOrderDate(null);
+        order.setOrderDate(new Date());
         order.setShippingFee(0);
 
 
