@@ -3,6 +3,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<%
+    // Lấy giá trị ngày tháng từ một biến hoặc đối tượng khác
+    String defaultDate = "2023-12-01";
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +27,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
         <div class="container image">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <img src="<c:url value="/templates/images/logo.jpg"/>"  width="120" alt="logo">
             </a>
             <p>Hồ sơ của tôi</p>
@@ -42,7 +46,7 @@
 
     <div class="form_login profile_user_container">
         <h3>Hồ sơ của tôi</h3>
-        <form:form method="post" action="update_user" modelAttribute="user">
+        <form:form method="post" action="update_user" modelAttribute="user" enctype="multipart/form-data">
             <div class="detail_form_info">
                 <div class="detail_info">
                     <div class="detail_author">
@@ -69,25 +73,39 @@
                     <div class="detail_author">
                         <label >Giới tính</label>
                         <div class="checkoption">
-                            <input type="radio" id="male" name="fav_language" >
+                            <input type="radio" id="male" name="option_gender" value="male" >
                             <label >Nam</label>
-                            <input type="radio" id="female" name="fav_language">
+                            <input type="radio" id="female" name="option_gender" value="female">
                             <label >Nữ</label>
                         </div>
 
                     </div>
+                    <script>
+                        if((${user.gender})===true){
+                            document.getElementById("male").checked=true;
+                        }
+                        else{
+                            if((${user.gender})===false){
+                                document.getElementById("female").checked=true;
+                            }
+                        }
 
-
-<%--                    <div class="detail_author">--%>
-<%--                        <label >Ngày sinh</label>--%>
-<%--                        <form:input type="date" value="${user.dob}" path="dob"/>--%>
-<%--                    </div>--%>
+                    </script>
+                    <div class="detail_author">
+                        <label >Ngày sinh</label>
+                        <input type="date" name="dob_user" value="${dob}" id="dob">
+                    </div>
                 </div>
 
                 <div class="detail_info_image">
                     <div class="detail_image_user">
-                        <img src="<c:url value="/templates/images/account.png"/>" alt="" id="imageElement">
-                        <input type="file" id="image_user" style="display: none;">
+                        <c:if test="${user.avatarLink == null}">
+                            <img src="<c:url value="/templates/images/account.png"/>" alt="" id="imageElement">
+                        </c:if>
+                        <c:if test="${user.avatarLink != null}">
+                            <img src="<c:url value="/templates/images/${user.avatarLink}"/>" alt="" id="imageElement">
+                        </c:if>
+                        <input path="avatarLink" type="file" id="image_user" style="display: none;" name="image_user">
                         <button type="button" onclick="document.getElementById('image_user').click();">Chọn ảnh </button>
                     </div>
                     <script>
