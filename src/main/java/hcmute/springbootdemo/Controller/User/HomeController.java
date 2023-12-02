@@ -5,6 +5,7 @@ import hcmute.springbootdemo.Repository.CategoryRepository;
 import hcmute.springbootdemo.Service.IProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,7 @@ public class HomeController {
         session.removeAttribute("username");
         session.removeAttribute("user_id");
         session.removeAttribute("cart_id");
+        SecurityContextHolder.getContext().setAuthentication(null);
         return "redirect:/";
     }
 

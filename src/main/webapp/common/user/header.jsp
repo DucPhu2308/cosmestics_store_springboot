@@ -62,7 +62,7 @@
                 </a>
             </form>
 
-            <c:if test="${sessionScope.user_id != null}">
+            <c:if test="${pageContext.request.userPrincipal != null}">
 
             <div class="header_action_user">
                 <div class="header_action_logo_user">
@@ -91,7 +91,7 @@
                 </div>
             </div>
             </c:if>
-            <c:if test="${sessionScope.user_id == null}">
+            <c:if test="${pageContext.request.userPrincipal == null}">
                 <div class="header_action_user">
                     <a href="/login/">Đăng nhập</a>
                     <a href="/register/">Đăng ký</a>

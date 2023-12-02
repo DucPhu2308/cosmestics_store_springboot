@@ -62,7 +62,7 @@ public class ProductUserController {
             modelMap.addAttribute("available", "Hết hàng");
         }
 
-        String userID = session.getAttribute("user_id").toString();
+        Object userID = session.getAttribute("user_id");
 
         int user_id = 0;
         if(userID == null){

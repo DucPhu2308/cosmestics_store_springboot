@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ include file="/common/taglib.jsp"%>
 
 
 <body>
@@ -94,9 +93,16 @@
                         <label>Chương trình áp dụng giảm giá với sản phẩm này từ ngày ${product.discountStart} đến ngày ${product.discountEnd}</label>
                     </c:if>
 
+                    <sec:authorize access="hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')" var="isAuthenticated">
 
-                    <form:form method="post" action="/product/${product.id}/product_to_cart" modelAttribute="cart_product">
+                    </sec:authorize>
+                    <c:if test="${isAuthenticated}">
 
+
+                    <form:form method="post" action="/product/${product.id}/product_to_cart"
+                               modelAttribute="cart_product">
+
+                    <div class="form-group">
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="colors">Chọn giỏ hàng</label>
@@ -113,8 +119,8 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <form:button type="button"
-                                            class="quantity-left-minus btn btn-danger btn-number"
-                                            data-type="minus" data-field="">
+                                                 class="quantity-left-minus btn btn-danger btn-number"
+                                                 data-type="minus" data-field="">
                                         <i class="fa fa-minus"></i>
                                     </form:button>
                                 </div>
@@ -122,19 +128,24 @@
                                             path="quantity" min="1" max="100" value="1"/>
                                 <div class="input-group-append">
                                     <form:button type="button"
-                                            class="quantity-right-plus btn btn-success btn-number"
-                                            data-type="plus" data-field="">
+                                                 class="quantity-right-plus btn btn-success btn-number"
+                                                 data-type="plus" data-field="">
                                         <i class="fa fa-plus"></i>
                                     </form:button>
                                 </div>
                             </div>
                         </div>
-                        <input type="submit" value="Thêm vào giỏ hàng" class="btn btn-success btn-lg btn-block text-uppercase">
-<%--                        <a href="cart.html"--%>
-<%--                           class="btn btn-success btn-lg btn-block text-uppercase"> <i--%>
-<%--                                class="fa fa-shopping-cart"></i> Add To Cart--%>
-<%--                        </a>--%>
-                    </form:form>
+                        <input type="submit" value="Thêm vào giỏ hàng"
+                               class="btn btn-success btn-lg btn-block text-uppercase">
+                            <%--                        <a href="cart.html"--%>
+                            <%--                           class="btn btn-success btn-lg btn-block text-uppercase"> <i--%>
+                            <%--                                class="fa fa-shopping-cart"></i> Add To Cart--%>
+                            <%--                        </a>--%>
+                        </form:form>
+                        </c:if>
+                    <c:if test="${!isAuthenticated}">
+                        <p class="text-center">Vui lòng đăng nhập để thêm vào giỏ hàng</p>
+                    </c:if>
                     <div class="product_rassurance">
                         <ul class="list-inline">
                             <li class="list-inline-item"><i class="fa fa-truck fa-2x"></i><br/>Fast
@@ -228,6 +239,8 @@
                     <i class="fa fa-comment"></i> Reviews
                 </div>
                 <div class="review">
+
+                <c:if test="${isAuthenticated}">
                     <form:form class="post-review" method="post" action="/product/${product.id}/review1" modelAttribute="post_review">
                         <div class="post-review-user">
                             <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
@@ -257,6 +270,10 @@
                         <input type="submit" value="Đăng bình luận" class="btn-post-review">
 
                     </form:form>
+                </c:if>
+                <c:if test="${!isAuthenticated}">
+                    <p>Vui lòng đăng nhập để đánh giá sản phẩm</p>
+                </c:if>
                 </div>
 
                 <h3>Tất cả các bình luận</h3>
@@ -317,4 +334,4 @@
     });
 </script>
 </body>
-
+</html>
