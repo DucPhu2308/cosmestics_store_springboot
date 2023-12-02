@@ -2,10 +2,16 @@ package hcmute.springbootdemo.Entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
@@ -14,7 +20,7 @@ import javax.persistence.*;
 
 @NamedQuery(name = "User.findAll", query = "SELECT p FROM User p")
 
-public class User implements Serializable{
+public class User implements UserDetails, Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -182,6 +188,48 @@ public class User implements Serializable{
 
 	public void setCarts(List<Cart> carts) {
 		this.carts = carts;
+	}
+
+	// UserDetails interface methods
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        if (isAdmin) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+        return authorities;
+	}
+
+	@Override
+	public String getPassword() {
+		return passwordHashed;
+	}
+
+	@Override
+	public String getUsername() {
+		return phone;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return active;
 	}
 	
 }
