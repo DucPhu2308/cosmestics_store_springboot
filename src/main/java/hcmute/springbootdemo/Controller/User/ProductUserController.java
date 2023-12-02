@@ -100,22 +100,14 @@ public class ProductUserController {
 //        System.out.println(listProductBrand);
         modelMap.addAttribute("listProductBrand", listProductBrand);
 
-
         modelMap.addAttribute("product", product);
-        modelMap.addAttribute("productId", id);
-        modelMap.addAttribute("discount", product.getDiscountPercent());
 
-        modelMap.addAttribute("discountStart", product.getDiscountStart());
-        modelMap.addAttribute("discountEnd", product.getDiscountEnd());
 
         modelMap.addAttribute("product_discounted", price);
-        modelMap.addAttribute("product_price", product.getPrice());
+
 
         modelMap.addAttribute("cart_product", new Cart_Product());
         modelMap.addAttribute("post_review",new Review());
-
-        List<Review> product_review= reviewRepository.findReviewByProductId(id);
-        modelMap.addAttribute("product_review", product_review);
 
 
 

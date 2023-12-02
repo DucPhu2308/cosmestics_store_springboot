@@ -85,17 +85,17 @@
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                    <c:if test="${discount == 0}">
+                    <c:if test="${product.discountPercent == 0}">
                         <p class="price">${product.price} $</p>
                     </c:if>
-                    <c:if test="${discount != 0}">
+                    <c:if test="${product.discountPercent != 0}">
                         <p class="price">${product_discounted} $</p>
                         <p class="price_discounted">${product.price} $</p>
-                        <label>Chương trình áp dụng giảm giá với sản phẩm này từ ngày ${discountStart} đến ngày ${discountEnd}</label>
+                        <label>Chương trình áp dụng giảm giá với sản phẩm này từ ngày ${product.discountStart} đến ngày ${product.discountEnd}</label>
                     </c:if>
 
 
-                    <form:form method="post" action="/product/${productId}/product_to_cart" modelAttribute="cart_product">
+                    <form:form method="post" action="/product/${product.id}/product_to_cart" modelAttribute="cart_product">
 
                         <div class="form-group">
                             <div class="form-group">
@@ -188,7 +188,7 @@
                             <div class="row">
                                 <c:forEach var="i" items="${listProductBrand}" varStatus="status">
                                     <c:if test="${status.index <4}">
-                                        <c:if test="${i.id != productId}">
+                                        <c:if test="${i.id != product.id}">
                                             <div class="col-sm">
                                                 <div class="card">
                                                     <c:if test="${i.images.size() > 0}">
@@ -228,7 +228,7 @@
                     <i class="fa fa-comment"></i> Reviews
                 </div>
                 <div class="review">
-                    <form:form class="post-review" method="post" action="/product/${productId}/review1" modelAttribute="post_review">
+                    <form:form class="post-review" method="post" action="/product/${product.id}/review1" modelAttribute="post_review">
                         <div class="post-review-user">
                             <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
                                  alt="avatar">
@@ -262,7 +262,7 @@
                 <h3>Tất cả các bình luận</h3>
 
                 <div class="card-body">
-                    <c:forEach var="i" items="${product_review}">
+                    <c:forEach var="i" items="${product.reviews}">
                         <div class="review">
                             <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                             <meta itemprop="datePublished" content="01-01-2016">
