@@ -42,6 +42,7 @@ public class HomeController {
         session.removeAttribute("username");
         session.removeAttribute("user_id");
         session.removeAttribute("cart_id");
+        session.removeAttribute("CountProduct");
         SecurityContextHolder.getContext().setAuthentication(null);
         return "redirect:/";
     }

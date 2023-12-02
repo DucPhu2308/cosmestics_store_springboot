@@ -75,7 +75,12 @@ public class UserServiceImpl implements IUserService{
         return userRepository.findUserByEmail(email);
     }
 
-	@Override
+    @Override
+    public User findUserById(int id) {
+        return userRepository.findUserById(id);
+    }
+
+    @Override
 	public <S extends User> S save(S entity) {
 		return userRepository.save(entity);
 	}

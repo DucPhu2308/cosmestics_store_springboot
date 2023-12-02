@@ -77,14 +77,19 @@
                     <div class="profile_user">
                         <div class="profile_user_info">
                             <div class="profile_user_info_col3">
-                                <img src="/templates/images/logo.jpg" width="30" alt="logo">
+                                <c:if test="${sessionScope.image_user == null}">
+                                    <img src="<c:url value="/templates/images/account.png"/>" width="30" alt="logo">
+                                </c:if>
+                                <c:if test="${sessionScope.image_user != null}">
+                                    <img src="<c:url value="/templates/images/${sessionScope.image_user}"/>" width="30" alt="logo">
+                                </c:if>
                             </div>
                             <div class="profile_user_info_col6">
                                 <span>Nicolas Tesla </span>
                             </div>
                         </div>
                         <div class="profile_user_col">
-                            <a href="/profile_user/${sessionScope.user_id}">Hồ sơ của tui</a>
+                            <a href="/profile_user/">Hồ sơ của tui</a>
                         </div>
                         <div class="profile_user_col">
                             <a href="">Đơn đặt hàng</a>

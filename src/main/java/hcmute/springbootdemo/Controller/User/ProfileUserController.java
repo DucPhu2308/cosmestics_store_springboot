@@ -29,9 +29,10 @@ public class ProfileUserController {
 
     @Autowired
     IStorageService storageService;
-    @GetMapping(value="{id}")
-    public String profile_user(ModelMap modelMap, @PathVariable("id") int id, HttpSession session){
-        User user = userService.findById(id).get();
+    @GetMapping(value="")
+    public String profile_user(ModelMap modelMap, HttpSession session){
+        int user_id = (int) session.getAttribute("user_id");
+        User user = userService.findById(user_id).get();
         modelMap.addAttribute("user", user);
         Date date = user.getDob();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -48,8 +49,6 @@ public class ProfileUserController {
                          RedirectAttributes redirectAttributes){
 
         int user_id = (int) session.getAttribute("user_id");
-
-
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(dob, formatter);

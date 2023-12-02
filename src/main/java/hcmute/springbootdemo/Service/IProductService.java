@@ -38,4 +38,5 @@ public interface IProductService {
 	Page<Product> findAll(Pageable pageable);
 
 	List<Product> findProductsByBrandId(int brandId);
+
 }

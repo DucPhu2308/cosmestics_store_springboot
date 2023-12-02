@@ -97,4 +97,8 @@ public class ProductServiceImpl implements IProductService{
 	public List<Product> findProductsByBrandId(int brandId) {
 		return productRepository.findProductsByBrandId(brandId);
 	}
+
+
+
+
 }

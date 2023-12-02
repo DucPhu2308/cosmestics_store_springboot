@@ -5,6 +5,7 @@ import hcmute.springbootdemo.Entity.*;
 import hcmute.springbootdemo.Repository.*;
 import hcmute.springbootdemo.Service.impl.CartServiceImpl;
 import hcmute.springbootdemo.Service.impl.ProductServiceImpl;
+import hcmute.springbootdemo.Service.impl.ReviewServiceImpl;
 import hcmute.springbootdemo.Service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,7 @@ public class ProductUserController {
     UserServiceImpl userService;
 
     @Autowired
-    ReviewRepository reviewRepository;
+    ReviewServiceImpl reviewService;
 
     @Autowired
     CartServiceImpl cartService;
@@ -109,6 +110,10 @@ public class ProductUserController {
         modelMap.addAttribute("cart_product", new Cart_Product());
         modelMap.addAttribute("post_review",new Review());
 
+        int avg_rating = reviewService.avgRating(id);
+        modelMap.addAttribute("avg_rating", avg_rating);
+        int count_review = reviewService.countReviewByProductId(id);
+        modelMap.addAttribute("count_review", count_review);
 
 
         return "user/product";
@@ -143,20 +148,5 @@ public class ProductUserController {
         return "redirect:/product/{id}";
     }
 
-    @PostMapping(value="/{id}/review1")
-    public String contact(@ModelAttribute("post_review") Review review,
-                          ModelMap modelMap, @PathVariable(value = "id") int id ,
-                          HttpSession session){
-        Product product= productService.findById(id).get();
-        User user = userRepository.findUserById((int) session.getAttribute("user_id"));
 
-        review.setProduct(product);
-        review.setUser(user);
-
-        reviewRepository.save(review);
-
-        modelMap.addAttribute("success", "Đánh giá thành công");
-
-        return "redirect:/product/{id}";
-    }
 }
