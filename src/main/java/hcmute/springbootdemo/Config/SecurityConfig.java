@@ -26,6 +26,9 @@ public class SecurityConfig {
             .authorizeRequests()
                 // Require "ADMIN" role for any request under "/admin"
                 .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                // Require "USER" role for any request containing "cart" or "review" in the path
+                .antMatchers("/**cart**").hasAuthority("ROLE_USER")
+                .antMatchers("/**review**").hasAuthority("ROLE_USER")
                 // Allow access to the root path "/" without any authentication
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
