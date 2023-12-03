@@ -72,7 +72,7 @@ public class ProductServiceImpl implements IProductService{
 	}
 
 	@Override
-	public List<Product> findProductByCategoryAndBrand(int categoryId, int brandId) {
+	public List<Product> findProductByCategoryIdAndBrandId(int categoryId, int brandId) {
 		return productRepository.findProductByCategoryIdAndBrandId(categoryId, brandId);
 	}
 
@@ -98,7 +98,10 @@ public class ProductServiceImpl implements IProductService{
 		return productRepository.findProductsByBrandId(brandId);
 	}
 
-
+	@Override
+	public List<Product> findProductsByName(String name) {
+		return productRepository.findProductsByName(name);
+	}
 
 
 }

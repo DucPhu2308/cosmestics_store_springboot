@@ -35,26 +35,68 @@
                 </li>
             </ul>
 
-            <form class="form-inline my-2 my-lg-0">
+            <form class="form-inline my-2 my-lg-0" action="/product/seach" method="post">
                 <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" placeholder="Search...">
+                    <input type="text" class="form-control" name="keyword" placeholder="Search...">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-secondary btn-number">
+                        <button type="submit" class="btn btn-secondary btn-number">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
+                    <div class="container_search" style="display: none;">
+                        <ul class="box_search">
+                            <c:forEach var="item" items="${sessionScope.listProduct}">
+                                <li class="box_search item">
+                                    <div class="item_image">
+                                        <img src="https://dummyimage.com/600x400/55595c/fff" alt="">
+<%--                                        <img src="<c:url value="/templates/images/${item.images[0].imageLink}"/>" alt="">--%>
+                                    </div>
+                                    <div class="item_title">
+                                        <a href="/product/${item.id}">${item.name} </a>
+                                        <p class="text-center" style="font-size: 15px; font-family: 'Be VietNam pro';">${item.price}vnđ</p>
+                                    </div>
+                                </li>
+                            </c:forEach>
+
+                        </ul>
+                    </div>
+
+                    <script>
+                        var text_input=document.querySelector(".form-control");
+                        var box_search=document.querySelector(".container_search");
+                        text_input.addEventListener("click",function(){
+                            if(box_search.style.display =='none'){
+                                box_search.style.display='block';
+                            }
+                            else{
+                                box_search.style.display='none'
+                            }
+                        });
+
+                        var search_input=document.querySelector(".input-group.input-group-sm input")
+                        search_input.addEventListener('input', function(e){
+                            let txtSearch=e.target.value.trim().toLowerCase();
+                            let list_itemDom=document.querySelectorAll(".box_search.item");
+                            list_itemDom.forEach(item=>{
+                                if(item.innerText.includes(txtSearch)){
+                                    item.classList.remove('hide');
+
+                                }
+                                else{
+                                    item.classList.add('hide')
+
+                                }
+                            })
+                        });
+                    </script>
+
                 </div>
                 <a class="btn btn-success btn-sm ml-3" href="/cart">
                     <i class="fa fa-shopping-cart"></i> Cart
                     <c:if test="${sessionScope.user_id!=null}">
-                        <c:if test="${sessionScope.CountProduct != null}">
+                        <c:if test="${sessionScope.CountCart != null}">
                         <span class="badge badge-light">
-                                ${sessionScope.CountProduct}
-                        </span>
-                        </c:if>
-                        <c:if test="${sessionScope.CountProduct == null}">
-                        <span class="badge badge-light">
-                            0
+                                ${sessionScope.CountCart}
                         </span>
                         </c:if>
                     </c:if>
@@ -85,7 +127,7 @@
                                 </c:if>
                             </div>
                             <div class="profile_user_info_col6">
-                                <span>Nicolas Tesla </span>
+                                <span>${sessionScope.FirstName} ${sessionScope.LastName} </span>
                             </div>
                         </div>
                         <div class="profile_user_col">

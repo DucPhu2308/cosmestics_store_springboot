@@ -62,6 +62,9 @@ public class OrderController {
             //Cập nhật lai số lượng sản phẩm và số lượng đã bán
             Product product = productService.findById(cart_product.getProduct().getId()).get();
             product.setStock(product.getStock() - cart_product.getQuantity());
+            if(product.getStock() - cart_product.getQuantity() == 0){
+                product.setAvailable(false);
+            }
             product.setSoldCount(product.getSoldCount() + cart_product.getQuantity());
             productService.save(product);
 

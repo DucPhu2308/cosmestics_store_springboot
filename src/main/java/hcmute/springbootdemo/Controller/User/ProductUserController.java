@@ -3,10 +3,7 @@ package hcmute.springbootdemo.Controller.User;
 
 import hcmute.springbootdemo.Entity.*;
 import hcmute.springbootdemo.Repository.*;
-import hcmute.springbootdemo.Service.impl.CartServiceImpl;
-import hcmute.springbootdemo.Service.impl.ProductServiceImpl;
-import hcmute.springbootdemo.Service.impl.ReviewServiceImpl;
-import hcmute.springbootdemo.Service.impl.UserServiceImpl;
+import hcmute.springbootdemo.Service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,7 +26,7 @@ public class ProductUserController {
     ProductServiceImpl productService;
 
     @Autowired
-    CartRepository cartRepository;
+    BrandServiceImpl brandService;
 
     @Autowired
     UserRepository userRepository;
@@ -39,6 +36,9 @@ public class ProductUserController {
 
     @Autowired
     ReviewServiceImpl reviewService;
+
+    @Autowired
+    CategoryServiceImpl categoryService;
 
     @Autowired
     CartServiceImpl cartService;
@@ -51,10 +51,10 @@ public class ProductUserController {
         Date date_end_discount = product.getDiscountEnd();
         Date now = new Date();
 
-//        if(date_end_discount.after(now)){
-//            product.setDiscountPercent(0.0f);
-//            productService.save(product);
-//        }
+        if(date_end_discount.after(now)){
+            product.setDiscountPercent(0.0f);
+            productService.save(product);
+        }
 
         if(product.getAvailable()){
             modelMap.addAttribute("available", "Còn hàng");
@@ -96,9 +96,10 @@ public class ProductUserController {
 
         int brandID = product.getBrand().getId();
         List<Product> listProductBrand =productService.findProductsByBrandId(brandID);
-//        System.out.println("ma san pham" + id);
-//        System.out.println("ma hang" + brandID);
-//        System.out.println(listProductBrand);
+
+
+
+
         modelMap.addAttribute("listProductBrand", listProductBrand);
 
         modelMap.addAttribute("product", product);
@@ -148,5 +149,13 @@ public class ProductUserController {
         return "redirect:/product/{id}";
     }
 
+    @PostMapping(value="/seach")
+    public String seachProduct(@RequestParam("keyword") String name, ModelMap modelMap, HttpSession session){
+        List<Product> listProduct = productService.findProductsByName(name);
+        session.setAttribute("list_product_category", listProduct);
+        session.setAttribute("list_category", categoryService.findAll());
+        session.setAttribute("list_brand", brandService.findAll());
+        return "redirect:/category";
+    }
 
 }

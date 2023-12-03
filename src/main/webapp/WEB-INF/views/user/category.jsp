@@ -18,8 +18,11 @@
             <div class="card bg-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
                 <ul class="list-group category_block">
-                    <li class="list-group-item"><a href="/category">Tất cả</a></li>
-                    <c:forEach var="i" items="${list_category}">
+
+                    <li class="list-group-item">
+                        <a href="/category">Tất cả</a>
+                    </li>
+                    <c:forEach var="i" items="${sessionScope.list_category}">
 
                         <li class="list-group-item"><a href="/category/${i.id}">${i.name} (${listCountProduct.get(temp)} sản phẩm)</a></li>
 
@@ -31,9 +34,9 @@
             <div class="card bg-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Search for brand</div>
                 <ul class="list-group category_block">
-                    <li class="list-group-item"><a href="/category/${sessionScope.category_id}">Tất cả</a></li>
-                    <c:forEach var="i" items="${list_brand}">
-                        <li class="list-group-item"><a href="/category/brand/${i.id}">${i.name}</a></li>
+                    <li class="list-group-item"><a href="/category/">Tất cả</a></li>
+                    <c:forEach var="i" items="${sessionScope.list_brand}">
+                        <li class="list-group-item"><a href="/brand/${i.id}">${i.name}</a></li>
                     </c:forEach>
                 </ul>
             </div>
@@ -50,7 +53,7 @@
         </div>
         <div class="col">
             <div class="row" id="content">
-                <c:forEach var="i" items="${list_product_category}">
+                <c:forEach var="i" items="${sessionScope.list_product_category}">
                     <div class="product col-12 col-md-6 col-lg-4">
                         <div class="card">
                             <c:if test="${i.images.size() > 0}">

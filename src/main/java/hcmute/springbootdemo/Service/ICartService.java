@@ -27,4 +27,6 @@ public interface ICartService {
 	void updateCart(Cart cart);
 
 	Cart findCartById(int id);
+
+	int countCartsByUserId(int userId);
 }

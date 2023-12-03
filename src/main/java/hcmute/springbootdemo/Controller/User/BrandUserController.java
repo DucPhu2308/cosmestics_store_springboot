@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(path="/brand/")
-public class BrandController {
+public class BrandUserController {
 
     @Autowired
     BrandServiceImpl brandService;
@@ -27,9 +27,18 @@ public class BrandController {
 
     @GetMapping(value="{id}")
     public String productByBrand (ModelMap modelMap, @PathVariable("id") int id, HttpSession session){
-        modelMap.addAttribute("list_category", categoryService.findAll());
-        modelMap.addAttribute("list_brand", brandService.findAll());
-        modelMap.addAttribute("list_product_category", productService.findProductByCategoryAndBrand((int)session.getAttribute("category_id"), id));
+        int categoryId = (int)session.getAttribute("category_id");
+
+        if(categoryId ==0){
+            session.setAttribute("list_product_category", productService.findProductsByBrandId(id));
+            System.out.println("list_cart_product: " + productService.findProductsByBrandId(id));
+        }
+        else {
+            session.setAttribute("list_product_category", productService.findProductByCategoryIdAndBrandId(categoryId, id));
+            System.out.println("list_cart_product: " + productService.findProductByCategoryIdAndBrandId(categoryId, id));
+        }
+        session.setAttribute("list_category", categoryService.findAll());
+        session.setAttribute("list_brand", brandService.findAll());
         return "user/category";
     }
 }

@@ -19,6 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 
     List<Product> findProductByCategoryId(int categoryId);
 
+    @Query("select p from Product p where p.category.id = ?1 and p.brand.id = ?2")
     List<Product> findProductByCategoryIdAndBrandId(int categoryId, int brandId);
 
     @Query("select count(*) from Product ")
@@ -40,4 +41,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 
     List<Product> findProductsByBrandId(int brandId);
 
+    List<Product> findProductsByName(String name);
 }

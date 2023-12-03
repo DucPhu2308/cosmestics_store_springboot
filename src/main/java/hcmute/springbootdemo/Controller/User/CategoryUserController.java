@@ -50,13 +50,15 @@ public class CategoryUserController {
         }
         modelMap.addAttribute("listCountProduct", listCountProduct);
 
-        modelMap.addAttribute("list_category", categoryRepository.findAll());
+        session.setAttribute("list_category", categoryRepository.findAll());
 
-        modelMap.addAttribute("list_brand", brandService.findAll());
+        session.setAttribute("list_brand", brandService.findAll());
 
         session.setAttribute("CountProduct",cart_productRepository.count());
 
-        modelMap.addAttribute("list_product_category", productService.findAll());
+        session.setAttribute("list_product_category", productService.findAll());
+
+        session.setAttribute("category_id", 0);
 
         return "user/category";
     }
@@ -72,18 +74,13 @@ public class CategoryUserController {
         }
 
         modelMap.addAttribute("listCountProduct", listCountProduct);
-        modelMap.addAttribute("list_category", categoryRepository.findAll());
-        modelMap.addAttribute("list_brand", brandService.findAll());
-        modelMap.addAttribute("list_product_category", productService.findProductByCategory(id));
+        session.setAttribute("list_category", categoryRepository.findAll());
+        session.setAttribute("list_brand", brandService.findAll());
+        session.setAttribute("list_product_category", productService.findProductByCategory(id));
         session.setAttribute("category_id", id);
         return "user/category";
     }
 
-    @GetMapping(value="/brand/{id}")
-    public String productByBrand (ModelMap modelMap, @PathVariable("id") int id, HttpSession session){
-        modelMap.addAttribute("list_category", categoryRepository.findAll());
-        modelMap.addAttribute("list_brand", brandService.findAll());
-        modelMap.addAttribute("list_product_category", productService.findProductByCategoryAndBrand((int)session.getAttribute("category_id"), id));
-        return "user/category";
-    }
+
+
 }

@@ -18,7 +18,7 @@ public interface IProductService {
 
 	List<Product> findProductByCategory(int categoryId);
 
-	List<Product> findProductByCategoryAndBrand(int categoryId, int brandId);
+	List<Product> findProductByCategoryIdAndBrandId(int categoryId, int brandId);
 
 	void delete(Product entity);
 
@@ -38,5 +38,7 @@ public interface IProductService {
 	Page<Product> findAll(Pageable pageable);
 
 	List<Product> findProductsByBrandId(int brandId);
+
+	List<Product> findProductsByName(String name);
 
 }

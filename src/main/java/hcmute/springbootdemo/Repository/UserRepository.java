@@ -1,6 +1,7 @@
 package hcmute.springbootdemo.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import hcmute.springbootdemo.Entity.User;
@@ -17,6 +18,9 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 
     List<User> findByIsAdmin(boolean isAdmin);
     User findUserById(int id);
+
+    @Query(value = "SELECT MAX(id) FROM user", nativeQuery = true)
+    int getMaxId();
 
 
 }
