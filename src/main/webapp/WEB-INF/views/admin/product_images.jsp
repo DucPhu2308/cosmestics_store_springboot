@@ -26,7 +26,7 @@
 		<div class="col-md-6">
 			<form method="post" enctype='multipart/form-data'>
 				<input type="hidden" name="id" value="${product.id}">
-				<input name="image" class="form-control" type="file" id="formFile" onchange="preview()">
+				<input name="image" class="form-control" type="file" accept="image/jpeg,image/png,image/gif" id="formFile" onchange="preview()">
 				
 				<button data-bs-toggle="modal" data-bs-target="#insertModal"
 					data-bs-action="Thêm loại hàng" type="submit"
@@ -42,7 +42,7 @@
 				<c:forEach items="${product.images}" var="image" varStatus="status">
 				<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
 					<%-- <div class="col-md-3"> --%>
-				<img src="<c:url value="/templates/images/${image.imageLink}"/>" style="height: 500px;" class="d-block w-100" alt="...">
+				<img src="<c:url value="/templates/images/${image.imageLink}"/>" style="height: auto;" class="d-block w-100" alt="...">
 					<%-- delete button --%>
 					<button data-bs-toggle="modal" data-bs-target="#warningModal"
 						data-bs-id="${image.id}" type="submit"

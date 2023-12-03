@@ -1,13 +1,15 @@
 package hcmute.springbootdemo.Service;
 
 import hcmute.springbootdemo.Entity.Order;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 
 public interface IOrderService {
-
+	public List<Order> findByOrderDateBetween(Date startDate, Date endDate);
 	void delete(Order entity);
 
 	void deleteById(Integer id);

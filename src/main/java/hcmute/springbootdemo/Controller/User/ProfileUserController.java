@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(value="/profile_user/")
+@RequestMapping(value="/profile_user")
 public class ProfileUserController {
 
     @Autowired
