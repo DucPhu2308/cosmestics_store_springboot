@@ -142,7 +142,7 @@
                                     </form:button>
                                 </div>
                                 <form:input type="number" class="form-control" id="quantity" name="quantity"
-                                            path="quantity" min="1" max="${product.stock}" />
+                                            path="quantity" min="1" max="${product.stock}" value="${sessionScope.quantity}"/>
                                 <div class="input-group-append">
                                     <form:button type="button"
                                                  class="quantity-right-plus btn btn-success btn-number"

@@ -133,14 +133,30 @@ public class ProductUserController {
 
         cartproduct.setProduct(product);
 
+        Cart cart =cartproduct.getCart();
+        int cart_id = cart.getId();
+        session.setAttribute("quantity",cartproduct.getQuantity());
         // tổng tiền của sản phẩm đó sau khi thêm vào giỏ hàng
         float total = cartproduct.getQuantity() * product.getPrice() - (cartproduct.getQuantity() * product.getPrice() * product.getDiscountPercent());
         cartproduct.setTotalPrice(total);
 
+//       kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+        List<Cart_Product> listCartProduct = cart_productRepository.findCart_ProductsByCartId(cart_id);
+        for(Cart_Product cart_product:listCartProduct){
+            if(cart_product.getProduct().getId() == id){
+                cart_product.setQuantity(cartproduct.getQuantity());
+                cart_product.setTotalPrice(cartproduct.getTotalPrice());
+                cart_product.setId(cart_product.getId());
+                System.out.println("cart gio hàng"+cart_product.getId());
+                cart_productRepository.save(cart_product);
+                session.setAttribute("CountProduct",cart_productRepository.count());
+                redirectAttributes.addFlashAttribute("message", "Thêm vào giỏ hàng thành công");
+                return "redirect:/product/{id}";
+            }
+        }
+
         cartproduct.setId(cart_productRepository.getMaximumId()+1);
         cart_productRepository.save(cartproduct);
-
-//        cách hiển thị thông báo thành công trên alert
 
         session.setAttribute("CountProduct",cart_productRepository.count());
 
