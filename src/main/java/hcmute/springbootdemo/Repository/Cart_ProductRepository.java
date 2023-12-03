@@ -21,4 +21,7 @@ public interface Cart_ProductRepository extends JpaRepository<Cart_Product, Inte
 
     List<Cart_Product> findCart_ProductsByCartId(int cart_id);
 
+    @Query("select MAX(cp.id) from Cart_Product cp")
+    int getMaximumId();
+
 }

@@ -48,8 +48,7 @@ public class HomeController {
         //----------------------------
         //thực thi cac chuc nang cua user
         if(session.getAttribute("user_id") == null){
-            session.setAttribute("user_id", 0);
-            String image= session.getAttribute("image_user").toString();
+            String image= (String)session.getAttribute("image_user");
             if(image == null){
                 session.setAttribute("image_user","https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png");
             }
@@ -83,6 +82,12 @@ public class HomeController {
         session.removeAttribute("user_id");
         session.removeAttribute("cart_id");
         session.removeAttribute("CountProduct");
+        session.removeAttribute("image_user");
+        session.removeAttribute("CountCart");
+        session.removeAttribute("listProduct");
+        session.removeAttribute("list_category");
+        session.removeAttribute("list_brand");
+        session.removeAttribute("list_product_category");
         SecurityContextHolder.getContext().setAuthentication(null);
         return "redirect:/";
     }

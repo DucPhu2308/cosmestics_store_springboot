@@ -27,4 +27,6 @@ public interface ICart_Product {
 
 	List<Cart_Product> findCart_ProductsByCartId(int cart_id);
 
+	int getMaximumId();
+
 }

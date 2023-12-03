@@ -48,13 +48,13 @@ public class ProductUserController {
 
         Product product = productService.findById(id).get();
 
-        Date date_end_discount = product.getDiscountEnd();
-        Date now = new Date();
-
-        if(date_end_discount.after(now)){
-            product.setDiscountPercent(0.0f);
-            productService.save(product);
-        }
+//        Date date_end_discount = product.getDiscountEnd();
+//        Date now = new Date();
+//
+//        if(date_end_discount.after(now)){
+//            product.setDiscountPercent(0.0f);
+//            productService.save(product);
+//        }
 
         if(product.getAvailable()){
             modelMap.addAttribute("available", "Còn hàng");
@@ -137,7 +137,7 @@ public class ProductUserController {
         float total = cartproduct.getQuantity() * product.getPrice() - (cartproduct.getQuantity() * product.getPrice() * product.getDiscountPercent());
         cartproduct.setTotalPrice(total);
 
-
+        cartproduct.setId(cart_productRepository.getMaximumId()+1);
         cart_productRepository.save(cartproduct);
 
 //        cách hiển thị thông báo thành công trên alert
