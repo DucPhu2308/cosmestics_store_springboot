@@ -114,6 +114,40 @@ public class StatisticsController {
         }
         return "admin/statistics/quarterly";
     }
+    @GetMapping(value="yearly")
+    public String yearly(ModelMap model){
+        model.addAttribute("active", "statistics");
+        List<Order> listOrder = orderService.findAll();
+        Map<Integer, Double> revenueByYear = calculateRevenueByYear(listOrder);
+        model.addAttribute("revenueByYear", revenueByYear);
+        
+        return "admin/statistics/yearly";
+    }
+    private Map<Integer, Double> calculateRevenueByYear(List<Order> orders) {
+        int currentYear = YearMonth.now().getYear();
+        int startYear = 2018;
+        Calendar calendar = Calendar.getInstance();
+        Map<Integer, Double> result = orders.stream()
+                .filter(order -> {
+                    calendar.setTime(order.getOrderDate());
+                    return order.getPaid();
+                })
+                .collect(
+                    Collectors.groupingBy(
+                            order -> {
+                                calendar.setTime(order.getOrderDate());
+                                return calendar.get(Calendar.YEAR);
+                            },
+                            Collectors.summingDouble(Order::getTotal))
+                );
+        // fill 0 for year has no revenue
+        for (int i = 2018; i <= currentYear; i++) {
+            if (!result.containsKey(i)) {
+                result.put(i, 0.0);
+            }
+        }
+        return result;
+    }
     private Map<Integer, Double> byMonthToByQuarter(Map<Integer, Double> brandSalesByMonth) {
         Map<Integer, Double> brandSalesByQuarter = new HashMap<>();
         for (int i = 1; i <= 12; i++) {
