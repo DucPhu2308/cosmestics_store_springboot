@@ -36,8 +36,14 @@ public class ProfileUserController {
         modelMap.addAttribute("user", user);
         Date date = user.getDob();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        if(date == null){
+            date = new Date();
+        }
         String dob = dateFormat.format(date);
+
         modelMap.addAttribute("dob", dob);
+
+
         return "user/profile_user";
     }
 
@@ -74,15 +80,22 @@ public class ProfileUserController {
         user.setId(user_id);
 
 
-        if(gender.contains("male")){
+        if(gender.equals("male")){
             user.setGender(true);
         }else{
-            user.setGender(false);
+            if(gender.equals("female")){
+                user.setGender(false);
+            }
         }
+        user.setActive(true);
+        user.setIsAdmin(false);
 
         userService.save(user);
         session.setAttribute("image_user", user.getAvatarLink());
+        session.setAttribute("FirstName", user.getFirstName());
+        session.setAttribute("LastName", user.getLastName());
 
-        return "redirect:/profile_user/" + user_id;
+
+        return "redirect:/profile_user/";
     }
 }

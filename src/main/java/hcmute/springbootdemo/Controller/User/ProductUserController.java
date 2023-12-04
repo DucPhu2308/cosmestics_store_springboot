@@ -3,10 +3,7 @@ package hcmute.springbootdemo.Controller.User;
 
 import hcmute.springbootdemo.Entity.*;
 import hcmute.springbootdemo.Repository.*;
-import hcmute.springbootdemo.Service.impl.CartServiceImpl;
-import hcmute.springbootdemo.Service.impl.ProductServiceImpl;
-import hcmute.springbootdemo.Service.impl.ReviewServiceImpl;
-import hcmute.springbootdemo.Service.impl.UserServiceImpl;
+import hcmute.springbootdemo.Service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,7 +26,7 @@ public class ProductUserController {
     ProductServiceImpl productService;
 
     @Autowired
-    CartRepository cartRepository;
+    BrandServiceImpl brandService;
 
     @Autowired
     UserRepository userRepository;
@@ -41,6 +38,9 @@ public class ProductUserController {
     ReviewServiceImpl reviewService;
 
     @Autowired
+    CategoryServiceImpl categoryService;
+
+    @Autowired
     CartServiceImpl cartService;
 
     @GetMapping(value="/{id}")
@@ -48,9 +48,9 @@ public class ProductUserController {
 
         Product product = productService.findById(id).get();
 
-        Date date_end_discount = product.getDiscountEnd();
-        Date now = new Date();
-
+//        Date date_end_discount = product.getDiscountEnd();
+//        Date now = new Date();
+//
 //        if(date_end_discount.after(now)){
 //            product.setDiscountPercent(0.0f);
 //            productService.save(product);
@@ -96,9 +96,10 @@ public class ProductUserController {
 
         int brandID = product.getBrand().getId();
         List<Product> listProductBrand =productService.findProductsByBrandId(brandID);
-//        System.out.println("ma san pham" + id);
-//        System.out.println("ma hang" + brandID);
-//        System.out.println(listProductBrand);
+
+
+
+
         modelMap.addAttribute("listProductBrand", listProductBrand);
 
         modelMap.addAttribute("product", product);
@@ -132,14 +133,30 @@ public class ProductUserController {
 
         cartproduct.setProduct(product);
 
+        Cart cart =cartproduct.getCart();
+        int cart_id = cart.getId();
+        session.setAttribute("quantity",cartproduct.getQuantity());
         // tổng tiền của sản phẩm đó sau khi thêm vào giỏ hàng
         float total = cartproduct.getQuantity() * product.getPrice() - (cartproduct.getQuantity() * product.getPrice() * product.getDiscountPercent());
         cartproduct.setTotalPrice(total);
 
+//       kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+        List<Cart_Product> listCartProduct = cart_productRepository.findCart_ProductsByCartId(cart_id);
+        for(Cart_Product cart_product:listCartProduct){
+            if(cart_product.getProduct().getId() == id){
+                cart_product.setQuantity(cartproduct.getQuantity());
+                cart_product.setTotalPrice(cartproduct.getTotalPrice());
+                cart_product.setId(cart_product.getId());
+                System.out.println("cart gio hàng"+cart_product.getId());
+                cart_productRepository.save(cart_product);
+                session.setAttribute("CountProduct",cart_productRepository.count());
+                redirectAttributes.addFlashAttribute("message", "Thêm vào giỏ hàng thành công");
+                return "redirect:/product/{id}";
+            }
+        }
 
+        cartproduct.setId(cart_productRepository.getMaximumId()+1);
         cart_productRepository.save(cartproduct);
-
-//        cách hiển thị thông báo thành công trên alert
 
         session.setAttribute("CountProduct",cart_productRepository.count());
 
@@ -148,5 +165,13 @@ public class ProductUserController {
         return "redirect:/product/{id}";
     }
 
+    @PostMapping(value="/seach")
+    public String seachProduct(@RequestParam("keyword") String name, ModelMap modelMap, HttpSession session){
+        List<Product> listProduct = productService.findProductsByName(name);
+        session.setAttribute("list_product_category", listProduct);
+        session.setAttribute("list_category", categoryService.findAll());
+        session.setAttribute("list_brand", brandService.findAll());
+        return "redirect:/category";
+    }
 
 }

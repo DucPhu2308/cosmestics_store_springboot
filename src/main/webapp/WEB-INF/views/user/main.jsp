@@ -90,7 +90,7 @@
                                                     <p class="btn btn-danger btn-block">${i.price}VNĐ</p>
                                                 </div>
                                                 <div class="col">
-                                                    <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
+                                                    <a href="/product/${i.id}" class="btn btn-success btn-block">Add to cart</a>
                                                 </div>
                                             </div>
                                         </div>

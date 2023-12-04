@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path="cart")
-public class CartController {
+public class CartUserController {
 
     @Autowired
     ProductServiceImpl productService;
@@ -73,6 +73,18 @@ public class CartController {
     @GetMapping(value="/delete_cart/{id}")
     public String deleteCart(HttpSession session, @PathVariable("id") int id){
         cartService.deleteById(id);
+
+
+        int user_id = (int) session.getAttribute("user_id");
+        int countCart = 0;
+        List<Cart> listCart = cartService.findCartByUserId(user_id);
+        for(Cart cart:listCart){
+            if(cart.getActive() == true){
+                countCart++;
+            }
+        }
+        session.setAttribute("CountCart", countCart);
+
         return "redirect:/cart";
     }
 
@@ -82,29 +94,31 @@ public class CartController {
         return "redirect:/cart/"+session.getAttribute("cart_id");
     }
 
-//    @GetMapping(value="/addCart")
-//    public String addCart(ModelMap modelMap, HttpSession session){
-//        modelMap.addAttribute("addCart", new Cart());
-//        int user_id = (int) session.getAttribute("user_id");
-//        String firstName= userService.findById(user_id).get().getFirstName();
-//        String lastName= userService.findById(user_id).get().getLastName();
-//
-//        modelMap.addAttribute("firstName", firstName);
-//        modelMap.addAttribute("lastName", lastName);
-//
-//        return "user/cart/addCart";
-//    }
+
 
     @PostMapping(value="/addCart")
     public String addCart(HttpSession session,
                           @RequestParam("nameNewCart") String nameNewCart){
         int user_id = (int) session.getAttribute("user_id");
+        if(nameNewCart.equals("")){
+            return "redirect:/cart";
+        }
         User user = userService.findById(user_id).get();
         Cart newCart = new Cart();
         newCart.setUser(user);
         newCart.setName(nameNewCart);
         newCart.setActive(true);
         cartService.save(newCart);
+
+        int countCart = 0;
+        List<Cart> listCart = cartService.findCartByUserId(user.getId());
+        for(Cart cart:listCart){
+            if(cart.getActive() == true){
+                countCart++;
+            }
+        }
+        session.setAttribute("CountCart", countCart);
+
         return "redirect:/cart";
     }
 
@@ -114,6 +128,9 @@ public class CartController {
     public String updateCart(HttpSession session, @PathVariable("id") int id,
                              @RequestParam("nameCart") String name){
         Cart cart1 = cartService.findById(id).get();
+        if(name.equals("")){
+            return "redirect:/cart";
+        }
         cart1.setId(id);
         cart1.setName(name);
         cart1.setActive(true);

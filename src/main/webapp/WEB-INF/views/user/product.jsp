@@ -86,6 +86,9 @@
         <!-- Add to cart -->
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
+                <c:if test="${product.available==false}">
+                    <p style="color: red; font-size: 25px; font-family: 'Be VietNam Pro', 'sans-serif'">Sản phẩm đã hết hàng</p>
+                </c:if>
                 <div class="card-body">
                     <c:if test="${product.discountPercent == 0}">
                         <p class="price">${product.price} $</p>
@@ -108,6 +111,15 @@
 
                     <div class="form-group">
                         <div class="form-group">
+                            <c:forEach var="item" items="${listCart}">
+                                <c:forEach var="j" items="${item.cart_products}">
+                                    <c:if test="${product.id == j.product.id}">
+                                        <label style="color:red">Sản phẩm này đã có trong giỏ hàng: "${item.name}"</label>
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+
+
                             <div class="form-group">
                                 <label for="colors">Chọn giỏ hàng</label>
                                 <form:select class="custom-select" id="colors" path="cart">
@@ -118,6 +130,7 @@
                                     </c:forEach>
                                 </form:select>
                             </div>
+
                             <a href="/cart">Thêm giỏ hàng</a></br>
                             <label>Quantity :</label>
                             <div class="input-group mb-3">
@@ -128,16 +141,29 @@
                                         <i class="fa fa-minus"></i>
                                     </form:button>
                                 </div>
-                                <form:input type="text" class="form-control" id="quantity" name="quantity"
-                                            path="quantity" min="1" max="100" value="1"/>
+                                <form:input type="number" class="form-control" id="quantity" name="quantity"
+                                            path="quantity" min="1" max="${product.stock}" value="${sessionScope.quantity}"/>
                                 <div class="input-group-append">
                                     <form:button type="button"
                                                  class="quantity-right-plus btn btn-success btn-number"
-                                                 data-type="plus" data-field="">
+                                                 data-type="plus" data-field="" onclick="limitQuantity()" value="1" >
                                         <i class="fa fa-plus"></i>
                                     </form:button>
                                 </div>
                             </div>
+                            <script>
+                                function limitQuantity() {
+                                    var quantity = document.getElementById("quantity").value;
+                                    if (quantity >= ${product.stock}) {
+                                        document.getElementById("quantity").value = ${product.stock}-1;
+                                        alert("Số lượng sản phẩm trong kho không đủ")
+                                    }
+                                    if (quantity === 0 ) {
+                                        document.getElementById("quantity").value = 1;
+                                    }
+                                }
+
+                            </script>
                         </div>
                         <input type="submit" value="Thêm vào giỏ hàng"
                                class="btn btn-success btn-lg btn-block text-uppercase">
@@ -150,6 +176,19 @@
                         <c:if test="${!isAuthenticated}">
                             <p class="text-center">Vui lòng đăng nhập để thêm vào giỏ hàng</p>
                         </c:if>
+
+                        <script>
+                            //nếu sản phẩm hết hàng hoặc không có sẵn thì không cho thêm vào giỏ hàng
+                            if((${product.available})===false){
+                                document.getElementById("quantity").disabled =true;
+                                document.querySelector(".quantity-left-minus.btn.btn-danger.btn-number").disabled =true;
+                                document.querySelector(".quantity-right-plus.btn.btn-success.btn-number").disabled =true;
+                                document.getElementById("quantity").value = 0;
+                                document.querySelector(".btn.btn-success.btn-lg.btn-block.text-uppercase").disabled =true;
+                            }
+
+
+                        </script>
                         <div class="product_rassurance">
                             <ul class="list-inline">
                                 <li class="list-inline-item"><i class="fa fa-truck fa-2x"></i><br/>Fast

@@ -4,7 +4,7 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:set var="cartID" value="0"/>
+
 
 <body>
 	<section class="jumbotron text-center">
@@ -22,7 +22,6 @@
 							<tr>
 								<th scope="col"></th>
 								<th scope="col">Sản phẩm</th>
-								<th scope="col">Có sẵn</th>
 								<th scope="col" class="text-center">Số lượng</th>
 								<th scope="col" class="text-center">Đơn giá</th>
 								<th scope="col" class="text-right">Tổng tiền</th>
@@ -47,7 +46,6 @@
 											</c:if>
 										</td>
 										<td>${i.product.name}</td>
-										<td>${i.product.stock}</td>
 										<td><input class="form-control" type="text" value="${i.quantity}" disabled/></td>
 										<td class="text-center">
 											<c:if test="${i.product.discountPercent == 0}">
@@ -61,7 +59,7 @@
 
 										</td>
 
-<%--										thêm dấu gạch ngang vào giá cũ--%>
+
 
 
 
@@ -83,7 +81,6 @@
 								<td></td>
 								<td></td>
 								<td></td>
-								<td></td>
 								<td>Sub-Total</td>
 								<td class="text-right">
 									<c:if test="${totalPrice == null}">
@@ -96,7 +93,6 @@
 							</tr>
 
 							<tr>
-								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -114,7 +110,13 @@
 						<button class="btn btn-block btn-light" type="submit" formaction="/category">Continue Shopping</button>
 					</div>
 					<div class="col-sm-12 col-md-6 text-right">
-						<button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+						<form action="/order_cart/${sessionScope.cart_id}" method="get">
+							<button class="btn btn-lg btn-block btn-success text-uppercase" >
+								Thanh toán
+							</button>
+						</form>
+
+
 					</div>
 				</div>
 			</div>

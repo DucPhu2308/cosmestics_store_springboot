@@ -41,6 +41,6 @@ public interface IUserService {
 
 	<S extends User> S save(S entity);
 
-
+	int getMaxId();
 
 }

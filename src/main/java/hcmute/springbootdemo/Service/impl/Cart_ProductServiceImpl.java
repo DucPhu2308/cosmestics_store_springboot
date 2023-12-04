@@ -72,6 +72,9 @@ public class Cart_ProductServiceImpl implements ICart_Product {
 	}
     
     
-
+	@Override
+	public int getMaximumId(){
+		return cart_ProductRepository.getMaximumId();
+	}
     
 }

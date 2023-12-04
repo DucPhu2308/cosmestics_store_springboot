@@ -85,7 +85,10 @@ public class UserServiceImpl implements IUserService{
 		return userRepository.save(entity);
 	}
 
-
+    @Override
+    public int getMaxId() {
+        return userRepository.getMaxId();
+    }
 
 
     @Override
