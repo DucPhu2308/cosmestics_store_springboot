@@ -81,6 +81,69 @@ public class StatisticsController {
 
         return "admin/statistics/monthly";
     }
+    @GetMapping(value="quarterly")
+    public String quarterly(ModelMap model, @RequestParam(required = false, defaultValue = "2023") int year){
+        model.addAttribute("active", "statistics");
+        model.addAttribute("year", year);
+        List<Order> listOrder = orderService.findAll();
+        Map<Integer, Double> revenueByMonth = calculateRevenueByMonth(listOrder, year);
+        Map<Integer, Double> revenueByQuarter = byMonthToByQuarter(revenueByMonth);
+        model.addAttribute("revenueByQuarter", revenueByQuarter);
+
+        Map<Integer, Map<Brand, Double>> brandSales = calculateBrandSales(listOrder, year);
+        // convert to Map<Brand, Map<Month, Revenue>>
+        Map<Brand, Map<Integer, Double>> newBrandSales = new HashMap<>();
+            brandSales.forEach((month, brandMap) -> {
+            for (Brand brand : brandMap.keySet()) {
+                newBrandSales.put(brand, new HashMap<>());
+                newBrandSales.get(brand).put(month, brandMap.get(brand));
+            }
+        });
+        // calculate total revenue by brand and sort from highest to lowest
+        Map<Brand, Double> totalBrandSales = calculateTotalBrandSales(newBrandSales);
+        // push to view brand sales by month of top 3 brand has highest total revenue
+        List<Brand> top3Brand = totalBrandSales.keySet().stream().limit(3).collect(Collectors.toList());
+        int n = top3Brand.size() < 3 ? top3Brand.size() : 3;
+        for (int i=0; i<n; i++) {
+            Brand brand = top3Brand.get(i);
+            Map<Integer, Double> brandSalesByMonth = newBrandSales.get(brand);
+            brandSalesByMonth = fillZeroForMonth(brandSalesByMonth);
+            Map<Integer, Double> brandSalesByQuarter = byMonthToByQuarter(brandSalesByMonth);
+            model.addAttribute("brandSales" + (i+1), brandSalesByQuarter);
+            model.addAttribute("brand" + (i+1), brand);
+        }
+        return "admin/statistics/quarterly";
+    }
+    private Map<Integer, Double> byMonthToByQuarter(Map<Integer, Double> brandSalesByMonth) {
+        Map<Integer, Double> brandSalesByQuarter = new HashMap<>();
+        for (int i = 1; i <= 12; i++) {
+            int quarter = (i-1) / 3 + 1;
+            if (!brandSalesByQuarter.containsKey(quarter)) {
+                brandSalesByQuarter.put(quarter, 0.0);
+            }
+            brandSalesByQuarter.put(quarter, brandSalesByQuarter.get(quarter) + brandSalesByMonth.get(i));
+        }
+        return brandSalesByQuarter;
+    }
+    private static Map<Brand, Double> calculateTotalBrandSales(Map<Brand, Map<Integer, Double>> brandSales) {
+        return brandSales.entrySet().stream()
+                .collect(
+                    Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().values().stream().mapToDouble(Double::doubleValue).sum()
+                    )
+                )
+                .entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(
+                    Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                    )
+                );
+    }
     private static Map<Integer, Double> fillZeroForMonth(Map<Integer, Double> map) {
         for (int i = 1; i <= 12; i++) {
             if (!map.containsKey(i)) {

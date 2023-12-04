@@ -34,9 +34,9 @@
 				Thống kê
 			</button>
 			<ul class="dropdown-menu w-100">
-				<li><a class="dropdown-item" href="statistics/monthly">Theo tháng</a></li>
-				<li><a class="dropdown-item" href="#">Theo quý</a></li>
-				<li><a class="dropdown-item" href="#">Theo năm</a></li>
+				<li><a class="dropdown-item" href="<c:url value="/admin/statistics/monthly" />">Theo tháng</a></li>
+				<li><a class="dropdown-item" href="<c:url value="/admin/statistics/quarterly" />">Theo quý</a></li>
+				<li><a class="dropdown-item" href="<c:url value="/admin/statistics/yearly" />">Theo năm</a></li>
 			</ul>
 		</li>
 	</ul>
