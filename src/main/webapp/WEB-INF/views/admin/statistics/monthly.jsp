@@ -5,7 +5,20 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="container">
 	<h2 class="display-6 my-3">Thống kê theo tháng</h2>
-
+    <form action="" method="get">
+        <%-- year input, default is current year --%>
+        <div class="form-group row">
+            <label class="col-sm-1 col-form-label">Năm:</label>
+            <div class="col-sm-2">
+                <%-- get current year --%>
+                <input type="number" class="form-control" name="year" value="${year}" min="2000" max="2100" required>
+            </div>
+            <%-- submit button --%>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">Xem</button>
+            </div>
+        </div>
+    </form>
     <section>
         <div class="title">
             <i class="fa-regular fa-heart"></i> <span class="text">Biểu đồ doanh thu</span>
@@ -25,6 +38,36 @@
                         borderColor : 'rgb(255, 99, 132)',
                         data : ${revenueByMonth.values()}
                     } ]
+                },
+                options : {}
+            });
+        </script>
+	</section>
+
+    <section>
+        <div class="title">
+            <i class="fa-regular fa-heart"></i> <span class="text">Biểu đồ doanh số theo hãng</span>
+        </div>
+        <div class="chart">
+            <canvas id="brandSalesChart"></canvas>
+        </div>
+        <script>
+            var ctx = document.getElementById('brandSalesChart').getContext('2d');
+            var chart = new Chart(ctx, { 
+                type : 'bar',
+                data : {
+                    labels : ${brandSales1.keySet()},
+                    datasets : [ <c:if test="${brand1 != null}"> {
+                        label : '${brand1.name}',
+                        backgroundColor : 'rgb(255, 99, 132)',
+                        borderColor : 'rgb(255, 99, 132)',
+                        data : ${brandSales1.values()}
+                    }, </c:if> <c:if test="${brand2 != null}"> {
+                        label : '${brand2.name}',
+                        backgroundColor : 'rgb(54, 162, 235)',
+                        borderColor : 'rgb(54, 162, 235)',
+                        data : ${brandSales2.values()}
+                    } </c:if> ]
                 },
                 options : {}
             });
