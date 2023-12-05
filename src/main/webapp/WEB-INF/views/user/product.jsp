@@ -56,7 +56,7 @@
                                 <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
                                         <%-- <div class="col-md-3"> --%>
                                     <img src="<c:url value="/templates/images/${image.imageLink}"/>"
-                                         style="height: 500px;" class="d-block w-100" alt="...">
+                                         style="max-width: 100%; max-height:100%; object-fit: contain;" alt="...">
 
                                 </div>
                             </c:forEach>
@@ -275,18 +275,115 @@
                                     <c:forEach var="i" items="${listProductBrand}" varStatus="status">
                                         <c:if test="${status.index <4}">
                                             <c:if test="${i.id != product.id}">
-                                                <div class="col-sm">
+                                                <div class="col-sm-3">
                                                     <div class="card">
+                                                        <div style="width:243px; height: 162px">
                                                         <c:if test="${i.images.size() > 0}">
-                                                            <img class="card-img-top"
-                                                                 src="<c:url value="/templates/images/${i.images[0].imageLink}"/>"
-                                                                 alt="Card image cap">
+                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
                                                         </c:if>
                                                         <c:if test="${i.images.size() == 0}">
-                                                            <img class="card-img-top"
-                                                                 src="<c:url value="/templates/images/no-image.png"/>"
-                                                                 alt="Card image cap">
+                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
                                                         </c:if>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h4 class="card-title"><a href="/product/${i.id}"
+                                                                                      title="View Product">${i.name}</a>
+                                                            </h4>
+                                                            <p class="card-text">${i.description}</p>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <p class="btn btn-danger btn-block">${i.price}VNĐ</p>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <a href="/product/${i.id}/product_to_cart"
+                                                                       class="btn btn-success btn-block">Add to cart</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:if>
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%-- Same category --%>
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white text-uppercase">
+                                <i class="fa fa-star"></i> Sản phẩm cùng loại
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <c:forEach var="i" items="${sameCategory}" varStatus="status">
+                                        <c:if test="${status.index <4}">
+                                            <c:if test="${i.id != product.id}">
+                                                <div class="col-sm-3">
+                                                    <div class="card">
+                                                        <div style="width:243px; height: 162px">
+                                                        <c:if test="${i.images.size() > 0}">
+                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
+                                                        </c:if>
+                                                        <c:if test="${i.images.size() == 0}">
+                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
+                                                        </c:if>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h4 class="card-title"><a href="/product/${i.id}"
+                                                                                      title="View Product">${i.name}</a>
+                                                            </h4>
+                                                            <p class="card-text">${i.description}</p>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <p class="btn btn-danger btn-block">${i.price}VNĐ</p>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <a href="/product/${i.id}/product_to_cart"
+                                                                       class="btn btn-success btn-block">Add to cart</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:if>
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%-- View History --%>
+             <div class="container mt-3">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white text-uppercase">
+                                <i class="fa fa-star"></i> Sản phẩm đã xem
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <c:forEach var="i" items="${viewHistory}" varStatus="status">
+                                        <c:if test="${status.index <4}">
+                                            <c:if test="${i.id != product.id}">
+                                                <div class="col-sm-3">
+                                                    <div class="card">
+                                                        <div style="width:243px; height: 162px">
+                                                        <c:if test="${i.images.size() > 0}">
+                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
+                                                        </c:if>
+                                                        <c:if test="${i.images.size() == 0}">
+                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
+                                                        </c:if>
+                                                        </div>
                                                         <div class="card-body">
                                                             <h4 class="card-title"><a href="/product/${i.id}"
                                                                                       title="View Product">${i.name}</a>
@@ -392,20 +489,6 @@
                                 <hr>
                             </div>
                         </c:forEach>
-
-                        <div class="review">
-                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                            <meta itemprop="datePublished" content="01-01-2016">
-                            January 01, 2018 <span class="fa fa-star" aria-hidden="true"></span>
-                            <span class="fa fa-star" aria-hidden="true"></span> <span
-                                class="fa fa-star" aria-hidden="true"></span> <span
-                                class="fa fa-star" aria-hidden="true"></span> <span
-                                class="fa fa-star" aria-hidden="true"></span> by Paul Smith
-                            <p class="blockquote">
-                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Integer posuere erat a ante.</p>
-                            <hr>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -19,6 +19,10 @@ public class ProductServiceImpl implements IProductService{
     @Autowired
     ProductRepository productRepository;
     
+	@Override
+	public List<Product> findAllById(Iterable<Integer> ids) {
+		return productRepository.findAllById(ids);
+	}
 
     @Override
 	public <S extends Product> S save(S entity) {

@@ -56,12 +56,14 @@
                 <c:forEach var="i" items="${sessionScope.list_product_category}">
                     <div class="product col-12 col-md-6 col-lg-4">
                         <div class="card">
-                            <c:if test="${i.images.size() > 0}">
-                                <img class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
-                            </c:if>
-                            <c:if test="${i.images.size() == 0}">
-                                <img class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
-                            </c:if>
+                            <div style="width:243px; height: 162px">
+                                        <c:if test="${i.images.size() > 0}">
+                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
+                                        </c:if>
+                                        <c:if test="${i.images.size() == 0}">
+                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
+                                        </c:if>
+                                        </div>
                             <div class="card-body">
                                 <h4 class="card-title"><a href="/product/${i.id}" title="View Product">${i.name} </a></h4>
                                 <pre class="card-text">${i.description}</pre>

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IProductService {
+	public List<Product> findAllById(Iterable<Integer> ids);
     List<Product> findAll();
 
     Product findProductById(int id);
