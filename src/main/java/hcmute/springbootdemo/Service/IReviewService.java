@@ -8,6 +8,7 @@ import org.springframework.data.domain.Example;
 
 public interface IReviewService {
 
+	public List<Review> findTop10NewestReview();
 	void delete(Review entity);
 
 	void deleteById(Integer id);

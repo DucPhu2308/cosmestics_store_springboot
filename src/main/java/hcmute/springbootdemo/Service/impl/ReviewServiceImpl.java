@@ -18,6 +18,11 @@ public class ReviewServiceImpl implements IReviewService {
     ReviewRepository reviewRepository;
 
 	@Override
+	public List<Review> findTop10NewestReview() {
+		return reviewRepository.findTop10NewestReview();
+	}
+
+	@Override
 	public <S extends Review> S save(S entity) {
 		return reviewRepository.save(entity);
 	}

@@ -7,7 +7,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/common/taglib.jsp"%>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
@@ -33,6 +33,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/contact/${productId}">Contact</a>
                 </li>
+                <sec:authorize access="hasAnyAuthority('ROLE_ADMIN')" var="isAuthenticated"></sec:authorize>
+                <c:if test="${isAuthenticated}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Admin</a>
+                    </li>
+                </c:if>
             </ul>
 
             <form class="form-inline my-2 my-lg-0" action="/product/seach" method="post">
@@ -48,8 +54,12 @@
                             <c:forEach var="item" items="${sessionScope.listProduct}">
                                 <li class="box_search item">
                                     <div class="item_image">
-                                        <img src="https://dummyimage.com/600x400/55595c/fff" alt="">
-<%--                                        <img src="<c:url value="/templates/images/ ${item.images[0].imageLink}"/>" alt="">--%>
+                                        <c:if test="${fn:length(item.images) > 0}">
+                                            <img src="<c:url value="/templates/images/${item.getImages()[0].imageLink}"/>" alt="">
+                                        </c:if>
+                                        <c:if test="${fn:length(item.images) == 0}">
+                                            <img src="<c:url value="/templates/images/no-image.png"/>" alt="">
+                                        </c:if>
                                     </div>
 
                                     <div class="item_title">

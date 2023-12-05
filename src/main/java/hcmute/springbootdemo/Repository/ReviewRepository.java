@@ -18,4 +18,7 @@ public interface ReviewRepository extends JpaRepository<Review, Integer>{
 
     int countReviewByProductId(int id);
 
+    // find top 10 newest review
+    @Query(value = "SELECT * FROM review ORDER BY id DESC LIMIT 10", nativeQuery = true)
+    List<Review> findTop10NewestReview();
 }

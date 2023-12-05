@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="container">
-	<h2 class="display-6 my-3">Thống kê theo tháng</h2>
+	<h2 class="display-6 my-3">Thống kê theo quý</h2>
     <form action="" method="get">
         <%-- year input, default is current year --%>
         <div class="form-group row">
@@ -31,12 +31,12 @@
             var chart = new Chart(ctx, {
                 type : 'line',
                 data : {
-                    labels : ${revenueByMonth.keySet()},
+                    labels : ["Q1", "Q2", "Q3", "Q4"],
                     datasets : [ {
                         label : 'Doanh thu',
                         backgroundColor : 'rgb(255, 99, 132)',
                         borderColor : 'rgb(255, 99, 132)',
-                        data : ${revenueByMonth.values()}
+                        data : ${revenueByQuarter.values()}
                     } ]
                 },
                 options : {}
@@ -48,6 +48,7 @@
         <div class="title">
             <i class="fa-regular fa-heart"></i> <span class="text">Biểu đồ doanh số theo hãng</span>
         </div>
+        <c:if test="${brand1 != null}">
         <div class="chart">
             <canvas id="brandSalesChart"></canvas>
         </div>
@@ -56,7 +57,7 @@
             var chart = new Chart(ctx, { 
                 type : 'bar',
                 data : {
-                    labels : ${brandSales1.keySet()},
+                    labels : ["Q1", "Q2", "Q3", "Q4"],
                     datasets : [ <c:if test="${brand1 != null}"> {
                         label : '${brand1.name}',
                         backgroundColor : 'rgb(255, 99, 132)',
@@ -72,5 +73,9 @@
                 options : {}
             });
         </script>
+        </c:if>
+        <c:if test="${brand1 == null}">
+            <div class="alert alert-info">Không có dữ liệu</div>
+        </c:if>
 	</section>
 </div>

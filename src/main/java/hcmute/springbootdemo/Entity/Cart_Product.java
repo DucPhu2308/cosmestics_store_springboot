@@ -8,8 +8,6 @@ import javax.persistence.*;
 @Entity
 
 @Table(name = "Cart_Product")
-
-@Embeddable
 public class Cart_Product implements Serializable{
 
 	private static final long serialVersionUID = 1L;

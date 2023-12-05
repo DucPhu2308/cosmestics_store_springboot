@@ -17,6 +17,11 @@ public class OrderServiceImpl implements IOrderService {
     OrderRepository orderRepository;
 	
 	@Override
+	public List<Order> findTop10NewestOrder() {
+		return orderRepository.findTop10NewestOrder();
+	}
+
+	@Override
 	public List<Order> findByOrderDateBetween(Date startDate, Date endDate) {
 		return orderRepository.findByOrderDateBetween(startDate, endDate);
 	}
