@@ -65,9 +65,9 @@ public class User implements UserDetails, Serializable{
 	@Column
 	private LocalDateTime lastLogin;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Review> reviews;
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	private List<Review> reviews;
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Cart> carts;
 	
 	public LocalDateTime getCreatedAt() {

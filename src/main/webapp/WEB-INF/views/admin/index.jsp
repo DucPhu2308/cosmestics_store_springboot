@@ -38,32 +38,56 @@
 			<div class="title">
 				<i class="fa-regular fa-heart"></i> <span class="text">Biểu đồ doanh thu</span>
 			</div>
-			<div class="chart">
-				<canvas id="revenueChart"></canvas>
-			</div>
-			 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-			<script>
-				var ctx = document.getElementById('revenueChart').getContext('2d');
-				var chart = new Chart(ctx, {
-					type : 'line',
-					data : {
-						labels : ${revenueByMonth.keySet()},
-						datasets : [ {
-							label : 'Doanh thu',
-							backgroundColor : 'rgb(255, 99, 132)',
-							borderColor : 'rgb(255, 99, 132)',
-							data : ${revenueByMonth.values()}
-						} ]
-					},
-					options : {}
-				});
-			</script>
+			
 		</section>
 		<section>
 			<div class="title">
 				<i class="fa-regular fa-message"></i> <span class="text">Đánh
 					giá mới</span>
 			</div>
+			<div class="table">
+				<table>
+					<thead>
+						<tr>
+							<th>Người dùng</th>
+							<th>Sản phẩm</th>
+							<th>Đánh giá</th>
+							<th>Thời gian</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Nguyễn Văn A</td>
+							<td>iPhone 12 Pro Max</td>
+							<td>5 sao</td>
+							<td>12/12/2020</td>
+						</tr>
+						<tr>
+							<td>Nguyễn Văn A</td>
+							<td>iPhone 12 Pro Max</td>
+							<td>5 sao</td>
+							<td>12/12/2020</td>
+						</tr>
+						<tr>
+							<td>Nguyễn Văn A</td>
+							<td>iPhone 12 Pro Max</td>
+							<td>5 sao</td>
+							<td>12/12/2020</td>
+						</tr>
+						<tr>
+							<td>Nguyễn Văn A</td>
+							<td>iPhone 12 Pro Max</td>
+							<td>5 sao</td>
+							<td>12/12/2020</td>
+						</tr>
+						<tr>
+							<td>Nguyễn Văn A</td>
+							<td>iPhone 12 Pro Max</td>
+							<td>5 sao</td>
+							<td>12/12/2020</td>
+						</tr>
+					</tbody>
+				</table>
 		</section>
 	</div>
 </body>

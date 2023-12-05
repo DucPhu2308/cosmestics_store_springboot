@@ -68,10 +68,10 @@ public class Product implements Serializable{
 	@JoinColumn(name = "brandId")
 	private Brand brand;
 	
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
 	private List<Image> images;
 	
-	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<Review> reviews;
 	
 	@OneToMany(mappedBy = "product")

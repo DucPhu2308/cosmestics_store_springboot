@@ -54,11 +54,11 @@
                             <c:forEach var="item" items="${sessionScope.listProduct}">
                                 <li class="box_search item">
                                     <div class="item_image">
-                                        <c:if test="${item.getImages() != null}">
+                                        <c:if test="${fn:length(item.images) > 0}">
                                             <img src="<c:url value="/templates/images/${item.getImages()[0].imageLink}"/>" alt="">
                                         </c:if>
-                                        <c:if test="${item.getImages() == null}">
-                                            <img src="<c:url value="/templates/images/no-image.jpg"/>" alt="">
+                                        <c:if test="${fn:length(item.images) == 0}">
+                                            <img src="<c:url value="/templates/images/no-image.png"/>" alt="">
                                         </c:if>
                                     </div>
                                     <div class="item_title">
