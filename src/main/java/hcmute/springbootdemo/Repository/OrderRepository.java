@@ -16,4 +16,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer>{
     @Query(value = "select * from orders where OrderDate between ?1 and ?2 and Paid = true", nativeQuery = true)
     List<Order> findByOrderDateBetween(Date startDate, Date endDate);
 
+    // find top 10 newest orders
+    @Query(value = "select * from orders order by id desc limit 10", nativeQuery = true)
+    List<Order> findTop10NewestOrder();
 }

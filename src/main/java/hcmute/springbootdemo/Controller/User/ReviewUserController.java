@@ -3,7 +3,6 @@ package hcmute.springbootdemo.Controller.User;
 import hcmute.springbootdemo.Entity.Product;
 import hcmute.springbootdemo.Entity.Review;
 import hcmute.springbootdemo.Entity.User;
-import hcmute.springbootdemo.Repository.ReviewRepository;
 import hcmute.springbootdemo.Service.impl.ProductServiceImpl;
 import hcmute.springbootdemo.Service.impl.ReviewServiceImpl;
 import hcmute.springbootdemo.Service.impl.UserServiceImpl;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Controller
@@ -38,7 +35,7 @@ public class ReviewUserController {
         Product product= productService.findById(id).get();
         User user = userService.findUserById((int) session.getAttribute("user_id"));
 
-        LocalDateTime date = LocalDateTime.now();
+        Date date = new Date();
         review.setCreatedAt(date);
         review.setRating(rating);
         review.setProduct(product);

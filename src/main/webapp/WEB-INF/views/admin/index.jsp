@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 </head>
 <body>
 	<div class="container">
-		<h2 class="display-6 my-3">Xin chào, User</h2>
+		<h2 class="display-6 my-3">Xin chào, Admin!</h2>
 		<section>
 			<div class="title">
 				<i class="fa-solid fa-gauge"></i> <span class="text">Tổng
@@ -26,69 +27,84 @@
 				</div>
 				<div class="box box3">
 					<i class="fa-solid fa-user"></i> <span class="text">Người
-						dùng mới</span> <span class="number">100,123</span>
+						dùng</span> <span class="number">${userCount}</span>
 				</div>
 				<div class="box box4">
 					<i class="fa-solid fa-star"></i> <span class="text">Lượt
-						đánh giá</span> <span class="number">333,333</span>
+						đánh giá</span> <span class="number">${reviewCount}</span>
 				</div>
 			</div>
 		</section>
-		<section>
-			<div class="title">
-				<i class="fa-regular fa-heart"></i> <span class="text">Biểu đồ doanh thu</span>
+		<div class="row">
+			<div class="col-5">
+				<section>
+					<div class="title">
+						<i class="fa-regular fa-clock"></i> <span class="text">Đơn hàng gần đây</span>
+					</div>
+					<div class="table">
+						<table class="table-striped table bg-white">
+							<thead>
+								<tr>
+									<th>Mã đơn hàng</th>
+									<th>Ngày đặt</th>
+									<th>Người nhận</th>
+									<th>Địa chỉ</th>
+									<th>Trạng thái</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${newOrder}" var="order">
+									<tr>
+										<td>${order.id}</td>
+										<td><fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+										<td>${order.cart.user.firstName} ${order.cart.user.lastName}</td>
+										<td>${order.address}</td>
+										<c:if test="${order.paid && order.arriveDate != null}">
+											<td><span class="badge text-bg-success">Đã giao</span></td>
+										</c:if>
+										<c:if test="${order.paid && order.arriveDate == null}">
+											<td><span class="badge text-bg-warning">Đã thanh toán</span></td>
+										</c:if>
+										<c:if test="${!order.paid && order.arriveDate == null}">
+											<td><span class="badge text-bg-danger">Đã hủy</span></td>
+										</c:if>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+				</section>
 			</div>
-			
-		</section>
-		<section>
-			<div class="title">
-				<i class="fa-regular fa-message"></i> <span class="text">Đánh
-					giá mới</span>
-			</div>
-			<div class="table">
-				<table>
-					<thead>
-						<tr>
-							<th>Người dùng</th>
-							<th>Sản phẩm</th>
-							<th>Đánh giá</th>
-							<th>Thời gian</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Nguyễn Văn A</td>
-							<td>iPhone 12 Pro Max</td>
-							<td>5 sao</td>
-							<td>12/12/2020</td>
-						</tr>
-						<tr>
-							<td>Nguyễn Văn A</td>
-							<td>iPhone 12 Pro Max</td>
-							<td>5 sao</td>
-							<td>12/12/2020</td>
-						</tr>
-						<tr>
-							<td>Nguyễn Văn A</td>
-							<td>iPhone 12 Pro Max</td>
-							<td>5 sao</td>
-							<td>12/12/2020</td>
-						</tr>
-						<tr>
-							<td>Nguyễn Văn A</td>
-							<td>iPhone 12 Pro Max</td>
-							<td>5 sao</td>
-							<td>12/12/2020</td>
-						</tr>
-						<tr>
-							<td>Nguyễn Văn A</td>
-							<td>iPhone 12 Pro Max</td>
-							<td>5 sao</td>
-							<td>12/12/2020</td>
-						</tr>
-					</tbody>
-				</table>
-		</section>
+			<div class="col-7">
+				<section>
+					<div class="title">
+						<i class="fa-regular fa-clock"></i> <span class="text">Đánh giá gần đây</span>
+					</div>
+					<div class="table">
+						<table class="table-striped table bg-white">
+							<thead>
+								<tr>
+									<th>Người đánh giá</th>
+									<th>Sản phẩm</th>
+									<th>Sao</th>
+									<th>Đánh giá</th>
+									<th>Ngày đánh giá</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${newReview}" var="review">
+									<tr>
+										<td>${review.user.firstName} ${review.user.lastName}</td>
+										<td> <a href="<c:url value="/product/${review.product.id}" />">${review.product.name}</a> </td>
+										<td>${review.rating}</td>
+										<td>${review.content}</td>
+										<td><fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+				</section>
+		</div>
+		
 	</div>
 </body>
 </html>

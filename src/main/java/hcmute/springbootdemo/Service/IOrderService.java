@@ -10,6 +10,7 @@ import org.springframework.data.domain.Example;
 
 public interface IOrderService {
 	public List<Order> findByOrderDateBetween(Date startDate, Date endDate);
+	public List<Order> findTop10NewestOrder();
 	void delete(Order entity);
 
 	void deleteById(Integer id);

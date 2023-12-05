@@ -363,7 +363,7 @@
                             <div class="review">
                                 <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                                 <meta itemprop="datePublished" content="01-01-2016">
-                                    ${i.createdAt}
+                                    <td><fmt:formatDate value="${i.createdAt}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
                                     <c:set var="cnt" value="1"/>
                                     <c:forEach var="j" begin="1" end="${i.rating}">
                                         <span class="fa fa-star"></span>

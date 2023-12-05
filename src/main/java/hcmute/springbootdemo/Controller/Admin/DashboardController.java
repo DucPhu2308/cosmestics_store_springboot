@@ -13,12 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import hcmute.springbootdemo.Entity.Order;
 import hcmute.springbootdemo.Service.IOrderService;
+import hcmute.springbootdemo.Service.IReviewService;
+import hcmute.springbootdemo.Service.IUserService;
 
 @Controller
 @RequestMapping(value = "/admin")
 public class DashboardController {
 	@Autowired
 	IOrderService orderService;
+
+	@Autowired
+	IUserService userService;
+
+	@Autowired
+	IReviewService reviewService;
 
 	@RequestMapping(value = "")
 	public String index(ModelMap model)
@@ -33,17 +41,13 @@ public class DashboardController {
 		// List<Order> listOrder = orderService.findByOrderDateBetween(dateBefore, today);
 		List<Order> listOrder = orderService.findAll();
 		model.addAttribute("orderCount", listOrder.size());
-		model.addAttribute("revenue", getRevenue(listOrder));
-		model.addAttribute("revenueByMonth", calculateRevenueByMonth(listOrder));
+		model.addAttribute("revenue", getRevenue(listOrder));	
+		model.addAttribute("userCount", userService.count());
+		model.addAttribute("reviewCount", reviewService.count());
+		model.addAttribute("newOrder", orderService.findTop10NewestOrder());
+		model.addAttribute("newReview", reviewService.findTop10NewestReview());
 		return "admin/index";
 	}
-	 private static Map<Integer, Double> calculateRevenueByMonth(List<Order> orders) {
-        return orders.stream().collect(
-				Collectors.groupingBy(
-						order -> order.getOrderDate().getMonth() + 1,
-						Collectors.summingDouble(Order::getTotal))
-				);
-    }
 	float getRevenue(List<Order> listOrder)
 	{
 		float revenue = 0;

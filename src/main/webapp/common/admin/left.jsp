@@ -14,15 +14,15 @@
 			aria-current="page"> <i class="fa-solid fa-house"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg> -->
 				Trang chủ
 		</a></li>
-		<li><a href="<c:url value="/admin/brand" />" class="nav-link ${active=='brand' ? 'active' : 'link-dark'}"> <i
-				class="fa-solid fa-gauge"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg> -->
+		<li><a href="<c:url value="/admin/brand" />" class="nav-link ${active=='brand' ? 'active' : 'link-dark'}"> 
+				<i class="fa-solid fa-rectangles-mixed"></i></i><!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg> -->
 				Nhãn hiệu
 		</a></li>
 		<li><a href="<c:url value="/admin/category" />" class="nav-link ${active=='category' ? 'active' : 'link-dark'}"> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg> -->
-				<i class="fa-solid fa-money-bill"></i> Loại hàng
+				<i class="fa-solid fa-layer-group"></i></i> Loại hàng
 		</a></li>
-		<li><a href="<c:url value="/admin/product" />" class="nav-link ${active=='product' ? 'active' : 'link-dark'}"> <i
-				class="fa-solid fa-shop"></i> <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
+		<li><a href="<c:url value="/admin/product" />" class="nav-link ${active=='product' ? 'active' : 'link-dark'}"> 
+				<i class="fa-brands fa-product-hunt"></i><!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
 				Sản phẩm
 		</a></li>
 		<li><a href="<c:url value="/admin/customer" />" class="nav-link ${active=='customer' ? 'active' : 'link-dark'}"> <i
@@ -30,9 +30,10 @@
 				Khách hàng
 		</a></li>
 		<li class="dropdown">
-			<button class="w-100 btn dropdown-toggle nav-link ${active=='statistics' ? 'active' : 'link-dark'}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+			<a class="w-100 dropdown-toggle nav-link ${active=='statistics' ? 'active' : 'link-dark'}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<i class="fa-solid fa-chart-simple"></i>
 				Thống kê
-			</button>
+			</a>
 			<ul class="dropdown-menu w-100">
 				<li><a class="dropdown-item" href="<c:url value="/admin/statistics/monthly" />">Theo tháng</a></li>
 				<li><a class="dropdown-item" href="<c:url value="/admin/statistics/quarterly" />">Theo quý</a></li>
@@ -45,16 +46,23 @@
 		<a href="#"
 			class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
 			id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-			<img src="https://github.com/mdo.png" alt="" width="32" height="32"
-			class="rounded-circle me-2"> <strong>mdo</strong>
+			<%-- <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+			class="rounded-circle me-2">  --%>
+			<c:if test="${sessionScope.image_user == null}">
+				<img class="rounded-circle me-2" src="<c:url value="/templates/images/account.png"/>" width="30" alt="logo">
+			</c:if>
+			<c:if test="${sessionScope.image_user != null}">
+				<img class="rounded-circle me-2" src="<c:url value="/templates/images/${sessionScope.image_user}"/>" width="30" alt="logo">
+			</c:if>
+			<strong>${sessionScope.user.firstName} ${sessionScope.user.lastName}</strong>
 		</a>
 		<ul class="dropdown-menu text-small shadow"
 			aria-labelledby="dropdownUser2">
 			<li><a class="dropdown-item" href="#">New project...</a></li>
 			<li><a class="dropdown-item" href="#">Settings</a></li>
-			<li><a class="dropdown-item" href="#">Profile</a></li>
+			<li><a class="dropdown-item" href="<c:url value="/profile_user"/>">Profile</a></li>
 			<li><hr class="dropdown-divider"></li>
-			<li><a class="dropdown-item" href="#">Sign out</a></li>
+			<li><a class="dropdown-item" href="<c:url value="/checkout"/>">Sign out</a></li>
 		</ul>
 	</div>
 </div>

@@ -48,6 +48,7 @@ public class LoginController {
         if(userService.checklogin(phoneNumber,password)) {
             Optional<User> user_login = userService.findUserByPhone(phoneNumber);
             User user = user_login.get();
+            session.setAttribute("user", user);
             session.setAttribute("user_id", user.getId());
             Authentication authentication = new UsernamePasswordAuthenticationToken(phoneNumber, password);
             SecurityContextHolder.getContext().setAuthentication(authentication);

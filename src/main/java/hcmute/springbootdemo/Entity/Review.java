@@ -31,10 +31,10 @@ public class Review implements Serializable{
 	private Boolean published;
 	
 	@Column
-	private LocalDateTime createdAt;
+	private Date createdAt;
 	
 	@Column
-	private LocalDateTime lastUpdate;
+	private Date lastUpdate;
 	
 	@ManyToOne
 	@JoinColumn(name = "productId")
@@ -92,19 +92,19 @@ public class Review implements Serializable{
 		this.published = published;
 	}
 
-	public LocalDateTime getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public LocalDateTime getLastUpdate() {
+	public Date getLastUpdate() {
 		return lastUpdate;
 	}
 
-	public void setLastUpdate(LocalDateTime lastUpdate) {
+	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 

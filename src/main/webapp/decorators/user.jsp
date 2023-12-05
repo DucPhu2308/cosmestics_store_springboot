@@ -18,7 +18,30 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
     <link href="<c:url value="/templates/user/css/header.css"/>" rel="stylesheet" type="text/css">
     <link href="<c:url value="/templates/user/css/style.css"/>" rel="stylesheet" type="text/css">
+    <link
+    rel="stylesheet"
+    href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css"
+    >
 
+    <link
+    rel="stylesheet"
+    href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css"
+    >
+
+    <link
+    rel="stylesheet"
+    href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css"
+    >
+
+    <link
+    rel="stylesheet"
+    href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css"
+    >
+
+    <link
+    rel="stylesheet"
+    href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css"
+    >
 </head>
 <body>
     <%@ include file="../common/user/header.jsp"%>
