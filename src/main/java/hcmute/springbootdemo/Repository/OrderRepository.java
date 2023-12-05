@@ -16,4 +16,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer>{
     @Query(value = "select * from orders where OrderDate between ?1 and ?2 and Paid = true", nativeQuery = true)
     List<Order> findByOrderDateBetween(Date startDate, Date endDate);
 
+    // tìm tất cả hóa đơn theo user id
+    @Query(value= "select * from orders join cart on orders.CartId = cart.Id where cart.UserId = ?1", nativeQuery = true)
+    List<Order> findOrdersByUserId(int userId);
+
 }

@@ -28,7 +28,7 @@ public class ReviewServiceImpl implements IReviewService {
 	}
 
 	@Override
-	public int avgRating(int productId) {
+	public double avgRating(int productId) {
 		List<Review> review = reviewRepository.findReviewByProductId(productId);
 		int sum = 0;
 		for (Review r : review) {
@@ -38,9 +38,9 @@ public class ReviewServiceImpl implements IReviewService {
 			return 0;
 		}
 		else{
-			double avg = sum / review.size();
-			avg=Math.ceil(avg);
-			return (int) avg;
+			double avg = (double)sum / review.size();
+			avg=rounding(avg);
+			return avg;
 		}
 
 	}
@@ -86,6 +86,20 @@ public class ReviewServiceImpl implements IReviewService {
 		reviewRepository.delete(entity);
 	}
 
+	public static double rounding(double a){
+		double temp = a - (int)a;
+		if(temp >0 && temp<0.25){
+			return Math.ceil(a)-1;
+		}
+		else if(temp>=0.25 && temp<0.75){
+			return Math.ceil(a)-0.5;
+		}
+		else if(temp>=0.75 && temp<1){
+			return Math.ceil(a);
+		}
+		else{
+			return a;
+		}
+	}
 
-    
 }

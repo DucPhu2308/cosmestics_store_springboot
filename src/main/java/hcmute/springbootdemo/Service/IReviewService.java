@@ -26,7 +26,7 @@ public interface IReviewService {
 
 	int getMaxId();
 
-	int avgRating(int productId);
+	double avgRating(int productId);
 
 	int countReviewByProductId(int id);
 

@@ -5,18 +5,16 @@ import hcmute.springbootdemo.Entity.Cart;
 import hcmute.springbootdemo.Entity.Cart_Product;
 import hcmute.springbootdemo.Entity.Order;
 import hcmute.springbootdemo.Entity.Product;
-import hcmute.springbootdemo.Repository.CartRepository;
-import hcmute.springbootdemo.Repository.Cart_ProductRepository;
 import hcmute.springbootdemo.Service.impl.CartServiceImpl;
 import hcmute.springbootdemo.Service.impl.Cart_ProductServiceImpl;
 import hcmute.springbootdemo.Service.impl.OrderServiceImpl;
 import hcmute.springbootdemo.Service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -36,18 +34,32 @@ public class OrderController {
     @Autowired
     ProductServiceImpl productService;
 
+
+    @GetMapping(value = " ")
+    public String listOrder(ModelMap modelMap, HttpSession session){
+        String userId=  session.getAttribute("user_id").toString();
+        if(userId == null){
+            return "redirect:/login";
+        }
+        else{
+            int user_id =(int) session.getAttribute("user_id");
+            List<Order> orders =orderService.findOrdersByUserId(user_id);
+            modelMap.addAttribute("orders", orders);
+            return "user/order/list_order_payment";
+        }
+    }
     @GetMapping(value="{id}")
     public String order(ModelMap modelMap, @PathVariable("id") int id){
         Order order = new Order();
         order.setCart(cartService.findCartById(id));
         modelMap.addAttribute("order", order);
-        return "user/order";
+        return "user/order/order";
     }
 
     @PostMapping(value="/add_orderCart/{id}")
     public String addOrder(@PathVariable("id") int id, @ModelAttribute("order") Order order){
         order.setCart(cartService.findCartById(id));
-        order.setPaid(true);
+
         order.setArriveDate(null);
         order.setOrderDate(new Date());
         order.setShippingFee(0);
@@ -73,7 +85,7 @@ public class OrderController {
         order.setSubTotal(total);
 
         order.setTotalDiscount(totalDiscount);
-
+        order.setPaid(false);
         order.setTotal(total-totalDiscount);
 
         Cart cart = cartService.findCartById(id);

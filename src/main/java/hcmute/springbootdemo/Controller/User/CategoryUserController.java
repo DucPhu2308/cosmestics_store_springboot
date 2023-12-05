@@ -56,10 +56,17 @@ public class CategoryUserController {
 
         session.setAttribute("CountProduct",cart_productRepository.count());
 
-        session.setAttribute("list_product_category", productService.findAll());
-
         session.setAttribute("category_id", 0);
 
+        String name_brand=(String)session.getAttribute("brand_name");
+        if(name_brand!=null){
+            List<Product> listProduct=productService.findProductsByName(name_brand);
+            session.setAttribute("list_product_category",listProduct);
+            session.setAttribute("brand_name",null);
+        }
+        else{
+            session.setAttribute("list_product_category", productService.findAll());
+        }
         return "user/category";
     }
 

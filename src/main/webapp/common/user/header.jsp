@@ -49,8 +49,9 @@
                                 <li class="box_search item">
                                     <div class="item_image">
                                         <img src="https://dummyimage.com/600x400/55595c/fff" alt="">
-<%--                                        <img src="<c:url value="/templates/images/${item.images[0].imageLink}"/>" alt="">--%>
+<%--                                        <img src="<c:url value="/templates/images/ ${item.images[0].imageLink}"/>" alt="">--%>
                                     </div>
+
                                     <div class="item_title">
                                         <a href="/product/${item.id}">${item.name} </a>
                                         <p class="text-center" style="font-size: 15px; font-family: 'Be VietNam pro';">${item.price}vnđ</p>
@@ -134,7 +135,7 @@
                             <a href="/profile_user/">Hồ sơ của tui</a>
                         </div>
                         <div class="profile_user_col">
-                            <a href="">Đơn đặt hàng</a>
+                            <a href="/order_cart/ ">Đơn đặt hàng</a>
                         </div>
                         <div class="profile_user_col">
                             <a href="/checkout">Đăng xuất</a>

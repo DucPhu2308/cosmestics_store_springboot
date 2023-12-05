@@ -27,6 +27,11 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
+	public List<Order> findOrdersByUserId(int userId) {
+		return orderRepository.findOrdersByUserId(userId);
+	}
+
+	@Override
 	public List<Order> findAll() {
 		return orderRepository.findAll();
 	}

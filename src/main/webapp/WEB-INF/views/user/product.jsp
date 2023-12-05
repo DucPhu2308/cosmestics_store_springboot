@@ -210,13 +210,24 @@
                                 ${count_review} reviews
                             </c:if>
 
-                            <c:set var="cnt_star" value="0"/>
+                            <c:set var="cnt_star" value="1"/>
+                            <c:set var="temp" value="${avg_rating-1}"/>
                             <c:forEach var="i" begin="1" end="${avg_rating}">
-                                <i class="fa fa-star"></i>
-                                <c:set var="cnt_star" value="${cnt_star + 1}"/>
+                                <c:if test="${temp >=0}">
+                                    <i class="fa fa-star"></i>
+                                    <c:set var="cnt_star" value="${cnt_star + 1}"/>
+                                    <c:set var="temp" value="${temp - 1}"/>
+                                </c:if>
                             </c:forEach>
+
+                            <c:set var="temp" value="${temp+1}"/>
+                            <c:if test="${temp==0.5}">
+                                <i class="fa fa-star fa-star-half-o "></i>
+                                <c:set var="cnt_star" value="${cnt_star + 1}"/>
+                            </c:if>
+
                             <c:forEach var="i" begin="${cnt_star}" end="5">
-                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star fa-star-o"></i>
                                 <c:set var="cnt_star" value="${cnt_star + 1}"/>
                             </c:forEach>
 

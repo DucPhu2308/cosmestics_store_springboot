@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 
 <body>
@@ -21,28 +22,13 @@
                     </tr>
                     </thead>
                     <tbody class="row_cart">
-                    <tr>
-                        <td>Product Name Toto</td>
-                        <td>In stock</td>
-                        <td><a href="#">Xem chi tiết</a></td>
-                    </tr>
-                    <tr>
-
-                        <td>Product Name Toto</td>
-                        <td>In stock</td>
-
-                        <td><a href="#">Xem chi tiết</a></td>
-
-                    </tr>
-                    <tr>
-
-                        <td>Product Name Titi</td>
-                        <td>In stock</td>
-
-                        <td><a href="#">Xem chi tiết</a></td>
-
-                    </tr>
-
+                    <c:forEach items="${carts}" var="cart">
+                        <tr>
+                            <td>${cart.name}</td>
+                            <td>${cart.status}</td>
+                            <td><a href="#">Xem chi tiết</a></td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
 
                 </table>

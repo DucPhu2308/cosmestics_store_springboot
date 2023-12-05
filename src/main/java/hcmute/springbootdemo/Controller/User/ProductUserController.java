@@ -111,7 +111,8 @@ public class ProductUserController {
         modelMap.addAttribute("cart_product", new Cart_Product());
         modelMap.addAttribute("post_review",new Review());
 
-        int avg_rating = reviewService.avgRating(id);
+        double avg_rating = reviewService.avgRating(id);
+        System.out.println("avg_rating"+avg_rating);
         modelMap.addAttribute("avg_rating", avg_rating);
         int count_review = reviewService.countReviewByProductId(id);
         modelMap.addAttribute("count_review", count_review);
@@ -167,10 +168,7 @@ public class ProductUserController {
 
     @PostMapping(value="/seach")
     public String seachProduct(@RequestParam("keyword") String name, ModelMap modelMap, HttpSession session){
-        List<Product> listProduct = productService.findProductsByName(name);
-        session.setAttribute("list_product_category", listProduct);
-        session.setAttribute("list_category", categoryService.findAll());
-        session.setAttribute("list_brand", brandService.findAll());
+        session.setAttribute("brand_name",name);
         return "redirect:/category";
     }
 
