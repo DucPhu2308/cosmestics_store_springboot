@@ -43,8 +43,8 @@
             <button type="submit" class="btn btn-primary">Đăng nhập</button>
         </div>
         <div class="form-login-forgot-password">
-            <label> <input type="checkbox">Ghi nhớ đăng nhập</label>
-            <a href="">Quên mật khẩu</a>
+            <label> <input type="checkbox" value="on" name="save_login">Ghi nhớ đăng nhập</label>
+            <a href="/login/fill_email">Quên mật khẩu</a>
         </div>
         <div class="mb-3 form-check">
             <div class="tille-signin">

@@ -5,16 +5,14 @@ import hcmute.springbootdemo.Entity.Cart;
 import hcmute.springbootdemo.Entity.Cart_Product;
 import hcmute.springbootdemo.Entity.Order;
 import hcmute.springbootdemo.Entity.Product;
-import hcmute.springbootdemo.Service.impl.CartServiceImpl;
-import hcmute.springbootdemo.Service.impl.Cart_ProductServiceImpl;
-import hcmute.springbootdemo.Service.impl.OrderServiceImpl;
-import hcmute.springbootdemo.Service.impl.ProductServiceImpl;
+import hcmute.springbootdemo.Service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +32,8 @@ public class OrderController {
     @Autowired
     ProductServiceImpl productService;
 
+    @Autowired
+    PaymentServiceImpl paymentService;
 
     @GetMapping(value = " ")
     public String listOrder(ModelMap modelMap, HttpSession session){
@@ -57,12 +57,10 @@ public class OrderController {
     }
 
     @PostMapping(value="/add_orderCart/{id}")
-    public String addOrder(@PathVariable("id") int id, @ModelAttribute("order") Order order){
-        order.setCart(cartService.findCartById(id));
+    public String addOrder(@PathVariable("id") int id, @ModelAttribute("order") Order order, HttpSession session) throws UnsupportedEncodingException {
+        session.setAttribute("cartID",id);
+        session.setAttribute("order_pay",order);
 
-        order.setArriveDate(null);
-        order.setOrderDate(new Date());
-        order.setShippingFee(0);
 
 
         float total = 0;
@@ -71,32 +69,13 @@ public class OrderController {
         for(Cart_Product cart_product : cart_products){
             total += cart_product.getProduct().getPrice() * cart_product.getQuantity();
             totalDiscount += cart_product.getQuantity() * (cart_product.getProduct().getPrice() - (cart_product.getProduct().getPrice()-(cart_product.getProduct().getPrice()*cart_product.getProduct().getDiscountPercent())));
-
-            //Cập nhật lai số lượng sản phẩm và số lượng đã bán
-            Product product = productService.findById(cart_product.getProduct().getId()).get();
-            product.setStock(product.getStock() - cart_product.getQuantity());
-            if(product.getStock() - cart_product.getQuantity() == 0){
-                product.setAvailable(false);
-            }
-            product.setSoldCount(product.getSoldCount() + cart_product.getQuantity());
-            productService.save(product);
-
         }
-        order.setSubTotal(total);
-
-        order.setTotalDiscount(totalDiscount);
-        order.setPaid(false);
-        order.setTotal(total-totalDiscount);
-
-        Cart cart = cartService.findCartById(id);
-        cart.setActive(false);
 
 
-        cartService.save(cart);
-        orderService.save(order);
+        int amount= (int)(total-totalDiscount);
+        String payMent = paymentService.createPayment(amount*100000);
 
-
-        return "redirect:/cart";
+        return "redirect:"+payMent;
     }
 
 }

@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -38,7 +35,8 @@ public class RegisterController {
 
     @PostMapping(value="/register2")
     public String register2(ModelMap modelMap,
-                            @Valid @ModelAttribute("new_user")User user, HttpSession session){
+                            @Valid @ModelAttribute("new_user")User user, HttpSession session,
+                            @RequestParam("re-password") String repassword){
         try{
             String phoneNumber = user.getPhone();
             // String password = user.getPasswordHashed();
@@ -51,6 +49,10 @@ public class RegisterController {
                 modelMap.addAttribute("error","Số điện thoại đã được sử dụng");
                 return "redirect:/register/";
             }
+            if(repassword.equals(password)==false){
+                modelMap.addAttribute("error","Mật khẩu không khớp");
+                return "redirect:/register/";
+            }
             user.setActive(true);
             user.setIsAdmin(false);
             user.setFirstName(randomString(5));
@@ -60,8 +62,7 @@ public class RegisterController {
             session.setAttribute("LastName",user.getLastName());
             return"redirect:/login/";
         }catch(Exception e){
-            e.printStackTrace();
-
+            modelMap.addAttribute("error","Đăng ký thất bại");
             return "redirect:/register/";
         }
     }
