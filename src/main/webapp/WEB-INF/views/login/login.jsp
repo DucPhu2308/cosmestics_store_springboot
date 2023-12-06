@@ -1,12 +1,26 @@
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%--
+  Created by IntelliJ IDEA.
+  User: trong
+  Date: 11/15/2023
+  Time: 23:02
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ include file="/common/taglib.jsp"%>
 
 <body>
 
 <div class="form_login signin">
     <h4>Đăng nhập</h4>
+    <c:if test="${error != null}">
+
+		<div class="alert alert-danger alert-dismissible" role="alert">
+
+			<i>${error}</i>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+
+	</c:if>
     <form method="post" action="/login/checklogin">
         <div class="mb-3">
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"

@@ -5,9 +5,11 @@ import hcmute.springbootdemo.Entity.User;
 import hcmute.springbootdemo.Repository.UserRepository;
 import hcmute.springbootdemo.Service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -17,6 +19,8 @@ import java.util.Random;
 @Controller
 @RequestMapping(path="/register/")
 public class RegisterController {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     UserRepository userRepository;
@@ -33,7 +37,8 @@ public class RegisterController {
     @PostMapping(value="/register2")
     public String register2(ModelMap modelMap,
                             @Valid @ModelAttribute("new_user")User user, HttpSession session,
-                            @RequestParam("re-password") String repassword){
+                            @RequestParam("re-password") String repassword,
+                            RedirectAttributes redirectAttributes){
         try{
             String email = user.getEmail();
             String password = user.getPasswordHashed();
@@ -46,19 +51,22 @@ public class RegisterController {
                 return "redirect:/register/";
             }
             if(repassword.equals(password)==false){
-                modelMap.addAttribute("error","Mật khẩu không khớp");
+                redirectAttributes.addFlashAttribute("error","Mật khẩu không khớp");
                 return "redirect:/register/";
             }
             user.setActive(true);
             user.setIsAdmin(false);
             user.setFirstName(randomString(5));
             user.setLastName(randomString(10));
+            user.setPasswordHashed(passwordEncoder.encode(user.getPasswordHashed()));
             userRepository.save(user);
+
             session.setAttribute("FirstName",user.getFirstName());
             session.setAttribute("LastName",user.getLastName());
+            redirectAttributes.addFlashAttribute("message","Đăng ký thành công!");
             return"redirect:/login/";
         }catch(Exception e){
-            modelMap.addAttribute("error","Đăng ký thất bại");
+            redirectAttributes.addFlashAttribute("error","Đăng ký thất bại");
             return "redirect:/register/";
         }
     }

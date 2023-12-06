@@ -9,6 +9,7 @@ import hcmute.springbootdemo.Service.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,10 +36,13 @@ public class UserServiceImpl implements IUserService{
     @Autowired
     Cart_ProductRepository cart_productRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public boolean checklogin(String email, String password) {
         Optional<User> user = userRepository.findUserByEmail(email);
-        if(user.isPresent() && user.get().getPasswordHashed().contains(password)){
+        if(user.isPresent() && passwordEncoder.matches(password,user.get().getPasswordHashed())){
             return true;
         }
         return false;

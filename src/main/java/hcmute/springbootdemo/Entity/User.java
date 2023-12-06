@@ -1,6 +1,5 @@
 package hcmute.springbootdemo.Entity;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @NamedQuery(name = "User.findAll", query = "SELECT p FROM User p")
 
-public class User implements UserDetails, Serializable{
+public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
@@ -50,7 +49,7 @@ public class User implements UserDetails, Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String avatarLink;
 	
-	@Column(columnDefinition = "varchar(40)")
+	@Column(columnDefinition = "varchar(255)")
 	private String passwordHashed;
 	
 	@Column

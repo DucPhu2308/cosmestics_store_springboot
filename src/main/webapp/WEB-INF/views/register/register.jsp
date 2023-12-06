@@ -41,11 +41,28 @@
 
     <div class="form_login register">
         <h4>Đăng ký</h4>
+        <c:if test="${message != null}">
+
+		<div class="alert alert-primary alert-dismissible" role="alert">
+
+			<i>${message}</i>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+
+	</c:if>
+        <c:if test="${error != null}">
+
+		<div class="alert alert-danger alert-dismissible" role="alert">
+
+			<i>${error}</i>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+
+	</c:if>
         <form:form method="post" action="register2" modelAttribute="new_user">
             <div class="mb-3">
                 <form:input type="email" class="form-control" path="email"
                        placeholder="Email"/>
-                <p>${error}</p>
             </div>
             <div class="mb-3">
                 <div class="mb-3-password reg">
