@@ -38,14 +38,15 @@ public class LoginController {
 
 
     @PostMapping(value= "/checklogin")
-    public String checkLogin(@RequestParam("phoneNumber") String phoneNumber,
+    public String checkLogin(@RequestParam("Email") String email,
                              @RequestParam("password") String password,
                              RedirectAttributes redirectAttributes,
                              HttpSession session,
                              ModelMap modelMap){
 
-        if (userService.checklogin(phoneNumber, password)) {
-            Optional<User> user_login = userService.findUserByPhone(phoneNumber);
+        if (userService.checklogin(email, password)) {
+            Optional<User> user_login = userService.findUserByEmail(email);
+            System.out.println(email);
             User user = user_login.get();
             if (user.getActive() == false) {
                 redirectAttributes.addFlashAttribute("error", "Tài khoản đã bị khóa");
@@ -53,7 +54,7 @@ public class LoginController {
             }
             session.setAttribute("user", user);
             session.setAttribute("user_id", user.getId());
-            Authentication authentication = new UsernamePasswordAuthenticationToken(phoneNumber, password);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(email, password);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             session.setAttribute("image_user",user.getAvatarLink());

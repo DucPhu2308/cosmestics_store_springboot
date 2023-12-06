@@ -39,14 +39,14 @@ public class RegisterController {
                             @RequestParam("re-password") String repassword,
                             RedirectAttributes redirectAttributes){
         try{
-            String phoneNumber = user.getPhone();
+            String email = user.getEmail();
             String password = user.getPasswordHashed();
-            if(phoneNumber.isEmpty() || password.isEmpty()){
-                redirectAttributes.addFlashAttribute("error","Vui lòng nhập đầy đủ thông tin");
+            if(email.isEmpty() || password.isEmpty()){
+                modelMap.addAttribute("error","Vui lòng nhập đầy đủ thông tin");
                 return "redirect:/register/";
             }
-            if(userRepository.findUserByPhone(phoneNumber).isPresent()){
-                redirectAttributes.addFlashAttribute("error","Số điện thoại đã được sử dụng");
+            if(userRepository.findUserByEmail(email).isPresent()){
+                modelMap.addAttribute("error","Email này đã được sử dụng");
                 return "redirect:/register/";
             }
             if(repassword.equals(password)==false){

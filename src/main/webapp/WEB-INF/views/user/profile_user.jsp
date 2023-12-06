@@ -59,7 +59,7 @@
                     </div>
                     <div class="detail_author">
                         <label >Email</label>
-                        <form:input type="text" value="${user.email}" path="email"/>
+                        <form:input type="email" value="${user.email}" path="email"/>
                     </div>
                     <div class="detail_author">
                         <label >Số điện thoại</label>

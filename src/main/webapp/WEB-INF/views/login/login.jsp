@@ -23,8 +23,8 @@
 	</c:if>
     <form method="post" action="/login/checklogin">
         <div class="mb-3">
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                   placeholder="Số điện thoại" name="phoneNumber">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Email" name="Email">
         </div>
         <div class="mb-3">
             <div class="mb-3-password">

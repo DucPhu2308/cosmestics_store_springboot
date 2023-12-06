@@ -61,8 +61,8 @@
 	</c:if>
         <form:form method="post" action="register2" modelAttribute="new_user">
             <div class="mb-3">
-                <form:input type="text" class="form-control" path="phone"
-                       placeholder="Số điện thoại"/>
+                <form:input type="email" class="form-control" path="email"
+                       placeholder="Email"/>
             </div>
             <div class="mb-3">
                 <div class="mb-3-password reg">

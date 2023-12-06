@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .and()
             .formLogin()
                 .loginPage("/login") // adjust login page URL
-                .usernameParameter("phoneNumber")
+                .usernameParameter("Email")
                 .passwordParameter("password")
                 .permitAll()
                 .and()

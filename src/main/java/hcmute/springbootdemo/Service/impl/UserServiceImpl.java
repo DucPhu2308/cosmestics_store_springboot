@@ -40,8 +40,8 @@ public class UserServiceImpl implements IUserService{
     PasswordEncoder passwordEncoder;
 
     @Override
-    public boolean checklogin(String phoneNumber, String password) {
-        Optional<User> user = userRepository.findUserByPhone(phoneNumber);
+    public boolean checklogin(String email, String password) {
+        Optional<User> user = userRepository.findUserByEmail(email);
         if(user.isPresent() && passwordEncoder.matches(password,user.get().getPasswordHashed())){
             return true;
         }
