@@ -4,6 +4,8 @@ package hcmute.springbootdemo.Controller.Login_Register;
 import hcmute.springbootdemo.Entity.User;
 import hcmute.springbootdemo.Repository.UserRepository;
 import hcmute.springbootdemo.Service.IUserService;
+import hcmute.springbootdemo.Service.impl.EmailServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,10 +15,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import java.util.Random;
 
 @Controller
-@RequestMapping(path="/register/")
+@RequestMapping(path="/register")
 public class RegisterController {
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -26,6 +29,9 @@ public class RegisterController {
 
     @Autowired
     IUserService userService;
+
+    @Autowired
+    EmailServiceImpl emailService;
 
     @GetMapping(value="")
     public String register(ModelMap modelMap){
@@ -53,21 +59,59 @@ public class RegisterController {
                 redirectAttributes.addFlashAttribute("error","Mật khẩu không khớp");
                 return "redirect:/register/";
             }
-            user.setActive(true);
+            user.setActive(false);
             user.setIsAdmin(false);
             user.setFirstName("New user"); 
             user.setLastName("");
             // hash password
             user.setPasswordHashed(passwordEncoder.encode(user.getPasswordHashed()));
+
+            // generate code
+            user.setCode(emailService.generateRandomCode());
             userRepository.save(user);
 
-            session.setAttribute("FirstName",user.getFirstName());
-            session.setAttribute("LastName",user.getLastName());
-            redirectAttributes.addFlashAttribute("message","Đăng ký thành công!");
-            return"redirect:/login/";
+            // save user to session
+            session.setAttribute("user",user);
+
+            // send email
+            String subject = "Xác nhận đăng ký tài khoản";
+            String text = "Mã xác nhận của bạn là: " + user.getCode();
+            emailService.sendSimpleMessage(email,subject,text);
+
+            // redirectAttributes.addFlashAttribute("message","Đăng ký thành công!");
+            return"redirect:/register/verify";
         }catch(Exception e){
             redirectAttributes.addFlashAttribute("error","Đăng ký thất bại");
             return "redirect:/register/";
+        }
+    }
+
+    @GetMapping(value="/verify")
+    public String verify(ModelMap modelMap){
+        return "login/fill_code";
+    }
+
+    @PostMapping(value="/verify")
+    public String verify(ModelMap modelMap,
+                         @RequestParam("authcode") String code,
+                         HttpSession session,
+                         RedirectAttributes redirectAttributes){
+        try{
+            User user = (User) session.getAttribute("user");
+            if(user.getCode().equals(code)){
+                user.setActive(true);
+                user.setCode("");
+                userRepository.save(user);
+                session.setAttribute("user",user);
+                return "redirect:/login/";
+            }
+            else{
+                redirectAttributes.addFlashAttribute("error","Mã xác nhận không đúng");
+                return "redirect:/register/verify";
+            }
+        }catch(Exception e){
+            redirectAttributes.addFlashAttribute("error","Xác nhận thất bại");
+            return "redirect:/register/verify";
         }
     }
 

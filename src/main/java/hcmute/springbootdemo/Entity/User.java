@@ -57,7 +57,9 @@ public class User implements UserDetails {
 	
 	@Column
 	private Boolean active;
-	
+
+	private String code;
+
 	@Column
 	private LocalDateTime createdAt;
 	
@@ -69,6 +71,13 @@ public class User implements UserDetails {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Cart> carts;
 	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
