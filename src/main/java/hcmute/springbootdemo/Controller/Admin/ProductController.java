@@ -57,7 +57,6 @@ public class ProductController {
 	@PostMapping("/save")
 	public String save(RedirectAttributes redirectAttributes,
 			@Valid @ModelAttribute("product") Product product, BindingResult result) {
-		System.out.println(product.getDescription());
 		productService.save(product);
 		redirectAttributes.addFlashAttribute("message", "Thao tác thành công!");
 		return "redirect:/admin/product";

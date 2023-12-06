@@ -10,7 +10,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,10 +49,18 @@ public class ProductUserController {
     CartServiceImpl cartService;
 
     @GetMapping(value="/{id}")
-    public String productUser(ModelMap modelMap, @PathVariable("id") int id, HttpSession session){
+    public String productUser(ModelMap modelMap, @PathVariable("id") int id, 
+                            HttpSession session,HttpServletRequest request, HttpServletResponse response){
 
         Product product = productService.findById(id).get();
 
+        //view history
+        List<Integer> listId = saveToCookie(product.getId(),request, response);
+        List<Product> listProductViewHistory = productService.findAllById(listId);
+        modelMap.addAttribute("viewHistory", listProductViewHistory);
+        // same category product
+        List<Product> listProductSameCategory = product.getCategory().getProducts();
+        modelMap.addAttribute("sameCategory", listProductSameCategory);
 //        Date date_end_discount = product.getDiscountEnd();
 //        Date now = new Date();
 //
@@ -119,6 +132,47 @@ public class ProductUserController {
 
 
         return "user/product";
+    }
+    private List<Integer> saveToCookie(int id,HttpServletRequest request, HttpServletResponse response) {
+        int MAX_VIEW_HISTORY = 5;
+        int MAX_AGE = 60*60*24*30; // 30 days
+        List<Integer> list = getViewHistoryFromCookie(request);
+        if(list == null){
+            list = new ArrayList<>();
+        }
+        if(list.contains(id)){
+            list.remove(Integer.valueOf(id));
+        }
+        list.add(id);
+        if(list.size() > MAX_VIEW_HISTORY){
+            list.remove(0);
+        }
+
+        // Cookie cookie = new Cookie("view_history", list.toString());
+        // comma not allowed in cookie value
+        Cookie cookie = new Cookie("view_history", list.toString().replace(", ", "_"));
+        cookie.setMaxAge(MAX_AGE);
+        response.addCookie(cookie);
+        return list;
+    }
+
+
+    private List<Integer> getViewHistoryFromCookie(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals("view_history")){
+                    String value = cookie.getValue();
+                    String[] ids = value.substring(1, value.length()-1).split("_");
+                    List<Integer> list = new ArrayList<>();
+                    for(String id : ids){
+                        list.add(Integer.parseInt(id));
+                    }
+                    return list;
+                }
+            }
+        }
+        return null;
     }
 
 

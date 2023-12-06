@@ -20,7 +20,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer>{
     @Query(value= "select * from orders join cart on orders.CartId = cart.Id where cart.UserId = ?1", nativeQuery = true)
     List<Order> findOrdersByUserId(int userId);
 
-
     // find top 10 newest orders
     @Query(value = "select * from orders order by id desc limit 10", nativeQuery = true)
     List<Order> findTop10NewestOrder();

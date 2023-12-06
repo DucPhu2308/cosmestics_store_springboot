@@ -31,7 +31,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 
     Page<Product> findAll(Pageable pageable);
 
-
+    List<Product> findAllById(Iterable<Integer> ids);
 
     // top 10 new product by created date desc, available = true
     List<Product> findTop10ByAvailableOrderByCreatedDateDesc(boolean available);
