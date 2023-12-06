@@ -5,6 +5,7 @@ import hcmute.springbootdemo.Entity.User;
 import hcmute.springbootdemo.Repository.UserRepository;
 import hcmute.springbootdemo.Service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,8 @@ import java.util.Random;
 @Controller
 @RequestMapping(path="/register/")
 public class RegisterController {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     UserRepository userRepository;
@@ -38,7 +41,8 @@ public class RegisterController {
                             @Valid @ModelAttribute("new_user")User user, HttpSession session){
         try{
             String phoneNumber = user.getPhone();
-            String password = user.getPasswordHashed();
+            // String password = user.getPasswordHashed();
+            String password = passwordEncoder.encode(user.getPasswordHashed());
             if(phoneNumber.isEmpty() || password.isEmpty()){
                 modelMap.addAttribute("error","Vui lòng nhập đầy đủ thông tin");
                 return "redirect:/register/";
