@@ -36,8 +36,8 @@ public class UserServiceImpl implements IUserService{
     Cart_ProductRepository cart_productRepository;
 
     @Override
-    public boolean checklogin(String phoneNumber, String password) {
-        Optional<User> user = userRepository.findUserByPhone(phoneNumber);
+    public boolean checklogin(String email, String password) {
+        Optional<User> user = userRepository.findUserByEmail(email);
         if(user.isPresent() && user.get().getPasswordHashed().contains(password)){
             return true;
         }

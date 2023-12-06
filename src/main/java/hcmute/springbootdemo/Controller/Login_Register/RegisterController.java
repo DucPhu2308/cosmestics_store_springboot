@@ -35,14 +35,14 @@ public class RegisterController {
                             @Valid @ModelAttribute("new_user")User user, HttpSession session,
                             @RequestParam("re-password") String repassword){
         try{
-            String phoneNumber = user.getPhone();
+            String email = user.getEmail();
             String password = user.getPasswordHashed();
-            if(phoneNumber.isEmpty() || password.isEmpty()){
+            if(email.isEmpty() || password.isEmpty()){
                 modelMap.addAttribute("error","Vui lòng nhập đầy đủ thông tin");
                 return "redirect:/register/";
             }
-            if(userRepository.findUserByPhone(phoneNumber).isPresent()){
-                modelMap.addAttribute("error","Số điện thoại đã được sử dụng");
+            if(userRepository.findUserByEmail(email).isPresent()){
+                modelMap.addAttribute("error","Email này đã được sử dụng");
                 return "redirect:/register/";
             }
             if(repassword.equals(password)==false){
