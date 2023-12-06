@@ -91,7 +91,7 @@ pageEncoding="UTF-8"%> <%@ include file="/common/taglib.jsp"%>
 				<td><fmt:formatDate value="${i.createdDate}" pattern="dd/MM/yyyy"/></td>
                 
                 <td>
-                  <a class="btn btn-outline-info">
+                  <a class="btn btn-outline-info" href="<c:url value="/product/${i.id}"/>">
                     <i class="fa-solid fa-circle-info"></i>
                   </a>
                   <a

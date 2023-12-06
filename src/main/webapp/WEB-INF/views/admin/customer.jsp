@@ -40,7 +40,7 @@
                         <td>${i.firstName} ${i.lastName}</td>
                         <td>${i.phone}</td>
                         <td>${i.email}</td>
-                        <td>${i.dob}</td>
+                        <td><fmt:formatDate value="${i.dob}" pattern="yyyy-MM-dd"/></td>
                         <td>${i.gender ? "Nữ" : "Nam"}</td>
                         <td>
                             <c:if test="${i.active}">

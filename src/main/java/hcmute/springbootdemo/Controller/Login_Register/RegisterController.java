@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.lang.reflect.Type;
 import java.util.Random;
 
 @Controller
@@ -56,8 +55,9 @@ public class RegisterController {
             }
             user.setActive(true);
             user.setIsAdmin(false);
-            user.setFirstName(randomString(5));
-            user.setLastName(randomString(10));
+            user.setFirstName("New user"); 
+            user.setLastName("");
+            // hash password
             user.setPasswordHashed(passwordEncoder.encode(user.getPasswordHashed()));
             userRepository.save(user);
 

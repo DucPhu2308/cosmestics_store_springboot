@@ -45,7 +45,7 @@
 						<td>${i.name}</td>
 						<td>${i.icon}</td>
 						<td>
-							<a class="btn btn-outline-info">
+							<a class="btn btn-outline-info" href="<c:url value="/category/${i.id}"/>">
 								<i class="fa-solid fa-circle-info"></i>
 							</a> 
 							<a data-bs-toggle="modal" data-bs-target="#insertModal"
