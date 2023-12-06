@@ -216,7 +216,8 @@
                             <c:set var="temp" value="${avg_rating-1}"/>
                             <c:forEach var="i" begin="1" end="${avg_rating}">
                                 <c:if test="${temp >=0}">
-                                    <i class="fa fa-star"></i>
+                                    <%-- <i class="fa fa-star"></i> --%>
+                                    <i style="color: #ffd103;" class="fa-solid fa-star"></i>
                                     <c:set var="cnt_star" value="${cnt_star + 1}"/>
                                     <c:set var="temp" value="${temp - 1}"/>
                                 </c:if>
@@ -224,12 +225,14 @@
 
                             <c:set var="temp" value="${temp+1}"/>
                             <c:if test="${temp==0.5}">
-                                <i class="fa fa-star fa-star-half-o "></i>
+                                <%-- <i class="fa fa-star fa-star-half-o "></i> --%>
+                                <i style="color: #ffd103;" class="fa-solid fa-star-half-stroke"></i>
                                 <c:set var="cnt_star" value="${cnt_star + 1}"/>
                             </c:if>
 
                             <c:forEach var="i" begin="${cnt_star}" end="5">
-                                <i class="fa fa-star fa-star-o"></i>
+                                <%-- <i class="fa fa-star fa-star-o"></i> --%>
+                                <i style="color: #ffd103;" class="fa-regular fa-star"></i>
                                 <c:set var="cnt_star" value="${cnt_star + 1}"/>
                             </c:forEach>
 
@@ -476,12 +479,14 @@
                                     <td><fmt:formatDate value="${i.createdAt}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
                                     <c:set var="cnt" value="1"/>
                                     <c:forEach var="j" begin="1" end="${i.rating}">
-                                        <span class="fa fa-star"></span>
+                                        <%-- <span class="fa fa-star"></span> --%>
+                                        <i style="color: #e8e80c;" class="fa-solid fa-star"></i>
                                         <c:set var="cnt" value="${cnt + 1}"/>
                                     </c:forEach>
 
                                     <c:forEach var="j" begin="${cnt}" end="5">
-                                        <span class="fa fa-star-o"></span>
+                                        <%-- <span class="fa fa-star-o"></span> --%>
+                                        <i style="color: #e8e80c;" class="fa-regular fa-star"></i>
                                         <c:set var="cnt" value="${cnt + 1}"/>
                                     </c:forEach>
 
