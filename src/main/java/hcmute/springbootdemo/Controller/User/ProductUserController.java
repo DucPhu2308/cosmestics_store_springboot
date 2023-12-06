@@ -112,7 +112,7 @@ public class ProductUserController {
         modelMap.addAttribute("post_review",new Review());
 
         double avg_rating = reviewService.avgRating(id);
-        System.out.println("avg_rating"+avg_rating);
+//        System.out.println("avg_rating"+avg_rating);
         modelMap.addAttribute("avg_rating", avg_rating);
         int count_review = reviewService.countReviewByProductId(id);
         modelMap.addAttribute("count_review", count_review);

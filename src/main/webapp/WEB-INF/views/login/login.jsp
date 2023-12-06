@@ -1,11 +1,5 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: trong
-  Date: 11/15/2023
-  Time: 23:02
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
@@ -35,8 +29,8 @@
             <button type="submit" class="btn btn-primary">Đăng nhập</button>
         </div>
         <div class="form-login-forgot-password">
-            <label> <input type="checkbox">Ghi nhớ đăng nhập</label>
-            <a href="">Quên mật khẩu</a>
+            <label> <input type="checkbox" value="on" name="save_login">Ghi nhớ đăng nhập</label>
+            <a href="/login/fill_email">Quên mật khẩu</a>
         </div>
         <div class="mb-3 form-check">
             <div class="tille-signin">

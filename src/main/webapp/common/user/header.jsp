@@ -64,7 +64,7 @@
 
                                     <div class="item_title">
                                         <a href="/product/${item.id}">${item.name} </a>
-                                        <p class="text-center" style="font-size: 15px; font-family: 'Be VietNam pro';">${item.price}vnđ</p>
+                                        <p class="text-left" style="font-size: 15px; font-family: 'Be VietNam pro';">Giá bán: ${item.price}vnđ</p>
                                     </div>
                                 </li>
                             </c:forEach>

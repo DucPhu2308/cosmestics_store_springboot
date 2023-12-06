@@ -64,14 +64,16 @@
 
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                                data-bs-slide="prev">
+                                data-bs-slide="prev" style="background-color: rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.2);
+                                 color:black; cursor:pointer">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
+                            <span class="visually-hidden" style="font-size: 40px;"> < </span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                                data-bs-slide="next">
+                                data-bs-slide="next" style="background-color: rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.2);
+                                 color:black; cursor:pointer">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
+                            <span class="visually-hidden" style="font-size: 40px;"> > </span>
                         </button>
                     </div>
                     <%--                    <a href="" data-toggle="modal" data-target="#productModal">--%>

@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Đăng ký</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
@@ -59,6 +59,17 @@
                 </div>
             </div>
             <div class="mb-3">
+                <div class="mb-3-password re-reg">
+                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="re-password"/>
+                    <div class="signup_input_show-re-reg">
+                        <i class='bx bx-show-alt'></i>
+                    </div>
+                    <div class="signup_input_hidden-re-reg">
+                        <i class='bx bx-low-vision'></i>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
                 <div class="form-login-btn">
                     <input type="submit" class="btn btn-primary" value="Đăng ký"/>
                 </div>
@@ -91,7 +102,7 @@
 </div>
 
 
-<script src="<c:url value="/templates/login/js/login.js"/>" ></script>
+<script src="<c:url value="/templates/login/js/signup.js"/>" ></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         type="text/javascript"></script>

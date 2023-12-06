@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
@@ -44,29 +45,32 @@ public class LoginController {
                              @RequestParam("password") String password,
                              HttpSession session,
                              ModelMap modelMap){
-                        
-        if(userService.checklogin(phoneNumber,password)) {
+
+        if (userService.checklogin(phoneNumber, password)) {
             Optional<User> user_login = userService.findUserByPhone(phoneNumber);
             User user = user_login.get();
             session.setAttribute("user", user);
             session.setAttribute("user_id", user.getId());
             Authentication authentication = new UsernamePasswordAuthenticationToken(phoneNumber, password);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-
-
-
-            session.setAttribute("image_user",user.getAvatarLink());
-            session.setAttribute("FirstName",user.getFirstName());
-            session.setAttribute("LastName",user.getLastName());
-
-
-
-            return "redirect:/" ;
+            session.setAttribute("image_user", user.getAvatarLink());
+            session.setAttribute("FirstName", user.getFirstName());
+            session.setAttribute("LastName", user.getLastName());
+            return "redirect:/";
+        } else {
+            modelMap.addAttribute("error", "Sai tài khoản hoặc mật khẩu");
+            return "redirect:/login";
         }
-        else {
-            modelMap.addAttribute("error","Sai tài khoản hoặc mật khẩu");
-            return "login/login";
-        }
-        
     }
+
+    @GetMapping(value="/fill_email")
+    public String fill_email(){
+        return "login/fill_email";
+    }
+
+    @GetMapping(value="fill_code")
+    public String fill_code(){
+        return "login/fill_code";
+    }
+
 }

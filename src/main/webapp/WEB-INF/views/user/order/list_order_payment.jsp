@@ -22,10 +22,10 @@
                     </tr>
                     </thead>
                     <tbody class="row_cart">
-                    <c:forEach items="${carts}" var="cart">
+                    <c:forEach items="${orders}" var="item">
                         <tr>
-                            <td>${cart.name}</td>
-                            <td>${cart.status}</td>
+                            <td>${item.cart.name}</td>
+                            <td>${item.paid}</td>
                             <td><a href="#">Xem chi tiết</a></td>
                         </tr>
                     </c:forEach>
