@@ -3,7 +3,7 @@
     <div class="form_login fill_code">
         <form action="#" method="post" class="form_fill_code_content">
             <div class="form_fill_code_content_title">
-                <h4>Đăng nhập bằng số điện thoại</h4>
+                <h4>Đăng nhập bằng email</h4>
                 <p>Nhập mã xác nhận đã được gửi đến email của bạn</p>
             </div>
             <div class="form_fill_code_content_input">

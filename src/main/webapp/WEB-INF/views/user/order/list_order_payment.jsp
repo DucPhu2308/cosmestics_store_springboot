@@ -25,8 +25,18 @@
                     <c:forEach items="${orders}" var="item">
                         <tr>
                             <td>${item.cart.name}</td>
-                            <td>${item.paid}</td>
-                            <td><a href="#">Xem chi tiết</a></td>
+                            <td>
+                                <c:if test="${item.paid == true}">
+                                    <p style="color:green">Đã thanh toán</p>
+                                </c:if>
+
+                                <c:if test="${item.paid == false}">
+                                    <p style="color:red">Chưa thanh toán</p>
+                                </c:if>
+                            </td>
+                            <c:if test="${item.paid == false}">
+                                <td><a href="/order_cart/add_orderCart/${item.cart.id}">Thanh toán</a></td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>

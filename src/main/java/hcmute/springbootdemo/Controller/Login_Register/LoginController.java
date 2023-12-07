@@ -61,10 +61,6 @@ public class LoginController {
             session.setAttribute("FirstName",user.getFirstName());
             session.setAttribute("LastName",user.getLastName());
 
-            if (user.getIsAdmin() == true) {
-                return "redirect:/admin/";
-            }
-
             return "redirect:/" ;
         }
         else {

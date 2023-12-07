@@ -24,7 +24,6 @@
             <a class="navbar-brand" href="/">
                 <img src="<c:url value="/templates/images/logo.jpg" />" width="120" alt="logo">
             </a>
-            <p>Đăng nhập</p>
         </div>
 
 
@@ -36,10 +35,22 @@
     </div>
 </nav>
 
-<div class="container_body">
+<div style="display: flex; flex-direction: row; height:660px;">
+    <div class="block_info_image">
+        <div class="block_image">
+            <div class="block_logo_image">
+                <img src="/templates/images/logo.jpg" alt="">
+            </div>
+            <div class="block_logo_slogan">
+                <p >Trang online bán hàng mỹ phẩm chất lượng cao, uy tín và giá cả hợp lý </p>
+                <p >Orishop cung cấp các sản phẩm mỹ phẩm từ các thương hiệu nổi tiếng trong và ngoài nước</p>
+            </div>
+        </div>
+    </div>
 
-    <sitemesh:write property="body"> </sitemesh:write>
-
+    <div class="container_body">
+        <sitemesh:write property='body' />
+    </div>
 </div>
 
 

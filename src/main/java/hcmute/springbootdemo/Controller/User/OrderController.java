@@ -43,6 +43,7 @@ public class OrderController {
         }
         else{
             int user_id =(int) session.getAttribute("user_id");
+            System.out.println(user_id);
             List<Order> orders =orderService.findOrdersByUserId(user_id);
             modelMap.addAttribute("orders", orders);
             return "user/order/list_order_payment";
@@ -75,6 +76,10 @@ public class OrderController {
         int amount= (int)(total-totalDiscount);
         String payMent = paymentService.createPayment(amount*100000);
 
+        order.setPaid(false);
+        order.setOrderDate(new Date());
+//        order.setId(orderService.getMaxOrderID() + 1);
+//        orderService.save(order);
         return "redirect:"+payMent;
     }
 

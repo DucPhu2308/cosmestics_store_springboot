@@ -1,6 +1,6 @@
 .container_body{
     /*background-image: linear-gradient(to right, #6bb88f , #392cc8, #ee69f3, #f26649);*/
-    background-image: url("/templates/images/anh_form_my_pham.jpg");
+    background-image: url("/templates/images/right_pic.png");
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -186,6 +186,7 @@
 
 .fill_tel{
     display:block;
+    margin:185px;
 }
 
 
@@ -200,6 +201,7 @@
 
 .fill_code{
     display:block;
+    margin:185px;
 }
 
 
@@ -230,4 +232,45 @@
 
 .register{
     display: block;
+}
+
+
+
+.block_info_image{
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('/templates/images/pic.png');
+    background-size: cover;
+
+}
+.block_image{
+    width: 100%;
+    height: 655px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.block_logo_image{
+    height:20%;
+    margin-top:25%;
+    width:18%;
+}
+.block_logo_image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+
+}
+
+.block_logo_slogan p{
+    line-height: 1.5;
+    font-size: 20px;
+    font-weight: bold;
+    color:#351616;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top:15px;
+    text-align: center;
 }

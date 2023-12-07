@@ -69,12 +69,15 @@ public class PayController {
         order.setTotal(total-totalDiscount);
 
         Cart cart = cartService.findCartById(id);
-        cart.setActive(false);
 
+        order.setOrderDate(new Date());
+
+        cart.setActive(false);
         order.setPaid(true);
         cartService.save(cart);
         orderService.save(order);
 
+        order.setPaid(true);
 
 
         return "user/pay";

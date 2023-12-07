@@ -25,7 +25,6 @@
             <a class="navbar-brand" href="/">
                 <img src="<c:url value="/templates/images/logo.jpg" />" width="120" alt="logo">
             </a>
-            <p>Đăng ký</p>
         </div>
 
 
@@ -37,86 +36,102 @@
     </div>
 </nav>
 
-<div class="container_body">
-
-    <div class="form_login register">
-        <h4>Đăng ký</h4>
-        <c:if test="${message != null}">
-
-		<div class="alert alert-primary alert-dismissible" role="alert">
-
-			<i>${message}</i>
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>
-
-	</c:if>
-        <c:if test="${error != null}">
-
-		<div class="alert alert-danger alert-dismissible" role="alert">
-
-			<i>${error}</i>
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>
-
-	</c:if>
-        <form:form method="post" action="register2" modelAttribute="new_user">
-            <div class="mb-3">
-                <form:input type="email" class="form-control" path="email"
-                       placeholder="Email"/>
+<div style="display: flex; flex-direction: row; height:660px;">
+    <div class="block_info_image">
+        <div class="block_image">
+            <div class="block_logo_image">
+                <img src="/templates/images/logo.jpg" alt="">
             </div>
-            <div class="mb-3">
-                <div class="mb-3-password reg">
-                    <form:input type="password" class="form-control" path="passwordHashed" placeholder="Mật khẩu"/>
-                    <div class="signup_input_show">
-                        <i class='bx bx-show-alt'></i>
-                    </div>
-                    <div class="signup_input_hidden">
-                        <i class='bx bx-low-vision'></i>
-                    </div>
-                </div>
+            <div class="block_logo_slogan">
+                <p >Trang online bán hàng mỹ phẩm chất lượng cao, uy tín và giá cả hợp lý </p>
+                <p >Orishop cung cấp các sản phẩm mỹ phẩm từ các thương hiệu nổi tiếng trong và ngoài nước</p>
             </div>
-            <div class="mb-3">
-                <div class="mb-3-password re-reg">
-                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="re-password"/>
-                    <div class="signup_input_show-re-reg">
-                        <i class='bx bx-show-alt'></i>
-                    </div>
-                    <div class="signup_input_hidden-re-reg">
-                        <i class='bx bx-low-vision'></i>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <div class="form-login-btn">
-                    <input type="submit" class="btn btn-primary" value="Đăng ký"/>
-                </div>
-                <div class="mb-3 form-check">
-                    <div class="tille-signup">
-                        <p>HOẶC</p>
-                    </div>
-                    <div class="signup_social">
-                        <a href="" class="btn btn-facebook"><i class="fa fa-facebook" aria-hidden="true"></i>
-                            Facebook</a>
-                        <a href="" class="btn btn-google"><i class="fa fa-google" aria-hidden="true"></i> Google</a>
-                    </div>
-                    <div class="signup_policy">
-                        <p>Bằng việc đăng ký, bạn đã đồng ý với shop về
-                            <a href="">Điều khoản dịch vụ</a> &
-                            <a href="">Chính sách bảo mật</a>
-                        </p>
-                    </div>
-                    <div class="signup_not_have_account">
-                        <p>Bạn đã có tài khoản. Hãy đăng nhập
-                            <a href="/login/">tại đây</a>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </form:form>
+        </div>
     </div>
 
+    <div class="container_body">
+
+        <div class="form_login register">
+            <h4>Đăng ký</h4>
+            <c:if test="${message != null}">
+
+                <div class="alert alert-primary alert-dismissible" role="alert">
+
+                    <i>${message}</i>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+            </c:if>
+            <c:if test="${error != null}">
+
+                <div class="alert alert-danger alert-dismissible" role="alert">
+
+                    <i>${error}</i>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+            </c:if>
+            <form:form method="post" action="register2" modelAttribute="new_user">
+                <div class="mb-3">
+                    <form:input type="email" class="form-control" path="email"
+                                placeholder="Email"/>
+                </div>
+                <div class="mb-3">
+                    <div class="mb-3-password reg">
+                        <form:input type="password" class="form-control" path="passwordHashed" placeholder="Mật khẩu"/>
+                        <div class="signup_input_show">
+                            <i class='bx bx-show-alt'></i>
+                        </div>
+                        <div class="signup_input_hidden">
+                            <i class='bx bx-low-vision'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="mb-3-password re-reg">
+                        <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="re-password"/>
+                        <div class="signup_input_show-re-reg">
+                            <i class='bx bx-show-alt'></i>
+                        </div>
+                        <div class="signup_input_hidden-re-reg">
+                            <i class='bx bx-low-vision'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-login-btn">
+                        <input type="submit" class="btn btn-primary" value="Đăng ký"/>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <div class="tille-signup">
+                            <p>HOẶC</p>
+                        </div>
+                        <div class="signup_social">
+                            <a href="" class="btn btn-facebook"><i class="fa fa-facebook" aria-hidden="true"></i>
+                                Facebook</a>
+                            <a href="" class="btn btn-google"><i class="fa fa-google" aria-hidden="true"></i> Google</a>
+                        </div>
+                        <div class="signup_policy">
+                            <p>Bằng việc đăng ký, bạn đã đồng ý với shop về
+                                <a href="">Điều khoản dịch vụ</a> &
+                                <a href="">Chính sách bảo mật</a>
+                            </p>
+                        </div>
+                        <div class="signup_not_have_account">
+                            <p>Bạn đã có tài khoản. Hãy đăng nhập
+                                <a href="/login/">tại đây</a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </form:form>
+        </div>
+
+    </div>
 </div>
+
+
 
 
 <script src="<c:url value="/templates/login/js/signup.js"/>" ></script>

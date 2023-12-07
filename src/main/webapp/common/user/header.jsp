@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-
+<meta charset="UTF-8">
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="/">
@@ -87,6 +87,8 @@
                         var search_input=document.querySelector(".input-group.input-group-sm input")
                         search_input.addEventListener('input', function(e){
                             let txtSearch=e.target.value.trim().toLowerCase();
+                            // nhận diện tiếng việt có dấu
+                            // txtSearch=removeAccents(txtSearch);
                             let list_itemDom=document.querySelectorAll(".box_search.item");
                             list_itemDom.forEach(item=>{
                                 if(item.innerText.includes(txtSearch)){

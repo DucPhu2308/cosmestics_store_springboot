@@ -37,6 +37,11 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
+	public int getMaxOrderID() {
+		return orderRepository.getMaxOrderID();
+	}
+
+	@Override
 	public List<Order> findAll() {
 		return orderRepository.findAll();
 	}
