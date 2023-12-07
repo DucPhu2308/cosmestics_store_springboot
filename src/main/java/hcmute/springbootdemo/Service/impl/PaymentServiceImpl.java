@@ -76,6 +76,7 @@ public class PaymentServiceImpl {
         queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
         String paymentUrl = PayConfig.vnp_PayUrl + "?" + queryUrl;
 
+        // nếu giao dịch thành công thì trả về paymentUrl
         return paymentUrl;
     }
 }

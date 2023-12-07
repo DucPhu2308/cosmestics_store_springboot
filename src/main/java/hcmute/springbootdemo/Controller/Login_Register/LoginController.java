@@ -66,10 +66,6 @@ public class LoginController {
             session.setAttribute("FirstName",user.getFirstName());
             session.setAttribute("LastName",user.getLastName());
 
-            if (user.getIsAdmin() == true) {
-                return "redirect:/admin/";
-            }
-
             return "redirect:/" ;
         }
         else {
@@ -110,11 +106,7 @@ public class LoginController {
 
     @GetMapping(value="fill_code")
     public String fill_code(){
-        // send email
-        // String subject = "Xác nhận đăng ký tài khoản";
-        // String text = "Mã xác nhận của bạn là: ";
-        
-        return "login/fill_code";
+        return "register/fill_code";
     }
 
 }

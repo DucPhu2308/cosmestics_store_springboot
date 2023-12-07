@@ -88,7 +88,7 @@ public class RegisterController {
 
     @GetMapping(value="/verify")
     public String verify(ModelMap modelMap){
-        return "login/fill_code";
+        return "register/fill_code";
     }
 
     @PostMapping(value="/verify")
@@ -103,6 +103,7 @@ public class RegisterController {
                 user.setCode("");
                 userRepository.save(user);
                 session.setAttribute("user",user);
+                redirectAttributes.addFlashAttribute("message","Đăng ký thành công!");
                 return "redirect:/login/";
             }
             else{

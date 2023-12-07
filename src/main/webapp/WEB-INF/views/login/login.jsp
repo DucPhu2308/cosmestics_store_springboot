@@ -12,6 +12,15 @@
 
 <div class="form_login signin">
     <h4>Đăng nhập</h4>
+    <c:if test="${message != null}">
+
+		<div class="alert alert-primary alert-dismissible" role="alert">
+
+			<i>${message}</i>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+
+	</c:if>
     <c:if test="${error != null}">
 
 		<div class="alert alert-danger alert-dismissible" role="alert">

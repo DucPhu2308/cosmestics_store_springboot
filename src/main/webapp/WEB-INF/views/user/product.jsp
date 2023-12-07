@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/common/taglib.jsp" %>
-
 <html>
 <body>
 <section class="jumbotron text-center">
@@ -67,13 +66,13 @@
                                 data-bs-slide="prev" style="background-color: rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.2);
                                  color:black; cursor:pointer">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden" style="font-size: 40px;"> < </span>
+                            <span class="visually-hidden" style="font-size: 40px;"></span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
                                 data-bs-slide="next" style="background-color: rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.2);
                                  color:black; cursor:pointer">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden" style="font-size: 40px;"> > </span>
+                            <span class="visually-hidden" style="font-size: 40px;"></span>
                         </button>
                     </div>
                     <%--                    <a href="" data-toggle="modal" data-target="#productModal">--%>
@@ -88,6 +87,7 @@
         <!-- Add to cart -->
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
+                <p style="font-size: 50px;text-align: center;color: mediumvioletred;margin-bottom:-30px ;font-family: Be VietNam Pro,sans-serif">${product.name}</p>
                 <c:if test="${product.available==false}">
                     <p style="color: red; font-size: 25px; font-family: 'Be VietNam Pro', 'sans-serif'">Sản phẩm đã hết hàng</p>
                 </c:if>
@@ -214,6 +214,7 @@
 
                             <c:set var="cnt_star" value="1"/>
                             <c:set var="temp" value="${avg_rating-1}"/>
+                            <c:out value="${avg_rating}"/>
                             <c:forEach var="i" begin="1" end="${avg_rating}">
                                 <c:if test="${temp >=0}">
                                     <%-- <i class="fa fa-star"></i> --%>
@@ -245,10 +246,7 @@
 
                             <a class="pull-right" href="#reviews">View all reviews</a>
                         </div>
-                        <div class="datasheet p-3 mb-2 bg-info text-white">
-                            <a href="" class="text-white"><i class="fa fa-file-text"></i>
-                                Download DataSheet</a>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -282,12 +280,12 @@
                                             <c:if test="${i.id != product.id}">
                                                 <div class="col-sm-3">
                                                     <div class="card">
-                                                        <div style="width:243px; height: 162px">
+                                                        <div >
                                                         <c:if test="${i.images.size() > 0}">
-                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
+                                                            <img class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
                                                         </c:if>
                                                         <c:if test="${i.images.size() == 0}">
-                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
+                                                            <img  class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
                                                         </c:if>
                                                         </div>
                                                         <div class="card-body">
@@ -331,12 +329,12 @@
                                             <c:if test="${i.id != product.id}">
                                                 <div class="col-sm-3">
                                                     <div class="card">
-                                                        <div style="width:243px; height: 162px">
+                                                        <div >
                                                         <c:if test="${i.images.size() > 0}">
-                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
+                                                            <img  class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
                                                         </c:if>
                                                         <c:if test="${i.images.size() == 0}">
-                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
+                                                            <img  class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
                                                         </c:if>
                                                         </div>
                                                         <div class="card-body">
@@ -381,12 +379,12 @@
                                             <c:if test="${i.id != product.id}">
                                                 <div class="col-sm-3">
                                                     <div class="card">
-                                                        <div style="width:243px; height: 162px">
+                                                        <div >
                                                         <c:if test="${i.images.size() > 0}">
-                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
+                                                            <img  class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
                                                         </c:if>
                                                         <c:if test="${i.images.size() == 0}">
-                                                            <img style="max-width: 100%; max-height:100%; object-fit: contain;" class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
+                                                            <img  class="card-img-top" src="<c:url value="/templates/images/no-image.png"/>" alt="Card image cap">
                                                         </c:if>
                                                         </div>
                                                         <div class="card-body">
@@ -477,6 +475,7 @@
                                 <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                                 <meta itemprop="datePublished" content="01-01-2016">
                                     <td><fmt:formatDate value="${i.createdAt}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+                                    <c:out value="${i.rating}"/>
                                     <c:set var="cnt" value="1"/>
                                     <c:forEach var="j" begin="1" end="${i.rating}">
                                         <%-- <span class="fa fa-star"></span> --%>
@@ -494,14 +493,18 @@
                                 <p class="blockquote">
                                 <p class="mb-0">${i.content}</p>
                                 <hr>
+
                             </div>
                         </c:forEach>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript">
     //Plus & Minus for Quantity product
