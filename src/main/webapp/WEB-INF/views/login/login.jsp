@@ -12,6 +12,15 @@
 
 <div class="form_login signin">
     <h4>Đăng nhập</h4>
+    <c:if test="${message != null}">
+
+		<div class="alert alert-primary alert-dismissible" role="alert">
+
+			<i>${message}</i>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+
+	</c:if>
     <c:if test="${error != null}">
 
 		<div class="alert alert-danger alert-dismissible" role="alert">
@@ -43,7 +52,7 @@
             <button type="submit" class="btn btn-primary">Đăng nhập</button>
         </div>
         <div class="form-login-forgot-password">
-            <label> <input type="checkbox" value="on" name="save_login">Ghi nhớ đăng nhập</label>
+            <label> <input checked type="checkbox" value="on" name="remember-me">Ghi nhớ đăng nhập</label>
             <a href="/login/fill_email">Quên mật khẩu</a>
         </div>
         <div class="mb-3 form-check">

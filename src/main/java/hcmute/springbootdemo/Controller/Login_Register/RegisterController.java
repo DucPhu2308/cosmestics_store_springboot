@@ -48,11 +48,11 @@ public class RegisterController {
             String email = user.getEmail();
             String password = user.getPasswordHashed();
             if(email.isEmpty() || password.isEmpty()){
-                modelMap.addAttribute("error","Vui lòng nhập đầy đủ thông tin");
+                redirectAttributes.addFlashAttribute("error","Vui lòng nhập đầy đủ thông tin");
                 return "redirect:/register/";
             }
             if(userRepository.findUserByEmail(email).isPresent()){
-                modelMap.addAttribute("error","Email này đã được sử dụng");
+                redirectAttributes.addFlashAttribute("error","Email này đã được sử dụng");
                 return "redirect:/register/";
             }
             if(repassword.equals(password)==false){
@@ -74,7 +74,7 @@ public class RegisterController {
             session.setAttribute("user",user);
 
             // send email
-            String subject = "Xác nhận đăng ký tài khoản";
+            String subject = "[Ori Shop] Xác nhận đăng ký tài khoản";
             String text = "Mã xác nhận của bạn là: " + user.getCode();
             emailService.sendSimpleMessage(email,subject,text);
 
@@ -103,6 +103,7 @@ public class RegisterController {
                 user.setCode("");
                 userRepository.save(user);
                 session.setAttribute("user",user);
+                redirectAttributes.addFlashAttribute("message","Đăng ký thành công!");
                 return "redirect:/login/";
             }
             else{
