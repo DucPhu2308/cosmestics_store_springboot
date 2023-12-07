@@ -46,10 +46,6 @@ public class OrderController {
             System.out.println(user_id);
             List<Cart> carts =cartService.findCartByUserId(user_id);
 
-            for (Cart cart: carts) {
-                System.out.println("Tên giỏ hàng của user 20: " + cart.getName()+ "Mã giỏ hàng: " + cart.getId());
-
-            }
             modelMap.addAttribute("carts", carts );
             return "user/order/list_order_payment";
         }
