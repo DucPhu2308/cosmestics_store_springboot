@@ -74,8 +74,12 @@ public class PayController {
 
         cart.setActive(false);
         order.setPaid(true);
+        order.setId(orderService.getMaxOrderID());
         cartService.save(cart);
         orderService.save(order);
+
+        int countCart= session.getAttribute("CountCart") == null ? 0 : (int) session.getAttribute("CountCart");
+        session.setAttribute("CountCart", countCart - 1);
 
         order.setPaid(true);
 

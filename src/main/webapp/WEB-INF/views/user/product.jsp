@@ -87,6 +87,7 @@
         <!-- Add to cart -->
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
+                <p style="font-size: 50px;text-align: center;color: mediumvioletred;margin-bottom:-30px ;font-family: Be VietNam Pro,sans-serif">${product.name}</p>
                 <c:if test="${product.available==false}">
                     <p style="color: red; font-size: 25px; font-family: 'Be VietNam Pro', 'sans-serif'">Sản phẩm đã hết hàng</p>
                 </c:if>
@@ -216,7 +217,8 @@
                             <c:out value="${avg_rating}"/>
                             <c:forEach var="i" begin="1" end="${avg_rating}">
                                 <c:if test="${temp >=0}">
-                                    <i class="fa fa-star"></i>
+                                    <%-- <i class="fa fa-star"></i> --%>
+                                    <i style="color: #ffd103;" class="fa-solid fa-star"></i>
                                     <c:set var="cnt_star" value="${cnt_star + 1}"/>
                                     <c:set var="temp" value="${temp - 1}"/>
                                 </c:if>
@@ -224,12 +226,14 @@
 
                             <c:set var="temp" value="${temp+1}"/>
                             <c:if test="${temp==0.5}">
-                                <i class="fa fa-star fa-star-half-o "></i>
+                                <%-- <i class="fa fa-star fa-star-half-o "></i> --%>
+                                <i style="color: #ffd103;" class="fa-solid fa-star-half-stroke"></i>
                                 <c:set var="cnt_star" value="${cnt_star + 1}"/>
                             </c:if>
 
                             <c:forEach var="i" begin="${cnt_star}" end="5">
-                                <i class="fa fa-star fa-star-o"></i>
+                                <%-- <i class="fa fa-star fa-star-o"></i> --%>
+                                <i style="color: #ffd103;" class="fa-regular fa-star"></i>
                                 <c:set var="cnt_star" value="${cnt_star + 1}"/>
                             </c:forEach>
 
@@ -242,10 +246,7 @@
 
                             <a class="pull-right" href="#reviews">View all reviews</a>
                         </div>
-                        <div class="datasheet p-3 mb-2 bg-info text-white">
-                            <a href="" class="text-white"><i class="fa fa-file-text"></i>
-                                Download DataSheet</a>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -477,12 +478,14 @@
                                     <c:out value="${i.rating}"/>
                                     <c:set var="cnt" value="1"/>
                                     <c:forEach var="j" begin="1" end="${i.rating}">
-                                        <span class="fa fa-star"></span>
+                                        <%-- <span class="fa fa-star"></span> --%>
+                                        <i style="color: #e8e80c;" class="fa-solid fa-star"></i>
                                         <c:set var="cnt" value="${cnt + 1}"/>
                                     </c:forEach>
 
                                     <c:forEach var="j" begin="${cnt}" end="5">
-                                        <span class="fa fa-star-o"></span>
+                                        <%-- <span class="fa fa-star-o"></span> --%>
+                                        <i style="color: #e8e80c;" class="fa-regular fa-star"></i>
                                         <c:set var="cnt" value="${cnt + 1}"/>
                                     </c:forEach>
 

@@ -22,20 +22,23 @@
                     </tr>
                     </thead>
                     <tbody class="row_cart">
-                    <c:forEach items="${orders}" var="item">
+                    <c:forEach items="${carts}" var="item">
                         <tr>
-                            <td>${item.cart.name}</td>
+                            <td>${item.name}</td>
                             <td>
-                                <c:if test="${item.paid == true}">
+                                <c:if test="${item.active == false}">
                                     <p style="color:green">Đã thanh toán</p>
                                 </c:if>
 
-                                <c:if test="${item.paid == false}">
+                                <c:if test="${item.active == true}">
                                     <p style="color:red">Chưa thanh toán</p>
                                 </c:if>
                             </td>
-                            <c:if test="${item.paid == false}">
-                                <td><a href="/order_cart/add_orderCart/${item.cart.id}">Thanh toán</a></td>
+                            <c:if test="${item.active == true}">
+                                <td><a href="/order_cart/add_orderCart/${item.id}">Thanh toán</a></td>
+                            </c:if>
+                            <c:if test="${item.active == true}">
+                                <td> </td>
                             </c:if>
                         </tr>
                     </c:forEach>

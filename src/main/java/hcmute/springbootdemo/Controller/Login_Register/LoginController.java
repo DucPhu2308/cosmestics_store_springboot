@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
@@ -77,7 +76,7 @@ public class LoginController {
 
     @GetMapping(value="fill_code")
     public String fill_code(){
-        return "login/fill_code";
+        return "register/fill_code";
     }
 
 }

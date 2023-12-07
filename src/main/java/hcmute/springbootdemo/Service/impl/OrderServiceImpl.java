@@ -31,14 +31,17 @@ public class OrderServiceImpl implements IOrderService {
 		return orderRepository.save(entity);
 	}
 
-	@Override
-	public List<Order> findOrdersByUserId(int userId) {
-		return orderRepository.findOrdersByUserId(userId);
-	}
+
+
 
 	@Override
 	public int getMaxOrderID() {
 		return orderRepository.getMaxOrderID();
+	}
+
+	@Override
+	public Order findOrderByCartId(int id) {
+		return orderRepository.findOrderByCartId(id);
 	}
 
 	@Override

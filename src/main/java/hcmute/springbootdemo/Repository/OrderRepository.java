@@ -17,8 +17,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer>{
     List<Order> findByOrderDateBetween(Date startDate, Date endDate);
 
     // tìm tất cả hóa đơn theo user id
-    @Query(value= "select * from orders join cart on orders.CartId = cart.Id where cart.UserId = ?1", nativeQuery = true)
-    List<Order> findOrdersByUserId(int userId);
+    Order findOrderByCartId(int id);
 
     // find top 10 newest orders
     @Query(value = "select * from orders order by id desc limit 10", nativeQuery = true)
