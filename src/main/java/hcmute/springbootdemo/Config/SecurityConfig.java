@@ -41,8 +41,19 @@ public class SecurityConfig {
                 .permitAll()
                 .and()
             .logout()
-                .logoutSuccessUrl("/login")
-                .permitAll();
+                .logoutUrl("/checkout")
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/")
+                .permitAll()
+                .and()
+            .rememberMe()
+                .rememberMeParameter("remember-me")
+                .userDetailsService(userDetailsService)
+                // 1 day in seconds
+                .tokenValiditySeconds(86400)
+                .key("uniqueAndSecret");
+
+
         return http.build();
             
     }
