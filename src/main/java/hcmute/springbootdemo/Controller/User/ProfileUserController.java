@@ -41,7 +41,7 @@ public class ProfileUserController {
         modelMap.addAttribute("dob", dob);
 
 
-        return "user/profile_user";
+        return "user/profile_user/profile_user";
     }
 
     @PostMapping(value="update_user")
@@ -94,5 +94,13 @@ public class ProfileUserController {
 
 
         return "redirect:/profile_user/";
+    }
+
+    @GetMapping(value="/change_password")
+    public String change_password(ModelMap modelMap, HttpSession session){
+        int user_id = (int) session.getAttribute("user_id");
+        User user = userService.findById(user_id).get();
+        modelMap.addAttribute("user", user);
+        return "user/profile_user/change_password";
     }
 }
