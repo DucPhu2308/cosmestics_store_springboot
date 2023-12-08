@@ -40,18 +40,20 @@ public class SecurityConfig {
                 .passwordParameter("password")
                 .permitAll()
                 .and()
+            .rememberMe()
+                .rememberMeParameter("remember-me")
+                .rememberMeCookieName("remember-me-cookie")
+                .userDetailsService(userDetailsService)
+                // 1 day in seconds
+                .tokenValiditySeconds(86400)
+                // .key("uniqueAndSecret")
+                .and()
             .logout()
                 .logoutUrl("/checkout")
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/")
                 .permitAll()
-                .and()
-            .rememberMe()
-                .rememberMeParameter("remember-me")
-                .userDetailsService(userDetailsService)
-                // 1 day in seconds
-                .tokenValiditySeconds(86400)
-                .key("uniqueAndSecret");
+                ;
 
 
         return http.build();
