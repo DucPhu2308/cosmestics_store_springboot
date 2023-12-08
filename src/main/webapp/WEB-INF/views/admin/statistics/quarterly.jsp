@@ -68,6 +68,11 @@
                         backgroundColor : 'rgb(54, 162, 235)',
                         borderColor : 'rgb(54, 162, 235)',
                         data : ${brandSales2.values()}
+                    }, </c:if> <c:if test="${brand3 != null}"> {
+                        label : '${brand3.name}',
+                        backgroundColor : 'rgb(255, 206, 86)',
+                        borderColor : 'rgb(255, 206, 86)',
+                        data : ${brandSales3.values()}
                     } </c:if> ]
                 },
                 options : {}
