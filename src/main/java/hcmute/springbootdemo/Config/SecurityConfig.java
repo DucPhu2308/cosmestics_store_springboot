@@ -36,17 +36,20 @@ public class SecurityConfig {
                 .and()
             .formLogin()
                 .loginPage("/login") // adjust login page URL
+                .loginProcessingUrl("/login/checklogin") // adjust action URL for login page
+                .failureHandler(new CustomAuthenticationFailureHandler())
+                .successHandler(new CustomAuthenticationSuccessHandler())
                 .usernameParameter("Email")
                 .passwordParameter("password")
                 .permitAll()
                 .and()
             .rememberMe()
                 .rememberMeParameter("remember-me")
-                .rememberMeCookieName("remember-me-cookie")
+                .authenticationSuccessHandler(new CustomAuthenticationSuccessHandler())
                 .userDetailsService(userDetailsService)
                 // 1 day in seconds
                 .tokenValiditySeconds(86400)
-                // .key("uniqueAndSecret")
+                .key("uniqueAndSecret")
                 .and()
             .logout()
                 .logoutUrl("/checkout")
