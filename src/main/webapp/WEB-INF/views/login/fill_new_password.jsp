@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <body>
     <div class="form_login fill_new_password">
         <form method="post" action="#" class="form_fill_new_password_content">

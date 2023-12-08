@@ -45,11 +45,13 @@ public class LoginController {
     @PostMapping(value= "/checklogin")
     public String checkLogin(@RequestParam("Email") String email,
                              @RequestParam("password") String password,
+                             @RequestParam(value = "remember-me", required = false) String remember_me,
                              RedirectAttributes redirectAttributes,
                              HttpSession session,
                              ModelMap modelMap){
 
         if (userService.checklogin(email, password)) {
+            System.out.println("Remember me: " + remember_me);
             Optional<User> user_login = userService.findUserByEmail(email);
             System.out.println(email);
             User user = user_login.get();
