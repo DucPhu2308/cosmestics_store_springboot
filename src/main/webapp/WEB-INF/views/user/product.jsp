@@ -115,7 +115,7 @@
                         <div class="form-group">
                             <c:forEach var="item" items="${listCart}">
                                 <c:forEach var="j" items="${item.cart_products}">
-                                    <c:if test="${product.id == j.product.id}">
+                                    <c:if test="${product.id == j.product.id and j.cart.active == true}">
                                         <label style="color:red">Sản phẩm này đã có trong giỏ hàng: "${item.name}"</label>
                                     </c:if>
                                 </c:forEach>

@@ -107,7 +107,7 @@
 			<div class="col mb-2">
 				<div class="row">
 					<div class="col-sm-12  col-md-6">
-						<button class="btn btn-block btn-light" type="submit" formaction="/category">Continue Shopping</button>
+						<a href="/category/" class="btn btn-block btn-light">Continue Shopping</a>
 					</div>
 					<div class="col-sm-12 col-md-6 text-right">
 						<form action="/order_cart/${sessionScope.cart_id}" method="get">
