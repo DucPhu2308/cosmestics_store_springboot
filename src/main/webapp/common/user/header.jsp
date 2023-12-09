@@ -30,9 +30,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/product">Product</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact/${productId}">Contact</a>
-                </li>
+
                 <sec:authorize access="hasAnyAuthority('ROLE_ADMIN')" var="isAuthenticated"></sec:authorize>
                 <c:if test="${isAuthenticated}">
                     <li class="nav-item">

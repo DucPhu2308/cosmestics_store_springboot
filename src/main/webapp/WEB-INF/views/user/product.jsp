@@ -5,11 +5,11 @@
 <body>
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">E-COMMERCE PRODUCT</h1>
-        <p class="lead text-muted mb-0">Le Lorem Ipsum est simplement du
-            faux texte employé dans la composition et la mise en page avant
-            impression. Le Lorem Ipsum est le faux texte standard de
-            l'imprimerie depuis les années 1500...</p>
+        <h1 class="jumbotron-heading" style="font-size: 2.5rem">ORI-SHOP </h1>
+        <p class="lead text-muted mb-0" style="color: #2313ba!important; font-size: 30px; font-weight: 600;">
+            Đồng hành cùng bạn trải nghiệm với
+            hệ thống bán mỹ phảm an toàn và chất lượng
+            đến từ các nhãn hiệu trong và ngoài nước</p>
     </div>
 </section>
 <div class="container">
@@ -93,11 +93,11 @@
                 </c:if>
                 <div class="card-body">
                     <c:if test="${product.discountPercent == 0}">
-                        <p class="price">${product.price} $</p>
+                        <p class="price">${product.price} VNĐ</p>
                     </c:if>
                     <c:if test="${product.discountPercent != 0}">
-                        <p class="price">${product_discounted} $</p>
-                        <p class="price_discounted">${product.price} $</p>
+                        <p class="price">${product_discounted} VNĐ</p>
+                        <p class="price_discounted">${product.price} VNĐ</p>
                         <label>Chương trình áp dụng giảm giá với sản phẩm này từ ngày ${product.discountStart} đến
                             ngày ${product.discountEnd}</label>
                     </c:if>

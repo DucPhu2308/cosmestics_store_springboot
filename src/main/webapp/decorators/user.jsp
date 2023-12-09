@@ -32,6 +32,7 @@
 
     <sitemesh:write property="body"> </sitemesh:write>
 
+
     <%@ include file="../common/user/footer.jsp"%>
 </body>
 

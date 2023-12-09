@@ -43,7 +43,6 @@ public class HomeController {
         model.addAttribute("bestProduct", productService.get10Best());
 //        session.setAttribute("CountProduct",cart_productRepository.count());
 
-
         //----------------------------
         //thực thi cac chuc nang cua user
         if(session.getAttribute("user_id") == null){
@@ -54,7 +53,7 @@ public class HomeController {
 
         }
         else{
-            int user_id = (int) session.getAttribute("user_id");
+            int user_id = (int)session.getAttribute("user_id");
             int countCart = 0;
             List<Cart> listCart = cartService.findCartByUserId(user_id);
             for(Cart cart:listCart){

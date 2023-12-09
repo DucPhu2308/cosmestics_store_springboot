@@ -65,6 +65,7 @@ public class CartUserController {
         modelMap.addAttribute("listCartProduct", listCartProduct);
         float totalPrice = cart_productService.sumTotalProductByCartID(id);
         modelMap.addAttribute("totalPrice", totalPrice);
+        session.setAttribute("totalPrice", totalPrice);
         session.setAttribute("cart_id", id);
 
         return "user/cart/cart";

@@ -5,6 +5,7 @@
 
 body{
     margin: 0;
+
 }
 .bloc_left_price {
     color: #c01508;
@@ -56,11 +57,11 @@ body{
     margin-top: 20px;
 }
 footer {
-    background: #343a40;
+    background: #e29223;
     padding: 40px;
 }
 footer a {
-    color: #f8f9fa!important
+    color: #f8f9fa !important
 }
 
 .detail_form_info{
@@ -302,6 +303,9 @@ footer a {
     height:190px;
 }
 
+.navbar.navbar-expand-md.navbar-dark.bg-dark{
+    background-color: #e76c00 !important;
+}
 
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 /*reset css*/

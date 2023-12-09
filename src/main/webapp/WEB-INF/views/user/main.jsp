@@ -5,8 +5,11 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">E-COMMERCE CATEGORY</h1>
-        <p class="lead text-muted mb-0">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte...</p>
+        <h1 class="jumbotron-heading" style="font-size: 2.5rem">ORI-SHOP </h1>
+        <p class="lead text-muted mb-0" style="color: #2313ba!important; font-size: 30px; font-weight: 600;">
+            Đồng hành cùng bạn trải nghiệm với
+            hệ thống bán mỹ phảm an toàn và chất lượng
+            đến từ các nhãn hiệu trong và ngoài nước</p>
     </div>
 </section>
 
@@ -21,13 +24,13 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="https://dummyimage.com/855x365/55595c/fff" alt="First slide">
+                        <img class="d-block w-100"  src="<c:url value="/templates/images/anhmypham1.jpg"/>" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="https://dummyimage.com/855x365/a30ca3/fff" alt="Second slide">
+                        <img class="d-block w-100" src="<c:url value="/templates/images/anhmypham2.jpg"/>" alt="Second slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="https://dummyimage.com/855x365/1443ff/fff" alt="Third slide">
+                        <img class="d-block w-100" src="<c:url value="/templates/images/anhmypham3.jpg"/>" alt="Third slide">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -45,15 +48,20 @@
                 <div class="card-header bg-success text-white text-uppercase">
                     <i class="fa fa-heart"></i> Top product
                 </div>
-                <img class="img-fluid border-0" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                <c:if test="${bestProduct[0].images[0].imageLink != null}">
+                    <img class="img-fluid border-0" src="<c:url value="/templates/images/${bestProduct[0].images[0].imageLink}"/> " alt="Card image cap">
+                </c:if>
+                <c:if test="${bestProduct[0].images[0].imageLink == null}">
+                    <img class="img-fluid border-0" src="<c:url value="/templates/images/no-image.png"/> " alt="Card image cap">
+                </c:if>
                 <div class="card-body">
-                    <h4 class="card-title text-center"><a href="product.html" title="View Product">Product title</a></h4>
+                    <h4 class="card-title text-center"><a href="/product/${bestProduct[0].id}" title="View Product">${bestProduct[0].name}</a></h4>
                     <div class="row">
                         <div class="col">
-                            <p class="btn btn-danger btn-block">99.00 $</p>
+                            <p class="btn btn-danger btn-block">${bestProduct[0].price} VNĐ</p>
                         </div>
                         <div class="col">
-                            <a href="product.html" class="btn btn-success btn-block">View</a>
+                            <a href="/product/${bestProduct[0].id}" class="btn btn-success btn-block">Add to cart</a>
                         </div>
                     </div>
                 </div>

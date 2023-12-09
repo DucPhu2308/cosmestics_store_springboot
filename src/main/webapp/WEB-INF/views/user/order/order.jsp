@@ -7,7 +7,11 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">E-COMMERCE ORDER</h1>
+        <h1 class="jumbotron-heading" style="font-size: 2.5rem">ORI-SHOP </h1>
+        <p class="lead text-muted mb-0" style="color: #2313ba!important; font-size: 30px; font-weight: 600;">
+            Đồng hành cùng bạn trải nghiệm với
+            hệ thống bán mỹ phảm an toàn và chất lượng
+            đến từ các nhãn hiệu trong và ngoài nước</p>
     </div>
 </section>
 
@@ -45,7 +49,7 @@
                 <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                 <td>${i_product.product.name}</td>
                 <td class="text-center">${i_product.quantity}</td>
-                <td class="text-right">${i_product.totalPrice} €</td>
+                <td class="text-right">${i_product.totalPrice} VNĐ</td>
             </tr>
             </c:forEach>
 
@@ -54,20 +58,27 @@
                 <td></td>
                 <td></td>
                 <td>Sub-Total</td>
-                <td class="text-right">255,90 €</td>
+                <td class="text-right">
+                    <c:if test="${sessionScope.totalPrice == null}">
+                        0 VNĐ
+                    </c:if>
+                    <c:if test="${sessionScope.totalPrice != null}">
+                        ${sessionScope.totalPrice} VNĐ
+                    </c:if>
+                </td>
             </tr>
 
             <tr>
                 <td></td>
                 <td></td>
                 <td><strong>Total</strong></td>
-                <td class="text-right"><strong>346,90 €</strong></td>
+                <td class="text-right"><strong>${sessionScope.totalPrice} vnđ</strong></td>
             </tr>
         </table>
         <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-6">
-                    <button class="btn btn-block btn-light">Continue Shopping</button>
+                    <a href="/category/ " class="btn btn-block btn-light">Continue Shopping</a>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
                     <button class="btn btn-lg btn-block btn-success text-uppercase" type="submit">Xác nhận</button>

@@ -7,8 +7,11 @@
 <body>
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">E-COMMERCE CATEGORY</h1>
-        <p class="lead text-muted mb-0">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte...</p>
+        <h1 class="jumbotron-heading" style="font-size: 2.5rem">ORI-SHOP </h1>
+        <p class="lead text-muted mb-0" style="color: #2313ba!important; font-size: 30px; font-weight: 600;">
+            Đồng hành cùng bạn trải nghiệm với
+            hệ thống bán mỹ phảm an toàn và chất lượng
+            đến từ các nhãn hiệu trong và ngoài nước</p>
     </div>
 </section>
 <div class="container">
@@ -24,7 +27,7 @@
                     </li>
                     <c:forEach var="i" items="${sessionScope.list_category}">
 
-                        <li class="list-group-item"><a href="/category/${i.id}">${i.name} (${listCountProduct.get(temp)} sản phẩm)</a></li>
+                        <li class="list-group-item"><a href="/category/${i.id}">${i.name} (${listCountProduct.get(temp)})</a></li>
 
                         <c:set var="temp" value="${temp + 1}"/>
 
@@ -69,7 +72,7 @@
                                 <pre class="card-text">${i.description}</pre>
                                 <div class="row">
                                     <div class="col">
-                                        <p class="btn btn-danger btn-block">${i.price} $</p>
+                                        <p class="btn btn-danger btn-block">${i.price} VNĐ</p>
                                     </div>
                                     <div class="col">
                                         <a href="/product/${i.id}" class="btn btn-success btn-block">Add to cart</a>

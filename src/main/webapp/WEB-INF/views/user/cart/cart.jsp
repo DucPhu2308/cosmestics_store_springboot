@@ -9,7 +9,11 @@
 <body>
 	<section class="jumbotron text-center">
 		<div class="container">
-			<h1 class="jumbotron-heading">E-COMMERCE CART</h1>
+			<h1 class="jumbotron-heading" style="font-size: 2.5rem">ORI-SHOP </h1>
+			<p class="lead text-muted mb-0" style="color: #2313ba!important; font-size: 30px; font-weight: 600;">
+				Đồng hành cùng bạn trải nghiệm với
+				hệ thống bán mỹ phảm an toàn và chất lượng
+				đến từ các nhãn hiệu trong và ngoài nước</p>
 		</div>
 	</section>
 
@@ -49,11 +53,11 @@
 										<td><input class="form-control" type="text" value="${i.quantity}" disabled/></td>
 										<td class="text-center">
 											<c:if test="${i.product.discountPercent == 0}">
-												<p class="price">${i.product.price}€</p>
+												<p class="price">${i.product.price}VNĐ</p>
 											</c:if>
 											<c:if test="${i.product.discountPercent != 0}">
-												<span class="price" style="text-decoration: line-through">${i.product.price}€</span>
-												<span class="price_discounted" >${i.product.price - i.product.discountPercent*i.product.price}€</span>
+												<span class="price" style="text-decoration: line-through">${i.product.price} VNĐ</span>
+												<span class="price_discounted" >${i.product.price - i.product.discountPercent*i.product.price} VNĐ</span>
 											</c:if>
 
 
@@ -64,7 +68,7 @@
 
 
 
-										<td class="text-right">${i.totalPrice}€</td>
+										<td class="text-right">${i.totalPrice}VNĐ</td>
 										<td class="text-right">
 											<form:form method="post" action="/cart/delete_cartProduct/${i.product.id}">
 												<input type="submit" class="btn btn-sm btn-danger" value="Xóa">
@@ -84,10 +88,10 @@
 								<td>Sub-Total</td>
 								<td class="text-right">
 									<c:if test="${totalPrice == null}">
-										0 €
+										0 VNĐ
 									</c:if>
 									<c:if test="${totalPrice != null}">
-										${totalPrice} €
+										${totalPrice} VNĐ
 									</c:if>
 								</td>
 							</tr>
@@ -98,7 +102,7 @@
 								<td></td>
 								<td></td>
 								<td><strong>Total</strong></td>
-								<td class="text-right"><strong>${totalPrice} €</strong></td>
+								<td class="text-right"><strong>${totalPrice} VNĐ</strong></td>
 							</tr>
 						</tbody>
 					</table>
