@@ -2,7 +2,6 @@ package hcmute.springbootdemo.Controller.User;
 
 import hcmute.springbootdemo.Entity.Cart;
 import hcmute.springbootdemo.Entity.Product;
-import hcmute.springbootdemo.Entity.User;
 import hcmute.springbootdemo.Repository.Cart_ProductRepository;
 import hcmute.springbootdemo.Repository.CategoryRepository;
 import hcmute.springbootdemo.Service.IProductService;
@@ -56,7 +55,6 @@ public class HomeController {
         }
         else{
             int user_id = (int) session.getAttribute("user_id");
-            User user = userService.findUserById(user_id);
             int countCart = 0;
             List<Cart> listCart = cartService.findCartByUserId(user_id);
             for(Cart cart:listCart){
@@ -73,9 +71,6 @@ public class HomeController {
         return "user/main";
     }
 
-
-
-
     @GetMapping(value="/checkout")
     public String checkout(HttpSession session){
         session.removeAttribute("username");
@@ -91,5 +86,5 @@ public class HomeController {
         SecurityContextHolder.getContext().setAuthentication(null);
         return "redirect:/";
     }
-
+    
 }

@@ -45,13 +45,13 @@ public class LoginController {
     @PostMapping(value= "/checklogin")
     public String checkLogin(@RequestParam("Email") String email,
                              @RequestParam("password") String password,
+                             @RequestParam(value = "remember-me", required = false) String remember_me,
                              RedirectAttributes redirectAttributes,
                              HttpSession session,
                              ModelMap modelMap){
 
         if (userService.checklogin(email, password)) {
             Optional<User> user_login = userService.findUserByEmail(email);
-            System.out.println(email);
             User user = user_login.get();
             if (user.getActive() == false) {
                 redirectAttributes.addFlashAttribute("error", "Tài khoản đã bị khóa");
@@ -80,7 +80,7 @@ public class LoginController {
         return "login/fill_email";
     }
 
-    @PostMapping(value="/fill_email")
+    @PostMapping(value="/fill_email") // forgot password
     public String fill_email(@RequestParam("email") String email,
                              RedirectAttributes redirectAttributes,
                              HttpSession session){

@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
 
@@ -36,22 +36,27 @@ public class SecurityConfig {
                 .and()
             .formLogin()
                 .loginPage("/login") // adjust login page URL
+                .loginProcessingUrl("/login/checklogin") // adjust action URL for login page
+                .failureHandler(new CustomAuthenticationFailureHandler())
+                .successHandler(new CustomAuthenticationSuccessHandler())
                 .usernameParameter("Email")
                 .passwordParameter("password")
                 .permitAll()
+                .and()
+            .rememberMe()
+                .rememberMeParameter("remember-me")
+                .authenticationSuccessHandler(new CustomAuthenticationSuccessHandler())
+                .userDetailsService(userDetailsService)
+                // 1 day in seconds
+                .tokenValiditySeconds(86400)
+                .key("uniqueAndSecret")
                 .and()
             .logout()
                 .logoutUrl("/checkout")
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/")
                 .permitAll()
-                .and()
-            .rememberMe()
-                .rememberMeParameter("remember-me")
-                .userDetailsService(userDetailsService)
-                // 1 day in seconds
-                .tokenValiditySeconds(86400)
-                .key("uniqueAndSecret");
+                ;
 
 
         return http.build();

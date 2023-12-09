@@ -4,6 +4,7 @@ import hcmute.springbootdemo.Entity.User;
 import hcmute.springbootdemo.Service.IStorageService;
 import hcmute.springbootdemo.Service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,8 @@ public class ProfileUserController {
 
     @Autowired
     UserServiceImpl userService;
-
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Autowired
     IStorageService storageService;
     @GetMapping(value="")
@@ -98,9 +100,30 @@ public class ProfileUserController {
 
     @GetMapping(value="/change_password")
     public String change_password(ModelMap modelMap, HttpSession session){
+        return "user/profile_user/change_password";
+    }
+
+    @PostMapping(value="/change_password")
+    public String change_password(@RequestParam("old_password") String old_password,
+                                  @RequestParam("new_password") String new_password,
+                                  @RequestParam("renew_password") String confirm_password,
+                                  HttpSession session,
+                                  RedirectAttributes redirectAttributes){
         int user_id = (int) session.getAttribute("user_id");
         User user = userService.findById(user_id).get();
-        modelMap.addAttribute("user", user);
-        return "user/profile_user/change_password";
+        if(passwordEncoder.matches(old_password, user.getPasswordHashed())){
+            if (new_password.equals(confirm_password)) {
+                user.setPasswordHashed(passwordEncoder.encode(new_password));
+                userService.save(user);
+                redirectAttributes.addFlashAttribute("message", "Đổi mật khẩu thành công. Vui lòng đăng nhập lại.");
+                return "redirect:/checkout";
+            }else{
+                redirectAttributes.addFlashAttribute("error", "Mật khẩu mới không khớp.");
+                return "redirect:/profile_user/change_password";
+            }
+        }else{
+            redirectAttributes.addFlashAttribute("error", "Mật khẩu cũ không đúng.");
+            return "redirect:/profile_user/change_password";
+        }
     }
 }
