@@ -8,7 +8,7 @@
         <h1 class="jumbotron-heading" style="font-size: 2.5rem">ORI-SHOP </h1>
         <p class="lead text-muted mb-0" style="color: #2313ba!important; font-size: 30px; font-weight: 600;">
             Đồng hành cùng bạn trải nghiệm với
-            hệ thống bán mỹ phảm an toàn và chất lượng
+            hệ thống bán mỹ phẩm an toàn và chất lượng
             đến từ các nhãn hiệu trong và ngoài nước</p>
     </div>
 </section>
@@ -17,9 +17,9 @@
         <div class="col">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/category">Category</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Product</li>
+                    <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="/category">Loại sản phẩm</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
                 </ol>
             </nav>
         </div>
@@ -124,7 +124,7 @@
 
                             <div class="form-group">
                                 <label for="colors">Chọn giỏ hàng</label>
-                                <form:select class="custom-select" id="colors" path="cart">
+                                <form:select class="custom-select" id="colors" path="cart" >
                                     <c:forEach var="i_cart" items="${listCart}">
                                         <c:if test="${i_cart.active == true}">
                                             <option value="${i_cart.id}">${i_cart.name}</option>
@@ -257,7 +257,7 @@
             <div class="col-12">
                 <div class="card border-light mb-3">
                     <div class="card-header bg-primary text-white text-uppercase">
-                        <i class="fa fa-align-justify"></i> Description
+                        <i class="fa fa-align-justify"></i> Mô tả sản phẩm
                     </div>
                     <div class="card-body">
                         <pre style="font-family: 'Be VietNam Pro', 'sans-serif'; font-size: 20px; font-weight: 500;">${product.description}</pre>
@@ -456,7 +456,8 @@
                                 </div>
                                 <form:textarea path="content" class="form-control animated" cols="5" id="new-review"
                                                name="new-review"
-                                               placeholder="Enter your review here..." rows="5"></form:textarea>
+                                               placeholder="Enter your review here..." rows="5">
+                                </form:textarea>
 
                                 <input type="submit" value="Đăng bình luận" class="btn-post-review">
 
