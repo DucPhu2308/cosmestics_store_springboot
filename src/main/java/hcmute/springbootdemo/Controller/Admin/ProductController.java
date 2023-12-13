@@ -102,15 +102,17 @@ public class ProductController {
 
 	@GetMapping("/image-delete/{id}")
 	public String deleteImages(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
+		int productId = 0;
 		try {
 			// System.out.println(imageService.findAll());
 			Image image = imageService.findById(id).get();
 			storageService.delete(image.getImageLink());
+			productId = image.getProduct().getId();
 			imageService.deleteById(id);
 			redirectAttributes.addFlashAttribute("message", "Thao tác thành công!");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", e.getMessage());
 		}
-		return "redirect:/admin/product/images/" + imageService.findById(id).get().getProduct().getId();
+		return "redirect:/admin/product/images/" + productId;
 	}
 }
