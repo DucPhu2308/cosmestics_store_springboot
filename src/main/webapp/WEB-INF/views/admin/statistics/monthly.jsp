@@ -48,6 +48,7 @@
         <div class="title">
             <i class="fa-regular fa-heart"></i> <span class="text">Biểu đồ doanh số theo hãng</span>
         </div>
+        <c:if test="${brand1 != null}">
         <div class="chart">
             <canvas id="brandSalesChart"></canvas>
         </div>
@@ -77,5 +78,9 @@
                 options : {}
             });
         </script>
+        </c:if>
+        <c:if test="${brand1 == null}">
+            <div class="alert alert-info">Không có dữ liệu</div>
+        </c:if>
 	</section>
 </div>
