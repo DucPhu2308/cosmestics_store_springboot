@@ -61,6 +61,7 @@ public class OrderController {
     public String addOrderCart(ModelMap modelMap, @PathVariable("id") int id, HttpSession session) throws UnsupportedEncodingException {
         Order order = orderService.findOrderByCartId(id);
         int amount= (int)order.getTotal();
+        System.out.println("Tiền cần thanh toán"+amount);
         String payMent = paymentService.createPayment(amount);
 
         return "redirect:"+payMent;

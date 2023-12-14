@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body>
     <div class="form_login fill_tel">
         <form action="/login/fill_email" method="post" class="form_fill_tel_content">

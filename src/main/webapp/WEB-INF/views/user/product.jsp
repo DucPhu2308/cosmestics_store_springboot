@@ -89,7 +89,7 @@
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
                 <p class="text-name-product">${product.name}</p>
-                <c:if test="${product.available==false}">
+                <c:if test="${product.available==false or product.stock==0}">
                     <p style="color: red; font-size: 25px; font-family: 'Be VietNam Pro', 'sans-serif'">Sản phẩm đã hết hàng</p>
                 </c:if>
                 <div class="card-body">

@@ -41,9 +41,9 @@
                             <c:if test="${item.active == true}">
                                 <td><a href="/order_cart/add_orderCart/${item.id}">Thanh toán</a></td>
                             </c:if>
-                            <c:if test="${item.active == true}">
+                            <c:if test="${item.active == false}">
                                 <td> </td>
-                            </c:if>
+                            </c:if>s
                         </tr>
                     </c:forEach>
                     </tbody>
