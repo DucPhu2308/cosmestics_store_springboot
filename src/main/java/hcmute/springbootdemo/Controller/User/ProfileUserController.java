@@ -47,14 +47,20 @@ public class ProfileUserController {
     }
 
     @PostMapping(value="update_user")
-    public String update(@ModelAttribute("user") User user, HttpSession session,
+    public String update( HttpSession session,
+                         @RequestParam("firstName") String firstName,
+                          @RequestParam("lastName") String lastName,
+                         @RequestParam("phoneNumber") String phoneNumber,
                          @RequestParam("image_user") MultipartFile image_user,
                          @RequestParam("dob_user") String dob,
                          @RequestParam("option_gender") String gender,
                          RedirectAttributes redirectAttributes){
 
         int user_id = (int) session.getAttribute("user_id");
-
+        User user = userService.findById(user_id).get();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPhone(phoneNumber);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(dob, formatter);
         Date date1 = java.sql.Date.valueOf(date);
@@ -86,8 +92,7 @@ public class ProfileUserController {
                 user.setGender(false);
             }
         }
-        user.setActive(true);
-        user.setIsAdmin(false);
+
 
         userService.save(user);
         session.setAttribute("image_user", user.getAvatarLink());
