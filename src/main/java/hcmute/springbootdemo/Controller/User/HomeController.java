@@ -69,21 +69,5 @@ public class HomeController {
 
         return "user/main";
     }
-
-    @GetMapping(value="/checkout")
-    public String checkout(HttpSession session){
-        session.removeAttribute("username");
-        session.removeAttribute("user_id");
-        session.removeAttribute("cart_id");
-        session.removeAttribute("CountProduct");
-        session.removeAttribute("image_user");
-        session.removeAttribute("CountCart");
-        session.removeAttribute("listProduct");
-        session.removeAttribute("list_category");
-        session.removeAttribute("list_brand");
-        session.removeAttribute("list_product_category");
-        SecurityContextHolder.getContext().setAuthentication(null);
-        return "redirect:/";
-    }
     
 }

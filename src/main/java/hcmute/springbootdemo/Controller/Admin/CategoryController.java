@@ -31,10 +31,6 @@ public class CategoryController {
 	@PostMapping("/save")
     public String saveCategory(RedirectAttributes redirectAttributes,
     		@Valid @ModelAttribute("category") Category category, BindingResult result) {
-//		if (result.hasErrors()) {
-//			redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra!");
-//			return "redirect:/admin/category";
-//		}
         categoryService.save(category);
         redirectAttributes.addFlashAttribute("message", "Thao tác thành công!");
         return "redirect:/admin/category";

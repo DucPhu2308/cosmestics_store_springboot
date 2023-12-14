@@ -28,14 +28,10 @@ public class DashboardController {
 	public String index(ModelMap model)
 	{
 		model.addAttribute("active", "home");
-
-		// Thống kê 30 ngày gần nhất
-		// Lấy ngày hiện tại
-		// Date today = new Date();
-		// Lấy ngày 30 ngày trước
-		// Date dateBefore = new Date(today.getTime() - 30 * 24 * 3600 * 1000L);
-		// List<Order> listOrder = orderService.findByOrderDateBetween(dateBefore, today);
 		List<Order> listOrder = orderService.findAll();
+		// paid order only
+		listOrder.removeIf(order -> order.getPaid() == false);
+
 		model.addAttribute("orderCount", listOrder.size());
 		model.addAttribute("revenue", getRevenue(listOrder));	
 		model.addAttribute("userCount", userService.count());

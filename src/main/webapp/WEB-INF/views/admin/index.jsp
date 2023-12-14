@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Trang chủ - admin</title>
 </head>
 <body>
 	<div class="container">
@@ -18,7 +18,7 @@
 			<div class="boxes">
 				<div class="box box1">
 					<i class="fa-solid fa-dollar-sign"></i> <span class="text">Doanh
-						thu</span> <span class="number">$${revenue}</span>
+						thu</span> <span class="number">${revenue}₫</span>
 				</div>
 
 				<div class="box box2">

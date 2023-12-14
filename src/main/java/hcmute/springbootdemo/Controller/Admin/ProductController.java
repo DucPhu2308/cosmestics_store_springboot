@@ -57,6 +57,8 @@ public class ProductController {
 	@PostMapping("/save")
 	public String save(RedirectAttributes redirectAttributes,
 			@Valid @ModelAttribute("product") Product product, BindingResult result) {
+		if (product.getDiscountPercent() == null)
+			product.setDiscountPercent(0f);
 		productService.save(product);
 		redirectAttributes.addFlashAttribute("message", "Thao tác thành công!");
 		return "redirect:/admin/product";

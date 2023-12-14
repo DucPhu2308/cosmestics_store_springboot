@@ -41,40 +41,6 @@ public class LoginController {
         return "login/login";
     }
 
-
-    @PostMapping(value= "/checklogin")
-    public String checkLogin(@RequestParam("Email") String email,
-                             @RequestParam("password") String password,
-                             @RequestParam(value = "remember-me", required = false) String remember_me,
-                             RedirectAttributes redirectAttributes,
-                             HttpSession session,
-                             ModelMap modelMap){
-
-        if (userService.checklogin(email, password)) {
-            Optional<User> user_login = userService.findUserByEmail(email);
-            User user = user_login.get();
-            if (user.getActive() == false) {
-                redirectAttributes.addFlashAttribute("error", "Tài khoản đã bị khóa");
-                return "redirect:/login";
-            }
-            session.setAttribute("user", user);
-            session.setAttribute("user_id", user.getId());
-            Authentication authentication = new UsernamePasswordAuthenticationToken(email, password);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            session.setAttribute("image_user",user.getAvatarLink());
-            session.setAttribute("FirstName",user.getFirstName());
-            session.setAttribute("LastName",user.getLastName());
-
-            return "redirect:/" ;
-        }
-        else {
-            redirectAttributes.addFlashAttribute("error", "Sai tài khoản hoặc mật khẩu");
-            return "redirect:/login";
-        }
-        
-    }
-
     @GetMapping(value="/fill_email")
     public String fill_email(){
         return "login/fill_email";
