@@ -6,7 +6,7 @@
 <body>
 
 <div class="container mb-4">
-    <form:form action="/order_cart/add_orderCart/${order.cart.id}" class="order_form" modelAttribute="order">
+    <form:form action="/order_cart/add_orderCart/${order.cart.id}" class="order_form" modelAttribute="order" method="post">
         <div class="mb-3">
             <label  class="form-label">Họ và tên</label>
             <input type="text" class="form-control" value="${order.cart.user.firstName} ${order.cart.user.lastName}" placeholder="Nhập họ và tên">

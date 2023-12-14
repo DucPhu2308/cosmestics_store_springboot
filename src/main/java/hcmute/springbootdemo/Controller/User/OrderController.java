@@ -76,8 +76,6 @@ public class OrderController {
         session.setAttribute("cartID",id);
         session.setAttribute("order_pay",order);
 
-
-
         float total = 0;
         float totalDiscount = 0;
         List<Cart_Product> cart_products = cart_productService.findCart_ProductsByCartId(id);
@@ -85,7 +83,6 @@ public class OrderController {
             total += cart_product.getProduct().getPrice() * cart_product.getQuantity();
             totalDiscount += cart_product.getQuantity() * (cart_product.getProduct().getPrice() - (cart_product.getProduct().getPrice()-(cart_product.getProduct().getPrice()*cart_product.getProduct().getDiscountPercent())));
         }
-
 
         int amount= (int)(total-totalDiscount);
         String payMent = paymentService.createPayment(amount);

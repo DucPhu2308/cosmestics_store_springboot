@@ -12,24 +12,24 @@
 <body>
     <div class="form_login profile_user_container">
         <h3>Hồ sơ của tôi</h3>
-        <form:form method="post" action="update_user" modelAttribute="user" enctype="multipart/form-data">
+        <form method="post" action="update_user"  enctype="multipart/form-data">
             <div class="detail_form_info">
                 <div class="detail_info">
                     <div class="detail_author">
                         <label >Họ và tên lót:</label>
-                        <form:input type="text" value="${user.firstName}" path="firstName"/>
+                        <input type="text" value="${user.firstName}" name="firstName">
                     </div>
                     <div class="detail_author">
                         <label >Tên:</label>
-                        <form:input type="text" value="${user.lastName}" path="lastName"/>
+                        <input type="text" value="${user.lastName}" path="lastName" name="lastName">
                     </div>
                     <div class="detail_author">
                         <label >Email</label>
-                        <form:input type="email" value="${user.email}" path="email"/>
+                        <input type="email" value="${user.email}" >
                     </div>
                     <div class="detail_author">
                         <label >Số điện thoại</label>
-                        <form:input type="text" value="${user.phone}" path="phone"/>
+                        <input type="text" value="${user.phone}"  name="phoneNumber">
                     </div>
                     <div class="detail_author">
                         <label >Mật khẩu</label>
@@ -105,7 +105,7 @@
                 <a href="/" class="btn-danger">Thoát</a>
             </div>
 
-        </form:form>
+        </form>
 
     </div>
 

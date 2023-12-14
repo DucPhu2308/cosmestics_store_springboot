@@ -40,7 +40,14 @@ public class ReviewUserController {
         review.setRating(rating);
         review.setProduct(product);
         review.setUser(user);
-        review.setId(reviewService.getMaxId() + 1);
+        int maxId = reviewService.getMaxId();
+        if(maxId == 0){
+            review.setId(1);
+        }
+        else{
+            review.setId(maxId + 1);
+        }
+//        review.setId(reviewService.getMaxId() + 1);
         reviewService.save(review);
 
         modelMap.addAttribute("success", "Đánh giá thành công");

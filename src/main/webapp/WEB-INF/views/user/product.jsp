@@ -206,7 +206,6 @@
 
                             <c:set var="cnt_star" value="1"/>
                             <c:set var="temp" value="${avg_rating-1}"/>
-                            <c:out value="${avg_rating}"/>
                             <c:forEach var="i" begin="1" end="${avg_rating}">
                                 <c:if test="${temp >=0}">
                                     <%-- <i class="fa fa-star"></i> --%>
@@ -467,7 +466,6 @@
                                 <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                                 <meta itemprop="datePublished" content="01-01-2016">
                                     <td><fmt:formatDate value="${i.createdAt}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-                                    <c:out value="${i.rating}"/>
                                     <c:set var="cnt" value="1"/>
                                     <c:forEach var="j" begin="1" end="${i.rating}">
                                         <%-- <span class="fa fa-star"></span> --%>
@@ -483,7 +481,7 @@
 
                                     ${i.user.firstName} ${i.user.lastName}
                                 <p class="blockquote">
-                                <p class="mb-0">${i.content}</p>
+                                <pre class="mb-0" style="font-family: 'Be VietNam Pro', 'sans-serif';font-size: 20px">${i.content}</pre>
                                 <hr>
 
                             </div>
