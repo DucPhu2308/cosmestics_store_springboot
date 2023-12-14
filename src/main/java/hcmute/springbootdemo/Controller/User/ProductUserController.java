@@ -221,8 +221,9 @@ public class ProductUserController {
 
     @PostMapping(value="/seach")
     public String seachProduct(@RequestParam("keyword") String name, ModelMap modelMap, HttpSession session){
-        session.setAttribute("brand_name",name);
-        return "redirect:/category";
+        List<Product> listProduct = productService.findProductsByName(name);
+        session.setAttribute("list_product_category", listProduct);
+        return "user/category";
     }
 
 }
