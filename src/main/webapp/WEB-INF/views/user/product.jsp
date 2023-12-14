@@ -261,7 +261,7 @@
                         <i class="fa fa-align-justify"></i> Mô tả sản phẩm
                     </div>
                     <div class="card-body">
-                        <pre style="font-family: 'Be VietNam Pro', 'sans-serif'; font-size: 20px; font-weight: 500;">${product.description}</pre>
+                        <pre style="font-family: 'Be VietNam Pro', 'sans-serif'; font-size: 20px; font-weight: 500;text-wrap:wrap;">${product.description}</pre>
 
                     </div>
                 </div>
