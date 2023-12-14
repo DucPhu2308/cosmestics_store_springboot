@@ -221,6 +221,22 @@ footer a {
     color: #fff;
 
 }
+.card.prefix{
+    width: 260px;
+}
+
+.text-name-product{
+    font-size: 50px;
+    text-align: center;
+    color: mediumvioletred;
+    margin-bottom:-30px ;
+    font-family: Be VietNam Pro,sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
 .card-text{
     overflow: hidden;
     text-overflow: ellipsis;
@@ -235,7 +251,13 @@ footer a {
     overflow-y: scroll;
 }
 
-
+.card-title a{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
 
 .container_search{
     width: 300px;

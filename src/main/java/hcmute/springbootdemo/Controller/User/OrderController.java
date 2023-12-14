@@ -61,7 +61,7 @@ public class OrderController {
     public String addOrderCart(ModelMap modelMap, @PathVariable("id") int id, HttpSession session) throws UnsupportedEncodingException {
         Order order = orderService.findOrderByCartId(id);
         int amount= (int)order.getTotal();
-        String payMent = paymentService.createPayment(amount*100000);
+        String payMent = paymentService.createPayment(amount);
 
         return "redirect:"+payMent;
     }
@@ -82,7 +82,7 @@ public class OrderController {
 
 
         int amount= (int)(total-totalDiscount);
-        String payMent = paymentService.createPayment(amount*100000);
+        String payMent = paymentService.createPayment(amount);
 
         order.setPaid(false);
         order.setOrderDate(new Date());

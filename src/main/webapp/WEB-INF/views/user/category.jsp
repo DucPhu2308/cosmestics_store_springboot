@@ -10,7 +10,7 @@
         <h1 class="jumbotron-heading" style="font-size: 2.5rem">ORI-SHOP </h1>
         <p class="lead text-muted mb-0" style="color: #2313ba!important; font-size: 30px; font-weight: 600;">
             Đồng hành cùng bạn trải nghiệm với
-            hệ thống bán mỹ phảm an toàn và chất lượng
+            hệ thống bán mỹ phẩmm an toàn và chất lượng
             đến từ các nhãn hiệu trong và ngoài nước</p>
     </div>
 </section>
@@ -58,7 +58,7 @@
             <div class="row" id="content">
                 <c:forEach var="i" items="${sessionScope.list_product_category}">
                     <div class="product col-12 col-md-6 col-lg-4">
-                        <div class="card">
+                        <div class="card prefix">
                             <div>
                                         <c:if test="${i.images.size() > 0}">
                                             <img class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">

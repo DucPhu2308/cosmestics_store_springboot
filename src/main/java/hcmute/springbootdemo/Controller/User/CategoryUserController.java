@@ -48,7 +48,7 @@ public class CategoryUserController {
             int countProduct = productService.countProductsByCategoryId(category.getId());
             listCountProduct.add(countProduct);
         }
-        modelMap.addAttribute("listCountProduct", listCountProduct);
+        session.setAttribute("listCountProduct", listCountProduct);
 
         session.setAttribute("list_category", categoryRepository.findAll());
 
