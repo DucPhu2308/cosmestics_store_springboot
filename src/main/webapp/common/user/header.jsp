@@ -27,9 +27,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/category">Categories</a>
                 </li>
-                <li class="nav-item">
+                <%-- <li class="nav-item">
                     <a class="nav-link" href="/product">Product</a>
-                </li>
+                </li> --%>
 
                 <sec:authorize access="hasAnyAuthority('ROLE_ADMIN')" var="isAuthenticated"></sec:authorize>
                 <c:if test="${isAuthenticated}">
@@ -164,4 +164,19 @@
 
     </div>
 </nav>
+<style>
+    .text-border {
+        text-shadow: 1px 0 #fff, -1px 0 #fff, 0 1px #fff, 0 -1px #fff,
+             1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+    }
+</style>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading text-border" style="color: #ed3ed0; font-size: 2.5rem">ORI SHOP </h1>
+        <p class="lead text-muted mb-0 text-border" style="color: #6469fa!important; font-size: 30px; font-weight: 600; ">
+            Đồng hành cùng bạn trải nghiệm với
+            hệ thống bán mỹ phẩm an toàn và chất lượng
+            đến từ các nhãn hiệu trong và ngoài nước</p>
+    </div>
+</section>
 

@@ -3,7 +3,6 @@ package hcmute.springbootdemo.Service;
 import java.util.List;
 import java.util.Optional;
 import hcmute.springbootdemo.Entity.Category;
-import hcmute.springbootdemo.Entity.Product;
 
 public interface ICategoryService {
 

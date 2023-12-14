@@ -1,8 +1,6 @@
 package hcmute.springbootdemo.Controller.Admin;
 
 import java.time.YearMonth;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -141,7 +139,7 @@ public class StatisticsController {
                             Collectors.summingDouble(Order::getTotal))
                 );
         // fill 0 for year has no revenue
-        for (int i = 2018; i <= currentYear; i++) {
+        for (int i = startYear; i <= currentYear; i++) {
             if (!result.containsKey(i)) {
                 result.put(i, 0.0);
             }
@@ -264,10 +262,10 @@ public class StatisticsController {
         
         return result;
     }
-    private static Float calculateBrandSalesByCart(Cart cart, int brandId) {
-        return cart.getCart_products().stream()
-                .filter(cart_product -> cart_product.getProduct().getBrand().getId() == brandId)
-                .map(cart_product -> cart_product.getProduct().getPrice() * cart_product.getQuantity())
-                .collect(Collectors.summingDouble(null)).floatValue();
-    }
+    // private static Float calculateBrandSalesByCart(Cart cart, int brandId) {
+    //     return cart.getCart_products().stream()
+    //             .filter(cart_product -> cart_product.getProduct().getBrand().getId() == brandId)
+    //             .map(cart_product -> cart_product.getProduct().getPrice() * cart_product.getQuantity())
+    //             .collect(Collectors.summingDouble(null)).floatValue();
+    // }
 }

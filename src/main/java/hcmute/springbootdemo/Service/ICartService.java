@@ -1,7 +1,6 @@
 package hcmute.springbootdemo.Service;
 
 import hcmute.springbootdemo.Entity.Cart;
-import hcmute.springbootdemo.Entity.User;
 
 import java.util.List;
 import java.util.Optional;

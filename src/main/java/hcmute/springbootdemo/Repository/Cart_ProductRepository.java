@@ -1,6 +1,5 @@
 package hcmute.springbootdemo.Repository;
 
-import hcmute.springbootdemo.Entity.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,7 +20,7 @@ public interface Cart_ProductRepository extends JpaRepository<Cart_Product, Inte
 
     List<Cart_Product> findCart_ProductsByCartId(int cart_id);
 
-    @Query("select MAX(cp.id) from Cart_Product cp")
-    int getMaximumId();
+    @Query("select COALESCE(MAX(cp.id),0) from Cart_Product cp")
+    Integer getMaximumId();
 
 }
