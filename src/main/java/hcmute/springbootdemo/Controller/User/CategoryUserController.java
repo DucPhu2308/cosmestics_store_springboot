@@ -7,21 +7,13 @@ import hcmute.springbootdemo.Repository.CategoryRepository;
 import hcmute.springbootdemo.Service.IBrandService;
 import hcmute.springbootdemo.Service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.PrintWriter;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path="/category")
@@ -39,7 +31,7 @@ public class CategoryUserController {
     @Autowired
     Cart_ProductRepository cart_productRepository;
 
-    @GetMapping(value=" ")
+    @GetMapping(value="")
     public String category(ModelMap modelMap, HttpSession session){
 
         List<Category> listCategory = categoryRepository.findAll();

@@ -53,7 +53,7 @@ href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css"
 		</tr>
 		<tr>
 			<td style="vertical-align: top;" >
-				<div style="overflow-y: auto; height: 90vh;" id="body-content">
+				<div style="overflow-y: auto; height: 90vh; width:99%" id="body-content">
 					<sitemesh:write property='body'></sitemesh:write> 
 				</div>
 			</td>

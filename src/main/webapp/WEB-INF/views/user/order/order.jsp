@@ -1,19 +1,9 @@
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <body>
-
-<section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading" style="font-size: 2.5rem">ORI-SHOP </h1>
-        <p class="lead text-muted mb-0" style="color: #2313ba!important; font-size: 30px; font-weight: 600;">
-            Đồng hành cùng bạn trải nghiệm với
-            hệ thống bán mỹ phẩm an toàn và chất lượng
-            đến từ các nhãn hiệu trong và ngoài nước</p>
-    </div>
-</section>
 
 <div class="container mb-4">
     <form:form action="/order_cart/add_orderCart/${order.cart.id}" class="order_form" modelAttribute="order">

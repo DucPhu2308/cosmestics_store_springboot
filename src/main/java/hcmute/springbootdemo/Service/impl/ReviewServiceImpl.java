@@ -1,6 +1,5 @@
 package hcmute.springbootdemo.Service.impl;
 
-import hcmute.springbootdemo.Entity.Product;
 import hcmute.springbootdemo.Entity.Review;
 import hcmute.springbootdemo.Repository.ReviewRepository;
 import hcmute.springbootdemo.Service.IReviewService;

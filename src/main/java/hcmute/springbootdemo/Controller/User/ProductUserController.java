@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -210,7 +209,7 @@ public class ProductUserController {
             }
         }
 
-        cartproduct.setId(cart_productRepository.getMaximumId()+1);
+        // cartproduct.setId(cart_productRepository.getMaximumId()+1);
         cart_productRepository.save(cartproduct);
 
         session.setAttribute("CountProduct",cart_productRepository.count());

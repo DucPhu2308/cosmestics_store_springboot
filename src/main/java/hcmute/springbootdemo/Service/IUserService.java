@@ -1,6 +1,5 @@
 package hcmute.springbootdemo.Service;
 
-import hcmute.springbootdemo.Entity.Cart_Product;
 import hcmute.springbootdemo.Entity.Product;
 import hcmute.springbootdemo.Entity.Review;
 import hcmute.springbootdemo.Entity.User;
