@@ -27,7 +27,7 @@ public class PaymentServiceImpl {
         vnp_Params.put("vnp_Version", vnp_Version);
         vnp_Params.put("vnp_Command", vnp_Command);
         vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
-        vnp_Params.put("vnp_Amount", String.valueOf(amount*1000));
+        vnp_Params.put("vnp_Amount", String.valueOf(amount*100));
         vnp_Params.put("vnp_CurrCode", "VND");
 
         vnp_Params.put("vnp_BankCode", bankCode);

@@ -49,12 +49,7 @@
                 <td></td>
                 <td>Sub-Total</td>
                 <td class="text-right">
-                    <c:if test="${sessionScope.totalPrice == null}">
-                        0 VNĐ
-                    </c:if>
-                    <c:if test="${sessionScope.totalPrice != null}">
-                        ${sessionScope.totalPrice} VNĐ
-                    </c:if>
+                    ${total} VNĐ
                 </td>
             </tr>
 
@@ -62,7 +57,7 @@
                 <td></td>
                 <td></td>
                 <td><strong>Total</strong></td>
-                <td class="text-right"><strong>${sessionScope.totalPrice} vnđ</strong></td>
+                <td class="text-right"><strong>${total}VNĐ</strong></td>
             </tr>
         </table>
         <div class="col mb-2">

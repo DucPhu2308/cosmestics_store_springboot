@@ -52,8 +52,14 @@ public class OrderController {
     @GetMapping(value="{id}")
     public String order(ModelMap modelMap, @PathVariable("id") int id) {
         Order order = new Order();
+        Cart cart = cartService.findCartById(id);
+        float total = 0;
+        for(Cart_Product cart_product :cart.getCart_products()){
+            total += cart_product.getProduct().getPrice() * cart_product.getQuantity();
+        }
         order.setCart(cartService.findCartById(id));
         modelMap.addAttribute("order", order);
+        modelMap.addAttribute("total", total);
         return "user/order/order";
     }
     @GetMapping(value= "/add_orderCart/{id}")

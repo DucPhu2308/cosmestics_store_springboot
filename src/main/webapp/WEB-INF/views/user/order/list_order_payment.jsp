@@ -33,8 +33,8 @@
                                 <td><a href="/order_cart/add_orderCart/${item.id}">Thanh toán</a></td>
                             </c:if>
                             <c:if test="${item.active == false}">
-                                <td> </td>
-                            </c:if>s
+                                <td></td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>
