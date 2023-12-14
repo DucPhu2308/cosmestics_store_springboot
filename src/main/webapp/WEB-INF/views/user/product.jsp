@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/common/taglib.jsp" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <body>
 <section class="jumbotron text-center">
@@ -87,7 +88,7 @@
         <!-- Add to cart -->
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
-                <p style="font-size: 50px;text-align: center;color: mediumvioletred;margin-bottom:-30px ;font-family: Be VietNam Pro,sans-serif">${product.name}</p>
+                <p class="text-name-product">${product.name}</p>
                 <c:if test="${product.available==false}">
                     <p style="color: red; font-size: 25px; font-family: 'Be VietNam Pro', 'sans-serif'">Sản phẩm đã hết hàng</p>
                 </c:if>
@@ -456,8 +457,7 @@
                                 </div>
                                 <form:textarea path="content" class="form-control animated" cols="5" id="new-review"
                                                name="new-review"
-                                               placeholder="Enter your review here..." rows="5">
-                                </form:textarea>
+                                               placeholder="Enter your review here..." rows="5"/>
 
                                 <input type="submit" value="Đăng bình luận" class="btn-post-review">
 

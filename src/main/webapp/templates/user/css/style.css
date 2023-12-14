@@ -221,8 +221,21 @@ footer a {
     color: #fff;
 
 }
-.card{
+.card.prefix{
     width: 260px;
+}
+
+.text-name-product{
+    font-size: 50px;
+    text-align: center;
+    color: mediumvioletred;
+    margin-bottom:-30px ;
+    font-family: Be VietNam Pro,sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 .card-text{
     overflow: hidden;

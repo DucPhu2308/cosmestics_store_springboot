@@ -58,7 +58,7 @@
             <div class="row" id="content">
                 <c:forEach var="i" items="${sessionScope.list_product_category}">
                     <div class="product col-12 col-md-6 col-lg-4">
-                        <div class="card">
+                        <div class="card prefix">
                             <div>
                                         <c:if test="${i.images.size() > 0}">
                                             <img class="card-img-top" src="<c:url value="/templates/images/${i.images[0].imageLink}"/>" alt="Card image cap">
