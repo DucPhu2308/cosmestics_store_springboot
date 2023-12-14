@@ -84,7 +84,7 @@
 
                         var search_input=document.querySelector(".input-group.input-group-sm input")
                         search_input.addEventListener('input', function(e){
-                            let txtSearch=e.target.value.trim().toLowerCase();
+                            let txtSearch=e.target.value.trim();
                             // nhận diện tiếng việt có dấu
                             // txtSearch=removeAccents(txtSearch);
                             let list_itemDom=document.querySelectorAll(".box_search.item");
