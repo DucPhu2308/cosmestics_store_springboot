@@ -56,6 +56,7 @@ public class ProductUserController {
         //view history
         List<Integer> listId = saveToCookie(product.getId(),request, response);
         List<Product> listProductViewHistory = productService.findAllById(listId);
+        System.out.println(listProductViewHistory);
         modelMap.addAttribute("viewHistory", listProductViewHistory);
         // same category product
         List<Product> listProductSameCategory = product.getCategory().getProducts();

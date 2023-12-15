@@ -366,7 +366,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <c:forEach var="i" items="${viewHistory}" varStatus="status">
-                                        <c:if test="${status.index <4}">
+                                        <c:if test="${status.index < 5}">
                                             <c:if test="${i.id != product.id}">
                                                 <div class="col-sm-3">
                                                     <div class="card">

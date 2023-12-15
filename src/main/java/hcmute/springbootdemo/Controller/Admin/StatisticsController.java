@@ -224,12 +224,6 @@ public class StatisticsController {
                             Collectors.toList()
                     )
                 );
-        // fill 0 for month has no revenue
-        // for (int i = 1; i <= 12; i++) {
-        //     if (!orderByMonth.containsKey(i)) {
-        //         orderByMonth.put(i, new ArrayList<>());
-        //     }
-        // }
 
         Map<Integer, Map<Brand, Double>> result = new HashMap<>();
         for (int month : orderByMonth.keySet()) {
