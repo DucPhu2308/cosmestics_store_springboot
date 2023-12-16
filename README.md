@@ -3,7 +3,8 @@
 ## Mô tả
 
 Đây là một project web bán mỹ phẩm được xây dựng bằng Spring Boot + JSP/JSTL + Bootstrap + JPA + postgreSQL + Decorator Sitemesh. \
-Project này được dùng làm đồ án cuối kỳ môn Lập trình Web trường Đại học Sư phạm Kỹ thuật TP. HCM, GVHD Nguyễn Hữu Trung.
+Project này được dùng làm đồ án cuối kỳ môn Lập trình Web trường Đại học Sư phạm Kỹ thuật TP. HCM, GVHD Nguyễn Hữu Trung. \
+Xem chi tiết báo cáo và phân công nhiệm vụ trong file bao_cao_web_nhom7.docx
 
 ## Các chức năng
 
