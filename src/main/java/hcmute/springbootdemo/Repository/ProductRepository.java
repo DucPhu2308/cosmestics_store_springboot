@@ -39,5 +39,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 
     List<Product> findProductsByBrandId(int brandId);
 
+    @Query("select p from Product p where p.name like %?1%")
     List<Product> findProductsByName(String name);
 }
